@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\AdsController;
 use App\Http\Controllers\CategoriesController;
 use App\Http\Controllers\LoginController;
 use App\Http\Controllers\OffersController;
@@ -38,3 +39,5 @@ Route::get('product/{id}', [ProductController::class, 'getProduct']);
 Route::get('get-categories', [CategoriesController::class, 'getCategories']);
 Route::get('get-subcategory/{cat_id}', [CategoriesController::class, 'getSubCategories']);
 Route::get('get-subsubcategory/{subcat_id}', [CategoriesController::class, 'getSubSubCategories']);
+
+Route::get('/get-ad', [AdsController::class, 'get']);
