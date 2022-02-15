@@ -19,7 +19,10 @@ class Offers extends Model
         "end_time",
         "max_subs",
         "curr_subs",
-        "conditions"
+        "conditions",
+        "pic_one",
+        "pic_two",
+        "pic_three"
     ];
     protected $hidden = [];
     public $timestamps = false;

@@ -27,6 +27,9 @@ return new class extends Migration
             $table->text('category_id');
             $table->text('sub_category_id');
             $table->text('sub_sub_category_id');
+            $table->text('pic_one');
+            $table->text('pic_two');
+            $table->text('pic_three');
         });
     }
 

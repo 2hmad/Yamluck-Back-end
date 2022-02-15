@@ -3,6 +3,7 @@
 use App\Http\Controllers\CategoriesController;
 use App\Http\Controllers\LoginController;
 use App\Http\Controllers\OffersController;
+use App\Http\Controllers\ProductController;
 use App\Http\Controllers\RegisterController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
@@ -31,6 +32,8 @@ Route::get('login/{service}', [LoginController::class, 'social']);
 
 Route::get('offers/{limit}', [OffersController::class, 'randomOffers']);
 Route::get('get-offers/{category_id}', [OffersController::class, 'getOffers']);
+
+Route::get('product/{id}', [ProductController::class, 'getProduct']);
 
 Route::get('get-categories', [CategoriesController::class, 'getCategories']);
 Route::get('get-subcategory/{cat_id}', [CategoriesController::class, 'getSubCategories']);
