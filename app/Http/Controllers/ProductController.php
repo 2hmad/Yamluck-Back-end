@@ -9,13 +9,20 @@ class ProductController extends Controller
 {
     public function getProduct($id)
     {
-        if ($id == null) {
-            return response('Product not found', 404);
+        $get = Offers::where('id', $id)->first();
+        if ($get == "") {
+            return response('Invalid ID', 400);
         } else {
-            $get = Offers::where('id', $id)->get()->toJson();
-            if ($get !== "") {
-                return response('Invalid ID', 400);
-            }
+            return $get;
+        }
+    }
+    public function getSimilarProduct($id)
+    {
+        $getName = Offers::where('id', $id)->pluck('title')->first();
+        if ($getName !== "") {
+            return Offers::where('title', 'like', '%' . $getName . '%')->whereNotIn('id', [$id])->get(['id', 'pic_one', 'title', 'price']);
+        } else {
+            return response('Invalid ID', 400);
         }
     }
 }

@@ -19,8 +19,8 @@ return new class extends Migration
             $table->longText('details');
             $table->text('price');
             $table->text('share_price');
-            $table->text('start_time')->nullable();
-            $table->text('end_time')->nullable();
+            $table->time('start_time')->nullable();
+            $table->time('end_time')->nullable();
             $table->text('max_subs');
             $table->text('curr_subs');
             $table->longText('conditions');
@@ -30,6 +30,7 @@ return new class extends Migration
             $table->text('pic_one');
             $table->text('pic_two');
             $table->text('pic_three');
+            $table->date('publish_date');
         });
     }
 

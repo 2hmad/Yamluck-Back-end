@@ -22,7 +22,8 @@ class Offers extends Model
         "conditions",
         "pic_one",
         "pic_two",
-        "pic_three"
+        "pic_three",
+        "publish_date"
     ];
     protected $hidden = [];
     public $timestamps = false;

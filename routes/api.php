@@ -35,6 +35,7 @@ Route::get('offers/{limit}', [OffersController::class, 'randomOffers']);
 Route::get('get-offers/{category_id}', [OffersController::class, 'getOffers']);
 
 Route::get('product/{id}', [ProductController::class, 'getProduct']);
+Route::get('similar-product/{id}', [ProductController::class, 'getSimilarProduct']);
 
 Route::get('get-categories', [CategoriesController::class, 'getCategories']);
 Route::get('get-subcategory/{cat_id}', [CategoriesController::class, 'getSubCategories']);
