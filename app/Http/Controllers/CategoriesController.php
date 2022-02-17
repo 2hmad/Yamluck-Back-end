@@ -11,6 +11,10 @@ class CategoriesController extends Controller
     {
         return DB::table('categories')->get()->toJson();
     }
+    public function getCategoriesLimit($count)
+    {
+        return DB::table('categories')->limit($count)->get();
+    }
     public function getSubCategories($cat_id)
     {
         if ($cat_id == null) {

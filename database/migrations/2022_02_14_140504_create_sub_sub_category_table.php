@@ -15,7 +15,8 @@ return new class extends Migration
     {
         Schema::create('sub_sub_category', function (Blueprint $table) {
             $table->bigIncrements('id');
-            $table->text('title');
+            $table->text('title_ar');
+            $table->text('title_en');
             $table->text('sub_category_id');
         });
     }

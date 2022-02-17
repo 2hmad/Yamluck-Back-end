@@ -66,13 +66,14 @@ class RegisterController extends Controller
             return redirect('/dashboard');
         }
     }
+
     public function twitterRedirect()
     {
-        return Socialite::driver("twitter")->stateless()->redirect();
+        return Socialite::driver("twitter")->redirect();
     }
     public function twitterCallback()
     {
-        $user = Socialite::driver("twitter")->stateless()->user();
+        $user = Socialite::driver("twitter")->user();
         $isUser = Users::where('twitter_id', $user->id)->first();
         $checkEmail = Users::where('email', $user->email)->first();
         if ($isUser) {

@@ -11,15 +11,18 @@ class Offers extends Model
 
     protected $table = "offers";
     protected $fillable = [
-        "title",
-        "details",
+        "title_ar",
+        "title_en",
+        "details_ar",
+        "details_en",
         "price",
         "share_price",
         "start_time",
         "end_time",
         "max_subs",
         "curr_subs",
-        "conditions",
+        "conditions_ar",
+        "conditions_en",
         "pic_one",
         "pic_two",
         "pic_three",

@@ -15,15 +15,18 @@ return new class extends Migration
     {
         Schema::create('offers', function (Blueprint $table) {
             $table->bigIncrements('id');
-            $table->text('title');
-            $table->longText('details');
+            $table->text('title_ar');
+            $table->text('title_en');
+            $table->longText('details_ar');
+            $table->longText('details_en');
             $table->text('price');
             $table->text('share_price');
             $table->time('start_time')->nullable();
             $table->time('end_time')->nullable();
             $table->text('max_subs');
             $table->text('curr_subs');
-            $table->longText('conditions');
+            $table->longText('conditions_ar');
+            $table->longText('conditions_en');
             $table->text('category_id');
             $table->text('sub_category_id');
             $table->text('sub_sub_category_id');
