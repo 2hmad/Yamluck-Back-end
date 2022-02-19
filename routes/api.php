@@ -9,6 +9,7 @@ use App\Http\Controllers\ProductController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\RegisterController;
 use App\Http\Controllers\VerificationController;
+use App\Http\Controllers\WalletController;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Route;
 
@@ -57,4 +58,7 @@ Route::post('resend-code', [VerificationController::class, 'resend']);
 Route::post('verify-code', [VerificationController::class, 'verify']);
 
 Route::post('profile', [ProfileController::class, 'getProfile']);
+Route::post('edit-profile', [ProfileController::class, 'editProfile']);
+
+Route::post('wallet/activities', [WalletController::class, 'editProfile']);
 // });
