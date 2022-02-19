@@ -18,7 +18,7 @@ class CategoriesController extends Controller
     public function getSubCategories($cat_id)
     {
         if ($cat_id == null) {
-            return response('ID Invalid', 404);
+            return response()->json(['alert' => 'id-invalid'], 404);
         } else {
             return DB::table('sub_categories')->where('category_id', '=', $cat_id)->get()->toJson();
         }
@@ -26,7 +26,7 @@ class CategoriesController extends Controller
     public function getSubSubCategories($subcat_id)
     {
         if ($subcat_id == null) {
-            return response('ID Invalid', 404);
+            return response()->json(['alert' => 'id-invalid'], 404);
         } else {
             return DB::table('sub_sub_category')->where('sub_category_id', '=', $subcat_id)->get()->toJson();
         }

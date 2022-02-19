@@ -1,6 +1,9 @@
 <?php
 
+use App\Models\Users;
+use App\Models\Verification;
 use Illuminate\Support\Facades\Route;
+use Carbon\Carbon;
 
 /*
 |--------------------------------------------------------------------------
@@ -14,5 +17,4 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::get('/', function () {
-    return view('welcome');
 });

@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-return new class extends Migration
+class CreatePhoneVerifiedTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,13 +13,9 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('verification', function (Blueprint $table) {
+        Schema::create('phone_verified', function (Blueprint $table) {
             $table->bigIncrements('id');
             $table->text('user_id');
-            $table->string('code');
-            $table->text('start_time');
-            $table->text('end_time');
-            $table->text('date');
         });
     }
 
@@ -30,6 +26,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('verification');
+        Schema::dropIfExists('phone_verified');
     }
-};
+}

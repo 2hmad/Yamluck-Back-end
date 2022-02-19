@@ -11,7 +11,7 @@ class ProductController extends Controller
     {
         $get = Offers::where('id', $id)->first()->toJson();
         if ($get == "") {
-            return response('Invalid ID', 400);
+            return response()->json(['alert' => 'id-invalid'], 404);
         } else {
             return $get;
         }
@@ -22,7 +22,7 @@ class ProductController extends Controller
         if ($getName !== "") {
             return Offers::where('title_en', 'like', '%' . $getName . '%')->whereNotIn('id', [$id])->get(['id', 'pic_one', 'title_en', 'title_ar', 'price']);
         } else {
-            return response('Invalid ID', 400);
+            return response()->json(['alert' => 'id-invalid'], 404);
         }
     }
 }
