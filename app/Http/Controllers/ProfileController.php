@@ -10,18 +10,20 @@ class ProfileController extends Controller
 {
     public function getProfile(Request $request)
     {
-        $checkToken = Users::where('token', $request->token)->first();
-        if ($checkToken !== null && $request->token !== null) {
-            return Users::where('token', $request->token)->first();
+        $headerToken = $request->header('Authorization');
+        $checkToken = Users::where('token', $headerToken)->first();
+        if ($checkToken !== null || $headerToken !== null) {
+            return Users::where('token', $headerToken)->first();
         } else {
             return response()->json(['alert' => 'Invalid Token'], 404);
         }
     }
     public function editProfile(Request $request)
     {
-        $checkToken = Users::where('token', $request->token)->first();
-        if ($checkToken !== null && $request->token !== null) {
-            return Users::where('token', $request->token)->update([
+        $headerToken = $request->header('Authorization');
+        $checkToken = Users::where('token', $headerToken)->first();
+        if ($checkToken !== null && $headerToken !== null) {
+            return Users::where('token', $headerToken)->update([
                 'full_name' => $request->full_name,
                 'email' => $request->email,
                 'phone' => $request->phone
@@ -32,19 +34,21 @@ class ProfileController extends Controller
     }
     public function changePic(Request $request)
     {
-        $checkToken = Users::where('token', $request->token)->first();
-        if ($checkToken !== null && $request->token !== null) {
+        $headerToken = $request->header('Authorization');
+        $checkToken = Users::where('token', $headerToken)->first();
+        if ($checkToken !== null && $headerToken !== null) {
         } else {
             return response()->json(['alert' => 'Invalid Token'], 404);
         }
     }
     public function changePassword(Request $request)
     {
-        $checkToken = Users::where('token', $request->token)->first();
-        if ($checkToken !== null && $request->token !== null) {
-            $checkOld = Users::where('token', $request->token)->first('password');
+        $headerToken = $request->header('Authorization');
+        $checkToken = Users::where('token', $headerToken)->first();
+        if ($checkToken !== null && $headerToken !== null) {
+            $checkOld = Users::where('token', $headerToken)->first('password');
             if (Hash::check($request->oldPassword, $checkOld->password)) {
-                return Users::where('token', $request->token)->update([
+                return Users::where('token', $headerToken)->update([
                     'password' => Hash::make($request->newPassword)
                 ]);
             } else {

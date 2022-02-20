@@ -10,9 +10,10 @@ class WalletController extends Controller
 {
     public function getActivities(Request $request)
     {
-        $checkToken = Users::where('token', $request->token)->first();
-        if ($checkToken !== null && $request->token !== null) {
-            $getID = Users::where('token', $request->token)->first('id');
+        $headerToken = $request->header('Authorization');
+        $checkToken = Users::where('token', $headerToken)->first();
+        if ($checkToken !== null && $headerToken !== null) {
+            $getID = Users::where('token', $headerToken)->first('id');
             return DB::table('activities')->where('user_id', '=', $getID->id)->get();
         } else {
             return response()->json(['alert' => 'Invalid Token'], 404);
