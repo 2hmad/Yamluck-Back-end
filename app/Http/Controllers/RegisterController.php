@@ -53,13 +53,13 @@ class RegisterController extends Controller
                             'date' => date('Y-m-d')
                         ]);
                     }
-                    return response()->json(['alert' => 'success'], 202);
+                    return response()->json(['alert' => 'Account Created Successfully'], 202);
                 }
             } else {
-                return response()->json(['alert' => 'phone-user-before'], 404);
+                return response()->json(['alert' => 'The phone number has already been used'], 404);
             }
         } else {
-            return response()->json(['alert' => 'registered-before'], 404);
+            return response()->json(['alert' => 'The email address has already been used'], 404);
         }
     }
     public function facebookRedirect()

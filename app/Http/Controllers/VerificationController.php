@@ -42,7 +42,7 @@ class VerificationController extends Controller
             ]);
             return Verification::where('user_id', $getID->id)->delete();
         } else {
-            return response()->json(['alert' => 'code-invalid'], 404);
+            return response()->json(['alert' => 'Invalid Code'], 404);
         }
     }
 }

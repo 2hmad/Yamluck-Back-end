@@ -8,6 +8,7 @@ use App\Http\Controllers\OffersController;
 use App\Http\Controllers\ProductController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\RegisterController;
+use App\Http\Controllers\SearchController;
 use App\Http\Controllers\VerificationController;
 use App\Http\Controllers\WalletController;
 use Illuminate\Support\Facades\DB;
@@ -59,6 +60,10 @@ Route::post('verify-code', [VerificationController::class, 'verify']);
 
 Route::post('profile', [ProfileController::class, 'getProfile']);
 Route::post('edit-profile', [ProfileController::class, 'editProfile']);
+Route::post('change-pic', [ProfileController::class, 'changePic']);
+Route::post('change-password', [ProfileController::class, 'changePassword']);
 
-Route::post('wallet/activities', [WalletController::class, 'editProfile']);
+Route::post('wallet/activities', [WalletController::class, 'getActivities']);
+
+Route::post('search', [SearchController::class, 'search']);
 // });

@@ -20,10 +20,10 @@ class LoginController extends Controller
                 $getToken = Users::where('email', $request->email)->first('token');
                 return $getToken;
             } else {
-                return response()->json(['alert' => 'password-incorrect'], 404);
+                return response()->json(['alert' => 'Wrong Password'], 404);
             }
         } else {
-            return response()->json(['alert' => 'user-not-found'], 404);
+            return response()->json(['alert' => 'User not found'], 404);
         }
     }
     public function social(Request $request, $service)
