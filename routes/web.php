@@ -4,7 +4,7 @@ use App\Models\Users;
 use App\Models\Verification;
 use Illuminate\Support\Facades\Route;
 use Carbon\Carbon;
-
+use Paytabs\Paytabs;
 /*
 |--------------------------------------------------------------------------
 | Web Routes

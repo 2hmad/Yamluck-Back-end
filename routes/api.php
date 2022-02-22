@@ -25,45 +25,49 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-// Route::group(['middleware' => ['web']], function () {
-Route::post('register', [RegisterController::class, 'register'])->name('register');
+Route::group(['middleware' => ['cors']], function () {
+    Route::post('register', [RegisterController::class, 'register'])->name('register');
 
-Route::get('register/facebook', [RegisterController::class, 'facebookRedirect']);
-Route::get('register/facebook/callback', [RegisterController::class, 'facebookCallback']);
+    Route::get('register/facebook', [RegisterController::class, 'facebookRedirect']);
+    Route::get('register/facebook/callback', [RegisterController::class, 'facebookCallback']);
 
-Route::get('register/twitter', [RegisterController::class, 'twitterRedirect']);
-Route::get('register/twitter/callback', [RegisterController::class, 'twitterCallback']);
+    Route::get('register/twitter', [RegisterController::class, 'twitterRedirect']);
+    Route::get('register/twitter/callback', [RegisterController::class, 'twitterCallback']);
 
-Route::post('login', [LoginController::class, 'login']);
-Route::get('login/{service}', [LoginController::class, 'social']);
+    Route::post('login', [LoginController::class, 'login']);
 
-Route::get('offers/{limit}', [OffersController::class, 'randomOffers']);
-Route::get('get-offers/{category_id}', [OffersController::class, 'getOffers']);
-Route::get('get-sub-offers/{sub_category_id}', [OffersController::class, 'getSubOffers']);
-Route::get('get-sub-sub-offers/{sub_sub_category_id}', [OffersController::class, 'getSubSubOffers']);
+    Route::get('offers/{limit}', [OffersController::class, 'randomOffers']);
+    Route::get('get-offers/{category_id}', [OffersController::class, 'getOffers']);
+    Route::get('get-sub-offers/{sub_category_id}', [OffersController::class, 'getSubOffers']);
+    Route::get('get-sub-sub-offers/{sub_sub_category_id}', [OffersController::class, 'getSubSubOffers']);
 
-Route::get('product/{id}', [ProductController::class, 'getProduct']);
-Route::get('similar-product/{id}', [ProductController::class, 'getSimilarProduct']);
+    Route::get('product/{id}', [ProductController::class, 'getProduct']);
+    Route::get('similar-product/{id}', [ProductController::class, 'getSimilarProduct']);
 
-Route::get('get-categories', [CategoriesController::class, 'getCategories']);
-Route::get('categories-limited/{count}', [CategoriesController::class, 'getCategoriesLimit']);
-Route::get('get-subcategory/{cat_id}', [CategoriesController::class, 'getSubCategories']);
-Route::get('get-subsubcategory/{subcat_id}', [CategoriesController::class, 'getSubSubCategories']);
+    Route::get('get-categories', [CategoriesController::class, 'getCategories']);
+    Route::get('categories-limited/{count}', [CategoriesController::class, 'getCategoriesLimit']);
+    Route::get('get-subcategory/{cat_id}', [CategoriesController::class, 'getSubCategories']);
+    Route::get('get-subsubcategory/{subcat_id}', [CategoriesController::class, 'getSubSubCategories']);
 
-Route::get('get-ad', [AdsController::class, 'get']);
+    Route::get('get-ad', [AdsController::class, 'get']);
 
-Route::get('countries', [CountriesController::class, 'getCountries']);
-Route::get('cities/{country_id}', [CountriesController::class, 'getCities']);
+    Route::get('countries', [CountriesController::class, 'getCountries']);
+    Route::get('cities/{country_id}', [CountriesController::class, 'getCities']);
 
-Route::post('resend-code', [VerificationController::class, 'resend']);
-Route::post('verify-code', [VerificationController::class, 'verify']);
+    Route::post('resend-code', [VerificationController::class, 'resend']);
+    Route::post('verify-code', [VerificationController::class, 'verify']);
 
-Route::post('profile', [ProfileController::class, 'getProfile']);
-Route::post('edit-profile', [ProfileController::class, 'editProfile']);
-Route::post('change-pic', [ProfileController::class, 'changePic']);
-Route::post('change-password', [ProfileController::class, 'changePassword']);
+    Route::post('profile', [ProfileController::class, 'getProfile']);
+    Route::post('edit-profile', [ProfileController::class, 'editProfile']);
+    Route::post('change-pic', [ProfileController::class, 'changePic']);
+    Route::post('change-password', [ProfileController::class, 'changePassword']);
 
-Route::post('wallet/activities', [WalletController::class, 'getActivities']);
+    Route::post('wallet/amount', [WalletController::class, 'getAmount']);
+    Route::post('wallet/activities', [WalletController::class, 'getActivities']);
 
-Route::post('search', [SearchController::class, 'search']);
-// });
+    Route::post('search', [SearchController::class, 'search']);
+
+    Route::delete('logout', function () {
+        return response()->json(['alert' => 'OK'], 200);
+    });
+});

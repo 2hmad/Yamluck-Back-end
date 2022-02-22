@@ -72,12 +72,13 @@ class RegisterController extends Controller
         $isUser = Users::where('facebook_id', $user->id)->first();
         $checkEmail = Users::where('email', $user->email)->first();
         if ($isUser) {
-            return redirect('/dashboard');
+            return redirect()->back();
         } elseif ($checkEmail) {
             $createUser = Users::where('email', $user->email)->update([
                 'facebook_id' => $user->id
             ]);
-            return redirect('/dashboard');
+            $getToken = Users::where('email', $user->email)->first('token');
+            return redirect()->back()->with($getToken);
         } else {
             $createUser = Users::create([
                 'full_name' => $user->name,
@@ -89,7 +90,8 @@ class RegisterController extends Controller
                 'pic' => 'default.jpg',
                 'notifications' => 'Yes'
             ]);
-            return redirect('/dashboard');
+            $getToken = Users::where('email', $user->email)->first('token');
+            return redirect()->back()->with($getToken);
         }
     }
 
