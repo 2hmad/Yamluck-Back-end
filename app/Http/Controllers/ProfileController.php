@@ -28,6 +28,7 @@ class ProfileController extends Controller
                 'email' => $request->email,
                 'phone' => $request->phone
             ]);
+            return response()->json(['alert' => 'OK'], 200);
         } else {
             return response()->json(['alert' => 'Invalid Token'], 404);
         }
