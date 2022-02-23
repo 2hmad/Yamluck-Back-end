@@ -65,7 +65,7 @@ Route::group(['middleware' => ['cors']], function () {
     Route::post('wallet/amount', [WalletController::class, 'getAmount']);
     Route::post('wallet/activities', [WalletController::class, 'getActivities']);
 
-    Route::post('search', [SearchController::class, 'search']);
+    Route::get('search/{keyword}', [SearchController::class, 'search']);
 
     Route::delete('logout', function () {
         return response()->json(['alert' => 'OK'], 200);
