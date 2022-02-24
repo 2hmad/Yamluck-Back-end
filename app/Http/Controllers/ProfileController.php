@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Users;
 use Illuminate\Http\Request;
+use Illuminate\Http\Testing\File;
 use Illuminate\Support\Facades\Hash;
 
 class ProfileController extends Controller
@@ -38,6 +39,19 @@ class ProfileController extends Controller
         $headerToken = $request->header('Authorization');
         $checkToken = Users::where('token', $headerToken)->first();
         if ($checkToken !== null && $headerToken !== null) {
+            $validate = $request->validate([
+                'file' => 'required|mimes:jpg,jpeg,png|max:2000'
+            ]);
+            if ($validate) {
+                $file_name = 'uid' . '_' . $checkToken->id . '.' . $request->file->getClientOriginalExtension();
+                $file_path = $request->file('file')->storeAs('users', $file_name, 'public');
+                return Users::where('token', $headerToken)->update([
+                    'pic' => $file_name
+                ]);
+                return response()->json(['success' => 'File uploaded successfully.']);
+            } else {
+                return response()->json(['alert' => 'Invalid MIME Type'], 404);
+            }
         } else {
             return response()->json(['alert' => 'Invalid Token'], 404);
         }

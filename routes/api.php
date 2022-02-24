@@ -8,6 +8,7 @@ use App\Http\Controllers\OffersController;
 use App\Http\Controllers\ProductController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\RegisterController;
+use App\Http\Controllers\ResetPasswordController;
 use App\Http\Controllers\SearchController;
 use App\Http\Controllers\VerificationController;
 use App\Http\Controllers\WalletController;
@@ -35,6 +36,7 @@ Route::group(['middleware' => ['cors']], function () {
     Route::get('register/twitter/callback', [RegisterController::class, 'twitterCallback']);
 
     Route::post('login', [LoginController::class, 'login']);
+    Route::post('reset-password', [ResetPasswordController::class, 'reset']);
 
     Route::get('offers/{limit}', [OffersController::class, 'randomOffers']);
     Route::get('get-offers/{category_id}', [OffersController::class, 'getOffers']);
