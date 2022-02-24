@@ -37,6 +37,7 @@ Route::group(['middleware' => ['cors']], function () {
 
     Route::post('login', [LoginController::class, 'login']);
     Route::post('reset-password', [ResetPasswordController::class, 'reset']);
+    Route::post('update-password/{code}', [ResetPasswordController::class, 'update']);
 
     Route::get('offers/{limit}', [OffersController::class, 'randomOffers']);
     Route::get('get-offers/{category_id}', [OffersController::class, 'getOffers']);
