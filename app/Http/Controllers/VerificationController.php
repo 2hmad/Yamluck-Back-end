@@ -17,7 +17,7 @@ class VerificationController extends Controller
         $checkCode = Verification::where('user_id', $getID->id)->first();
         if ($checkCode !== null) {
             Verification::where('user_id', $getID->id)->update([
-                'code' => Str::random(4),
+                'code' => random_int(1000, 9999),
                 'start_time' => Carbon::now()->toTimeString(),
                 'end_time' => Carbon::now()->addMinutes(15)->toTimeString(),
                 'date' => date('Y-m-d')
@@ -25,7 +25,7 @@ class VerificationController extends Controller
         } else {
             Verification::create([
                 'user_id' => $getID->id,
-                'code' => Str::random(4),
+                'code' => random_int(1000, 9999),
                 'start_time' => Carbon::now()->toTimeString(),
                 'end_time' => Carbon::now()->addMinutes(15)->toTimeString(),
                 'date' => date('Y-m-d')
@@ -36,11 +36,17 @@ class VerificationController extends Controller
     {
         $getID = Users::where('phone', $request->phone)->first('id');
         $checkCode = DB::table('verification')->where('code', '=', $request->code)->where('user_id', '=', $getID->id)->first();
-        if ($checkCode !== null) {
-            return DB::table('phone_verified')->insert([
+        if ($checkCode !== null && $checkCode->date == date('Y-m-d') && $checkCode->end_time >= Carbon::now()->toTimeString()) {
+            $delVerify = Verification::where('user_id', $getID->id)->delete();
+            $updateVerified = Users::where('id', $getID->id)->update([
+                'verified' => 1
+            ]);
+            $insertVerified = DB::table('phone_verified')->insert([
                 'user_id' => $getID->id
             ]);
-            return Verification::where('user_id', $getID->id)->delete();
+            if ($delVerify && $updateVerified && $insertVerified) {
+                return response()->json(['alert' => 'OK'], 200);
+            }
         } else {
             return response()->json(['alert' => 'Invalid Code'], 404);
         }

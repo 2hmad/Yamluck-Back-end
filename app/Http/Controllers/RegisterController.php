@@ -32,14 +32,15 @@ class RegisterController extends Controller
                     'password' => Hash::make($request->password),
                     'token' => md5(rand(1, 10) . microtime()),
                     'pic' => 'default.jpg',
-                    'notifications' => 'Yes'
+                    'notifications' => 'Yes',
+                    'verified' => '0'
                 ]);
                 if ($createUser) {
                     $getID = Users::where('email', $request->email)->pluck('id')->first();
                     $checkCode = Verification::where('user_id', $getID)->first();
                     if ($checkCode !== null) {
                         Verification::where('user_id', $getID)->update([
-                            'code' => Str::random(4),
+                            'code' => random_int(1000, 9999),
                             'start_time' => Carbon::now()->toTimeString(),
                             'end_time' => Carbon::now()->addMinutes(15)->toTimeString(),
                             'date' => date('Y-m-d')
@@ -47,7 +48,7 @@ class RegisterController extends Controller
                     } else {
                         Verification::create([
                             'user_id' => $getID,
-                            'code' => Str::random(4),
+                            'code' => random_int(1000, 9999),
                             'start_time' => Carbon::now()->toTimeString(),
                             'end_time' => Carbon::now()->addMinutes(15)->toTimeString(),
                             'date' => date('Y-m-d')
@@ -88,7 +89,8 @@ class RegisterController extends Controller
                 'password' => Hash::make(Str::random(8)),
                 'token' => md5(rand(1, 10) . microtime()),
                 'pic' => 'default.jpg',
-                'notifications' => 'Yes'
+                'notifications' => 'Yes',
+                'verified' => '0'
             ]);
             $getToken = Users::where('email', $user->email)->first('token');
             return redirect()->back()->with($getToken);
@@ -120,7 +122,8 @@ class RegisterController extends Controller
                 'password' => Hash::make(Str::random(8)),
                 'token' => md5(rand(1, 10) . microtime()),
                 'pic' => 'default.jpg',
-                'notifications' => 'Yes'
+                'notifications' => 'Yes',
+                'verified' => '0'
             ]);
             return redirect('/dashboard');
         }
