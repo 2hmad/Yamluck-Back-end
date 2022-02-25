@@ -31,7 +31,7 @@ class RegisterController extends Controller
                     'interest' => $request->interest,
                     'password' => Hash::make($request->password),
                     'token' => md5(rand(1, 10) . microtime()),
-                    'pic' => 'default.jpg',
+                    'pic' => 'default.png',
                     'notifications' => 'Yes',
                     'verified' => 0
                 ]);
@@ -88,7 +88,7 @@ class RegisterController extends Controller
                 'facebook_id' => $user->id,
                 'password' => Hash::make(Str::random(8)),
                 'token' => md5(rand(1, 10) . microtime()),
-                'pic' => 'default.jpg',
+                'pic' => 'default.png',
                 'notifications' => 'Yes',
                 'verified' => 0
             ]);
@@ -121,7 +121,7 @@ class RegisterController extends Controller
                 'twitter_id' => $user->id,
                 'password' => Hash::make(Str::random(8)),
                 'token' => md5(rand(1, 10) . microtime()),
-                'pic' => 'default.jpg',
+                'pic' => 'default.png',
                 'notifications' => 'Yes',
                 'verified' => 0
             ]);
