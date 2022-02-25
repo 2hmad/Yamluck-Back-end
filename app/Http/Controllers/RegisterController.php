@@ -33,7 +33,7 @@ class RegisterController extends Controller
                     'token' => md5(rand(1, 10) . microtime()),
                     'pic' => 'default.jpg',
                     'notifications' => 'Yes',
-                    'verified' => '0'
+                    'verified' => 0
                 ]);
                 if ($createUser) {
                     $getID = Users::where('email', $request->email)->pluck('id')->first();
@@ -90,7 +90,7 @@ class RegisterController extends Controller
                 'token' => md5(rand(1, 10) . microtime()),
                 'pic' => 'default.jpg',
                 'notifications' => 'Yes',
-                'verified' => '0'
+                'verified' => 0
             ]);
             $getToken = Users::where('email', $user->email)->first('token');
             return redirect()->back()->with($getToken);
@@ -123,7 +123,7 @@ class RegisterController extends Controller
                 'token' => md5(rand(1, 10) . microtime()),
                 'pic' => 'default.jpg',
                 'notifications' => 'Yes',
-                'verified' => '0'
+                'verified' => 0
             ]);
             return redirect('/dashboard');
         }

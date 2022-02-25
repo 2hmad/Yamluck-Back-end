@@ -27,7 +27,8 @@ class Users extends Model
         'apple_id',
         'token',
         'pic',
-        'token'
+        'token',
+        'verified'
     ];
     protected $hidden = [
         'password'
