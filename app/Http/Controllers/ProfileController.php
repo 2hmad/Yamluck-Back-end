@@ -27,7 +27,8 @@ class ProfileController extends Controller
             return Users::where('token', $headerToken)->update([
                 'full_name' => $request->full_name,
                 'email' => $request->email,
-                'phone' => $request->phone
+                'phone' => $request->phone,
+                'birthdate' => $request->birthdate
             ]);
             return response()->json(['alert' => 'OK'], 200);
         } else {
