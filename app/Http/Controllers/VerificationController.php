@@ -7,13 +7,13 @@ use App\Models\Verification;
 use Illuminate\Http\Request;
 use Carbon\Carbon;
 use Illuminate\Support\Facades\DB;
-use Illuminate\Support\Str;
 
 class VerificationController extends Controller
 {
     public function resend(Request $request)
     {
-        $getID = Users::where('phone', $request->phone)->first('id');
+        $headerToken = $request->header('Authorization');
+        $getID = Users::where('token', $headerToken)->first('id');
         $checkCode = Verification::where('user_id', $getID->id)->first();
         if ($checkCode !== null) {
             Verification::where('user_id', $getID->id)->update([
@@ -34,7 +34,8 @@ class VerificationController extends Controller
     }
     public function verify(Request $request)
     {
-        $getID = Users::where('phone', $request->phone)->first('id');
+        $headerToken = $request->header('Authorization');
+        $getID = Users::where('token', $headerToken)->first('id');
         $checkCode = DB::table('verification')->where('code', '=', $request->code)->where('user_id', '=', $getID->id)->first();
         if ($checkCode !== null && $checkCode->date == date('Y-m-d') && $checkCode->end_time >= Carbon::now()->toTimeString()) {
             $delVerify = Verification::where('user_id', $getID->id)->delete();

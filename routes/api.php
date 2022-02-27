@@ -5,6 +5,7 @@ use App\Http\Controllers\CategoriesController;
 use App\Http\Controllers\CountriesController;
 use App\Http\Controllers\LoginController;
 use App\Http\Controllers\OffersController;
+use App\Http\Controllers\PayWithYamluck;
 use App\Http\Controllers\ProductController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\RegisterController;
@@ -36,6 +37,10 @@ Route::group(['middleware' => ['cors']], function () {
     Route::get('register/twitter/callback', [RegisterController::class, 'twitterCallback']);
 
     Route::post('login', [LoginController::class, 'login']);
+
+    Route::post('login/facebook', [LoginController::class, 'facebookRedirect']);
+    Route::post('login/facebook/callback', [LoginController::class, 'facebookCallback']);
+
     Route::post('reset-password', [ResetPasswordController::class, 'reset']);
     Route::post('update-password/{code}', [ResetPasswordController::class, 'update']);
 
@@ -73,4 +78,6 @@ Route::group(['middleware' => ['cors']], function () {
     Route::delete('logout', function () {
         return response()->json(['alert' => 'OK'], 200);
     });
+
+    Route::post('pay-with-yamluck', [PayWithYamluck::class, 'pay']);
 });

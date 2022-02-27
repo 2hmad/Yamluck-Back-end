@@ -11,6 +11,7 @@ use Illuminate\Support\Facades\Hash;
 use Laravel\Socialite\Facades\Socialite;
 use Illuminate\Support\Str;
 use Carbon\Carbon;
+use Illuminate\Support\Facades\DB;
 
 class RegisterController extends Controller
 {
@@ -24,7 +25,7 @@ class RegisterController extends Controller
                     'full_name' => $request->full_name,
                     'nick_name' => $request->nick_name,
                     'email' => $request->email,
-                    'phone' => $request->phone,
+                    'phone' => str_replace(' ', '', $request->phone),
                     'country' => $request->country,
                     'city' => $request->city,
                     'age' => $request->age,
@@ -45,6 +46,14 @@ class RegisterController extends Controller
                             'end_time' => Carbon::now()->addMinutes(15)->toTimeString(),
                             'date' => date('Y-m-d')
                         ]);
+                        $getID = Users::where('email', $request->email)->pluck('id')->first();
+                        $chackAmount = DB::table('yamluck')->where('user_id', $getID)->first();
+                        if ($chackAmount == null) {
+                            DB::table('yamluck')->insert([
+                                'user_id' => $getID,
+                                'amount' => 0,
+                            ]);
+                        }
                     } else {
                         Verification::create([
                             'user_id' => $getID,
@@ -53,6 +62,14 @@ class RegisterController extends Controller
                             'end_time' => Carbon::now()->addMinutes(15)->toTimeString(),
                             'date' => date('Y-m-d')
                         ]);
+                        $getID = Users::where('email', $request->email)->pluck('id')->first();
+                        $chackAmount = DB::table('yamluck')->where('user_id', $getID)->first();
+                        if ($chackAmount == null) {
+                            DB::table('yamluck')->insert([
+                                'user_id' => $getID,
+                                'amount' => 0,
+                            ]);
+                        }
                     }
                     return response()->json(['alert' => 'Account Created Successfully'], 202);
                 }
