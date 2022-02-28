@@ -19,6 +19,8 @@ class VerifyApiKey
         $apiKey = '$2y$10$h6ip6YtFQ1H6hk.0qQ9cD.StnRLbHoSezBDkaXjdMpxvEpBLNQVym';
         if ($request->header('x-api-key') === $apiKey) {
             return $next($request);
+        } else {
+            return response()->json(['alert' => 'Invalid api key'], 500);
         }
     }
 }
