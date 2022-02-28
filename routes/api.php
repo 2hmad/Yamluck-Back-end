@@ -73,7 +73,7 @@ Route::group(['middleware' => ['cors']], function () {
 
     Route::post('wallet/amount', [WalletController::class, 'getAmount']);
     Route::post('wallet/activities', [WalletController::class, 'getActivities']);
-    Route::post('wallet/recharge', [RechargeWalletController::class, 'recharge']);
+    Route::post('wallet/recharge', [RechargeWalletController::class, 'recharge'])->middleware('verifyApiKey');
 
     Route::get('search/{keyword}', [SearchController::class, 'search']);
 
