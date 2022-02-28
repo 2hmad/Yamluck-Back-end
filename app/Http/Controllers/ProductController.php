@@ -20,7 +20,7 @@ class ProductController extends Controller
     {
         $getName = Offers::where('id', $id)->pluck('title_en')->first();
         if ($getName !== "") {
-            return Offers::where('title_en', 'like', '%' . $getName . '%')->whereNotIn('id', [$id])->get(['id', 'pic_one', 'title_en', 'title_ar', 'price']);
+            return Offers::where('title_en', 'like', '%' . $getName . '%')->whereNotIn('id', [$id])->get();
         } else {
             return response()->json(['alert' => 'Invalid User ID'], 404);
         }
