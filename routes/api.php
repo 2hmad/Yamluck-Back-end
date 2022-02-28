@@ -8,6 +8,7 @@ use App\Http\Controllers\OffersController;
 use App\Http\Controllers\PayWithYamluck;
 use App\Http\Controllers\ProductController;
 use App\Http\Controllers\ProfileController;
+use App\Http\Controllers\RechargeWalletController;
 use App\Http\Controllers\RegisterController;
 use App\Http\Controllers\ResetPasswordController;
 use App\Http\Controllers\SearchController;
@@ -72,6 +73,7 @@ Route::group(['middleware' => ['cors']], function () {
 
     Route::post('wallet/amount', [WalletController::class, 'getAmount']);
     Route::post('wallet/activities', [WalletController::class, 'getActivities']);
+    Route::post('wallet/recharge', [RechargeWalletController::class, 'recharge']);
 
     Route::get('search/{keyword}', [SearchController::class, 'search']);
 
