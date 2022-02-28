@@ -31,7 +31,7 @@ class WalletController extends Controller
         $checkToken = Users::where('token', $headerToken)->first();
         if ($checkToken !== null && $headerToken !== null) {
             $getID = Users::where('token', $headerToken)->first('id');
-            return DB::table('activities')->where('user_id', '=', $getID->id)->get();
+            return DB::table('activities')->where('user_id', '=', $getID->id)->orderBy('id', 'DESC')->get();
         } else {
             return response()->json(['alert' => 'Invalid Token'], 404);
         }
