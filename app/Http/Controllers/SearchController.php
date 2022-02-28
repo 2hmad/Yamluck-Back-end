@@ -14,16 +14,6 @@ class SearchController extends Controller
             ->orWhere('title_en', 'LIKE', '%' . $keyword . '%')
             ->orWhere('details_ar', 'LIKE', '%' . $keyword . '%')
             ->orWhere('details_en', 'LIKE', '%' . $keyword . '%')
-            ->get([
-                'id',
-                'title_ar',
-                'title_en',
-                'details_ar',
-                'details_en',
-                'price',
-                'publish_date',
-                'curr_subs',
-                'pic_one'
-            ]);
+            ->get();
     }
 }
