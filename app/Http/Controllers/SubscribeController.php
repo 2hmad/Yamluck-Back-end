@@ -37,7 +37,7 @@ class SubscribeController extends Controller
         $headerToken = $request->header('Authorization');
         $checkToken = Users::where('token', $headerToken)->first();
         if ($checkToken !== null && $headerToken !== null && $request->product_id !== null) {
-            $checkSubscribe = Subscribe::where('user_id', $checkToken->id)->first();
+            $checkSubscribe = Subscribe::where('user_id', $checkToken->id)->where('product_id', $request->product_id)->first();
             if ($checkSubscribe == null) {
                 return response()->json(['alert' => 'User not subscribed'], 404);
             } else {
