@@ -82,5 +82,5 @@ Route::group(['middleware' => ['cors']], function () {
 
     Route::post('pay-with-yamluck', [PayWithYamluck::class, 'pay']);
 
-    Route::post('subscribe', [SubscribeController::class, 'subscribe']);
+    Route::post('subscribe', [SubscribeController::class, 'subscribe'])->middleware('verifyApiKey');
 });
