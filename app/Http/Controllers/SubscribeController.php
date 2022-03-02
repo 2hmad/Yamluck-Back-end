@@ -32,4 +32,19 @@ class SubscribeController extends Controller
             return response()->json(['alert' => 'Invalid Token'], 404);
         }
     }
+    public function getSubscribers(Request $request)
+    {
+        $headerToken = $request->header('Authorization');
+        $checkToken = Users::where('token', $headerToken)->first();
+        if ($checkToken !== null && $headerToken !== null && $request->product_id !== null) {
+            $checkSubscribe = Subscribe::where('user_id', $checkToken->id)->first();
+            if ($checkSubscribe == null) {
+                return response()->json(['alert' => 'User not subscribed'], 404);
+            } else {
+                return Users::where('id', $checkToken->id)->first('pic');
+            }
+        } else {
+            return response()->json(['alert' => 'Invalid Token'], 404);
+        }
+    }
 }
