@@ -8,13 +8,12 @@ use App\Http\Controllers\OffersController;
 use App\Http\Controllers\PayWithYamluck;
 use App\Http\Controllers\ProductController;
 use App\Http\Controllers\ProfileController;
-use App\Http\Controllers\RechargeWalletController;
 use App\Http\Controllers\RegisterController;
 use App\Http\Controllers\ResetPasswordController;
 use App\Http\Controllers\SearchController;
+use App\Http\Controllers\SubscribeController;
 use App\Http\Controllers\VerificationController;
 use App\Http\Controllers\WalletController;
-use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -73,7 +72,7 @@ Route::group(['middleware' => ['cors']], function () {
 
     Route::post('wallet/amount', [WalletController::class, 'getAmount']);
     Route::post('wallet/activities', [WalletController::class, 'getActivities']);
-    Route::post('wallet/recharge', [RechargeWalletController::class, 'recharge'])->middleware('verifyApiKey');
+    Route::post('wallet/recharge', [WalletController::class, 'recharge'])->middleware('verifyApiKey');
 
     Route::get('search/{keyword}', [SearchController::class, 'search']);
 
@@ -82,4 +81,6 @@ Route::group(['middleware' => ['cors']], function () {
     });
 
     Route::post('pay-with-yamluck', [PayWithYamluck::class, 'pay']);
+
+    Route::post('subscribe', [SubscribeController::class, 'subscribe']);
 });
