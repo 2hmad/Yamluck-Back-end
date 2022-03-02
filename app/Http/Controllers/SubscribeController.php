@@ -28,6 +28,8 @@ class SubscribeController extends Controller
             } else {
                 return response()->json(['alert' => 'Already subscribed'], 404);
             }
+        } else {
+            return response()->json(['alert' => 'Invalid Token'], 404);
         }
     }
 }
