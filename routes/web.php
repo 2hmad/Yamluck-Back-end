@@ -1,5 +1,6 @@
 <?php
 
+use App\Models\Subscribe;
 use App\Models\Users;
 use App\Models\Verification;
 use Illuminate\Support\Facades\Route;
@@ -18,4 +19,6 @@ use Paytabs\Paytabs;
 */
 
 Route::get('/', function () {
+    $user = Subscribe::where('product_id', 1)->with('user')->get();
+    return $user;
 });

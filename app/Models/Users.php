@@ -4,6 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
 
 class Users extends Model
 {
@@ -11,6 +12,7 @@ class Users extends Model
 
     public $table = 'users';
     protected $fillable = [
+        "id",
         'full_name',
         'nick_name',
         'email',
@@ -34,4 +36,9 @@ class Users extends Model
         'password'
     ];
     public $timestamps = false;
+
+    public function subscribe()
+    {
+        return $this->hasOne(Subscribe::class, 'user_id');
+    }
 }
