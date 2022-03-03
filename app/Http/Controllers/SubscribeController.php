@@ -41,7 +41,7 @@ class SubscribeController extends Controller
             if ($checkSubscribe == null) {
                 return response()->json(['alert' => 'User not subscribed'], 404);
             } else {
-                $pics = Subscribe::where('product_id', $request->product_id)->with('user')->get();
+                return Subscribe::where('product_id', $request->product_id)->with('user')->get();
             }
         } else {
             return response()->json(['alert' => 'Invalid Token'], 404);
