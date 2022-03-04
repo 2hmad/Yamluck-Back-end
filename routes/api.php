@@ -14,6 +14,7 @@ use App\Http\Controllers\SearchController;
 use App\Http\Controllers\SubscribeController;
 use App\Http\Controllers\VerificationController;
 use App\Http\Controllers\WalletController;
+use App\Http\Controllers\WinnerController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -84,4 +85,5 @@ Route::group(['middleware' => ['cors']], function () {
 
     Route::post('offer/subscribe', [SubscribeController::class, 'subscribe'])->middleware('verifyApiKey');
     Route::post('offer/subscribers', [SubscribeController::class, 'getSubscribers'])->middleware('verifyApiKey');
+    Route::post('offer/winner', [WinnerController::class, 'winner'])->middleware('verifyApiKey');
 });
