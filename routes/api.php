@@ -11,6 +11,7 @@ use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\RegisterController;
 use App\Http\Controllers\ResetPasswordController;
 use App\Http\Controllers\SearchController;
+use App\Http\Controllers\SocialAuthController;
 use App\Http\Controllers\SubscribeController;
 use App\Http\Controllers\VerificationController;
 use App\Http\Controllers\WalletController;
@@ -31,16 +32,10 @@ use Illuminate\Support\Facades\Route;
 Route::group(['middleware' => ['cors']], function () {
     Route::post('register', [RegisterController::class, 'register'])->name('register');
 
-    Route::get('register/facebook', [RegisterController::class, 'facebookRedirect']);
-    Route::get('register/facebook/callback', [RegisterController::class, 'facebookCallback']);
-
-    Route::get('register/twitter', [RegisterController::class, 'twitterRedirect']);
-    Route::get('register/twitter/callback', [RegisterController::class, 'twitterCallback']);
-
     Route::post('login', [LoginController::class, 'login']);
 
-    Route::post('login/facebook', [LoginController::class, 'facebookRedirect']);
-    Route::post('login/facebook/callback', [LoginController::class, 'facebookCallback']);
+    Route::post('auth/facebook', [SocialAuthController::class, 'facebook']);
+    Route::post('auth/twitter', [SocialAuthController::class, 'twitter']);
 
     Route::post('reset-password', [ResetPasswordController::class, 'reset']);
     Route::post('update-password/{code}', [ResetPasswordController::class, 'update']);
