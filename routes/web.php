@@ -19,6 +19,4 @@ use Paytabs\Paytabs;
 */
 
 Route::get('/', function () {
-    $user = Subscribe::where('product_id', 1)->with('user')->get();
-    return $user;
 });

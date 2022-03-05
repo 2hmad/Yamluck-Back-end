@@ -28,6 +28,7 @@ class RegisterController extends Controller
                     'phone' => str_replace(' ', '', $request->phone),
                     'country' => $request->country,
                     'city' => $request->city,
+                    'nationality' => $request->country,
                     'age' => $request->age,
                     'interest' => $request->interest,
                     'password' => Hash::make($request->password),
