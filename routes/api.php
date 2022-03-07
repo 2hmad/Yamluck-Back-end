@@ -5,6 +5,7 @@ use App\Http\Controllers\CategoriesController;
 use App\Http\Controllers\CountriesController;
 use App\Http\Controllers\LoginController;
 use App\Http\Controllers\OffersController;
+use App\Http\Controllers\PaymentController;
 use App\Http\Controllers\PayWithYamluck;
 use App\Http\Controllers\ProductController;
 use App\Http\Controllers\ProfileController;
@@ -79,5 +80,7 @@ Route::group(['middleware' => ['cors']], function () {
     Route::post('offer/subscribe', [SubscribeController::class, 'subscribe'])->middleware('verifyApiKey');
     Route::post('offer/subscribers', [SubscribeController::class, 'getSubscribers'])->middleware('verifyApiKey');
     Route::post('offer/winner', [WinnerController::class, 'winner'])->middleware('verifyApiKey');
-    Route::post('offer/pay-with-yamluck', [PayWithYamluck::class, 'pay']);
+    Route::post('offer/pay-with-yamluck', [PayWithYamluck::class, 'pay'])->middleware('verifyApiKey');
+
+    Route::post('payment/{type}', [PaymentController::class, 'pay']);
 });
