@@ -38,6 +38,8 @@ class PaymentController extends Controller
                 } else {
                     return response()->json(['alert' => 'Data is missing'], 404);
                 }
+            } else {
+                return response()->json(['alert' => 'Invalid token'], 404);
             }
         } elseif ($type == 'wallet') {
             $headerToken = $request->header('Authorization');
