@@ -76,9 +76,8 @@ Route::group(['middleware' => ['cors']], function () {
         return response()->json(['alert' => 'OK'], 200);
     });
 
-    Route::post('pay-with-yamluck', [PayWithYamluck::class, 'pay']);
-
     Route::post('offer/subscribe', [SubscribeController::class, 'subscribe'])->middleware('verifyApiKey');
     Route::post('offer/subscribers', [SubscribeController::class, 'getSubscribers'])->middleware('verifyApiKey');
     Route::post('offer/winner', [WinnerController::class, 'winner'])->middleware('verifyApiKey');
+    Route::post('offer/pay-with-yamluck', [PayWithYamluck::class, 'pay']);
 });
