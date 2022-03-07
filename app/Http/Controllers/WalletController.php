@@ -15,7 +15,7 @@ class WalletController extends Controller
         $checkToken = Users::where('token', $headerToken)->first();
         if ($checkToken !== null && $headerToken !== null) {
             $getID = Users::where('token', $headerToken)->first('id');
-            $getAmount = DB::table('yamluck')->where('user_id', '=', $getID->id)->first();
+            $getAmount = DB::table('yamluck')->where('user_id', '=', $getID->id)->first()->toJson();
             if ($getAmount == null) {
                 return 0;
             } else {
