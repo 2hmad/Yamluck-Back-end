@@ -16,12 +16,12 @@ class SocialAuthController extends Controller
             Users::where('email', $request->email)->update([
                 "facebook_id" => $request->facebook_id
             ]);
-            return Users::where('email', $request->email)->first('token');
+            return Users::where('email', $request->email)->first();
         } else if ($checkEmail !== null) {
             Users::where('email', $request->email)->update([
                 "facebook_id" => $request->facebook_id
             ]);
-            return Users::where('email', $request->email)->first('token');
+            return Users::where('email', $request->email)->first();
         } else {
             Users::create([
                 "full_name" => $request->full_name,
@@ -35,7 +35,7 @@ class SocialAuthController extends Controller
                 'verified' => 0,
                 "birthdate" => date("Y-m-d")
             ]);
-            return Users::where('email', $request->email)->first('token');
+            return Users::where('email', $request->email)->first();
         }
     }
 }
