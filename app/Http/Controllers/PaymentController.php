@@ -16,22 +16,22 @@ class PaymentController extends Controller
             $checkToken = Users::where('token', $headerToken)->first();
             if ($checkToken !== null && $headerToken !== null && $request->product_id !== null) {
                 $id = $request->product_id;
-                $cardHolder = $request->card_holder;
-                $cardNumber = $request->card_number;
-                $cardMonth = $request->expire_month;
-                $cardYear = $request->expire_year;
-                $cardCvv = $request->cvv;
-                if ($cardHolder !== "" && $cardNumber !== "" && $cardMonth !== "" && $cardYear !== "" && $cardCvv !== "") {
+                if ($request->card_holder !== "" && $request->card_number !== "" && $request->expire_month !== "" && $request->expire_year !== "" && $request->cvv !== "") {
                     $getOffer = Offers::where('id', $id)->first();
                     if ($getOffer->curr_subs < $getOffer->max_subs) {
-                        Subscribe::create([
-                            'user_id' => $checkToken->id,
-                            'product_id' => $id,
-                            'date' => date('Y-m-d')
-                        ]);
-                        Offers::where('id', $id)->update([
-                            "curr_subs" => $getOffer->curr_subs + 1
-                        ]);
+                        $checkSubscribe = Subscribe::where('user_id', $checkToken->id)->first();
+                        if ($checkSubscribe == null) {
+                            Subscribe::create([
+                                'user_id' => $checkToken->id,
+                                'product_id' => $id,
+                                'date' => date('Y-m-d')
+                            ]);
+                            Offers::where('id', $id)->update([
+                                "curr_subs" => $getOffer->curr_subs + 1
+                            ]);
+                        } else {
+                            return response()->json(['alert' => 'Already Subscribe'], 404);
+                        }
                     } else {
                         return response()->json(['alert' => 'Offer has expired'], 404);
                     }
