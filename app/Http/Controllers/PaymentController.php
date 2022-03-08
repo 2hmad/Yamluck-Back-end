@@ -30,7 +30,7 @@ class PaymentController extends Controller
                                 "curr_subs" => $getOffer->curr_subs + 1
                             ]);
                         } else {
-                            return response()->json(['alert' => 'Already Subscribe'], 404);
+                            return response()->json(['alert' => 'Already Subscribed'], 404);
                         }
                     } else {
                         return response()->json(['alert' => 'Offer has expired'], 404);
