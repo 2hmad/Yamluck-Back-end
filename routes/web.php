@@ -1,12 +1,7 @@
 <?php
 
-use App\Models\Subscribe;
-use App\Models\Users;
-use App\Models\Verification;
+use App\Http\Controllers\Web\LoginController;
 use Illuminate\Support\Facades\Route;
-use Carbon\Carbon;
-use Illuminate\Support\Facades\Hash;
-use Paytabs\Paytabs;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -18,5 +13,4 @@ use Paytabs\Paytabs;
 |
 */
 
-Route::get('/', function () {
-});
+Route::get('/', [LoginController::class, 'index']);

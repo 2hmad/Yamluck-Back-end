@@ -1,22 +1,22 @@
 <?php
 
-use App\Http\Controllers\AdsController;
-use App\Http\Controllers\CategoriesController;
-use App\Http\Controllers\CountriesController;
-use App\Http\Controllers\LoginController;
-use App\Http\Controllers\OffersController;
-use App\Http\Controllers\PaymentController;
-use App\Http\Controllers\PayWithYamluck;
-use App\Http\Controllers\ProductController;
-use App\Http\Controllers\ProfileController;
-use App\Http\Controllers\RegisterController;
-use App\Http\Controllers\ResetPasswordController;
-use App\Http\Controllers\SearchController;
-use App\Http\Controllers\SocialAuthController;
-use App\Http\Controllers\SubscribeController;
-use App\Http\Controllers\VerificationController;
-use App\Http\Controllers\WalletController;
-use App\Http\Controllers\WinnerController;
+use App\Http\Controllers\Api\AdsController;
+use App\Http\Controllers\Api\CategoriesController;
+use App\Http\Controllers\Api\CountriesController;
+use App\Http\Controllers\Api\LoginController;
+use App\Http\Controllers\Api\OffersController;
+use App\Http\Controllers\Api\PaymentController;
+use App\Http\Controllers\Api\PayWithYamluck;
+use App\Http\Controllers\Api\ProductController;
+use App\Http\Controllers\Api\ProfileController;
+use App\Http\Controllers\Api\RegisterController;
+use App\Http\Controllers\Api\ResetPasswordController;
+use App\Http\Controllers\Api\SearchController;
+use App\Http\Controllers\Api\SocialAuthController;
+use App\Http\Controllers\Api\SubscribeController;
+use App\Http\Controllers\Api\VerificationController;
+use App\Http\Controllers\Api\WalletController;
+use App\Http\Controllers\Api\WinnerController;
 use Illuminate\Support\Facades\Route;
 
 /*
