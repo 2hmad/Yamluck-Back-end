@@ -33,9 +33,11 @@ class WinnerController extends Controller
             if ($checkWinner == null) {
                 return response('', 404);
             } else {
-                return Winner::update([
-                    'confirmed' => 1
-                ]);
+                if ($checkToken->id == $checkWinner->user_id) {
+                    return Winner::where('product_id', $request->product_id)->update([
+                        'confirmed' => 1
+                    ]);
+                }
             }
         } else {
             return response()->json(['alert' => 'Invalid Token'], 404);
