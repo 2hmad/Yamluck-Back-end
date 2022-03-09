@@ -32,7 +32,7 @@ class SocialAuthController extends Controller
                 'token' => md5(rand(1, 10) . microtime()),
                 'pic' => 'default.png',
                 'notifications' => 'Yes',
-                'verified' => 0,
+                'verified' => 1,
                 "birthdate" => date("Y-m-d")
             ]);
             return Users::where('email', $request->email)->first();
