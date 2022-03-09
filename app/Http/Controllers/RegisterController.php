@@ -40,6 +40,10 @@ class RegisterController extends Controller
                 ]);
                 if ($createUser) {
                     $getID = Users::where('email', $request->email)->pluck('id')->first();
+                    DB::table('yamluck')->insert([
+                        'user_id' => $getID->id,
+                        'amount' => 0
+                    ]);
                     $checkCode = Verification::where('user_id', $getID)->first();
                     if ($checkCode !== null) {
                         Verification::where('user_id', $getID)->update([
