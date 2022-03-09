@@ -6,6 +6,7 @@ use App\Models\Offers;
 use App\Models\Subscribe;
 use App\Models\Users;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 
 class PaymentController extends Controller
 {
@@ -52,6 +53,10 @@ class PaymentController extends Controller
                 $cardYear = $request->expire_year;
                 $cardCvv = $request->cvv;
                 if ($cardHolder !== "" && $cardNumber !== "" && $cardMonth !== "" && $cardYear !== "" && $cardCvv !== "") {
+                    $getAmount = DB::table('yamluck')->where('user_id', '=', $checkToken->id)->first();
+                    DB::table('yamluck')->where('user_id', '=', $checkToken->id)->update([
+                        'amount' => $getAmount->amount + $amount
+                    ]);
                 } else {
                     return response()->json(['alert' => 'Data is missing'], 404);
                 }

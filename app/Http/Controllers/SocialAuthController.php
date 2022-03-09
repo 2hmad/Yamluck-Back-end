@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Users;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Hash;
 
 class SocialAuthController extends Controller
@@ -13,9 +14,9 @@ class SocialAuthController extends Controller
         $isUser = Users::where('facebook_id', $request->facebook_id)->first();
         $checkEmail = Users::where('email', $request->email)->first();
         if ($isUser !== null) {
-            Users::where('email', $request->email)->update([
-                "facebook_id" => $request->facebook_id
-            ]);
+            // Users::where('email', $request->email)->update([
+            //     "facebook_id" => $request->facebook_id
+            // ]);
             return Users::where('email', $request->email)->first();
         } else if ($checkEmail !== null) {
             Users::where('email', $request->email)->update([
@@ -34,6 +35,10 @@ class SocialAuthController extends Controller
                 'notifications' => 'Yes',
                 'verified' => 1,
                 "birthdate" => date("Y-m-d")
+            ]);
+            DB::table('yamluck')->insert([
+                'user_id' => 1,
+                'amount' => 0,
             ]);
             return Users::where('email', $request->email)->first();
         }
