@@ -17,8 +17,8 @@ class WinnerController extends Controller
             if ($checkWinner == null) {
                 return response('', 404);
             } else {
+                Users::where('id', $checkWinner->user_id)->first('pic');
                 return $checkWinner;
-                return Users::where('id', $checkWinner->user_id)->first('pic');
             }
         } else {
             return response()->json(['alert' => 'Invalid Token'], 404);
