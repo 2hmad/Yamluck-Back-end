@@ -31,7 +31,8 @@ class ProfileController extends Controller
                 'full_name' => $request->full_name,
                 'email' => $request->email,
                 'phone' => str_replace(' ', '', $request->phone),
-                'birthdate' => $request->birthdate
+                'birthdate' => $request->birthdate,
+                'country' => $request->country
             ]);
             if (str_replace(' ', '', $request->phone) !== $checkToken->phone) {
                 Users::where('token', $headerToken)->update([
