@@ -39,43 +39,31 @@ class RegisterController extends Controller
                     "birthdate" => date("Y-m-d")
                 ]);
                 if ($createUser) {
-                    $getID = Users::where('email', $request->email)->pluck('id')->first();
-                    DB::table('yamluck')->insert([
-                        'user_id' => $getID->id,
-                        'amount' => 0
-                    ]);
-                    $checkCode = Verification::where('user_id', $getID)->first();
+                    $getID = Users::where('email', $request->email)->first('id');
+                    $checkCode = Verification::where('user_id', $getID->id)->first();
                     if ($checkCode !== null) {
-                        Verification::where('user_id', $getID)->update([
+                        Verification::where('user_id', $getID->id)->update([
                             'code' => random_int(1000, 9999),
                             'start_time' => Carbon::now()->toTimeString(),
                             'end_time' => Carbon::now()->addMinutes(15)->toTimeString(),
                             'date' => date('Y-m-d')
                         ]);
-                        $getID = Users::where('email', $request->email)->pluck('id')->first();
-                        $chackAmount = DB::table('yamluck')->where('user_id', $getID)->first();
-                        if ($chackAmount == null) {
-                            DB::table('yamluck')->insert([
-                                'user_id' => $getID,
-                                'amount' => 0,
-                            ]);
-                        }
+                        DB::table('yamluck')->insert([
+                            'user_id' => $getID->id,
+                            'amount' => 0,
+                        ]);
                     } else {
                         Verification::create([
-                            'user_id' => $getID,
+                            'user_id' => $getID->id,
                             'code' => random_int(1000, 9999),
                             'start_time' => Carbon::now()->toTimeString(),
                             'end_time' => Carbon::now()->addMinutes(15)->toTimeString(),
                             'date' => date('Y-m-d')
                         ]);
-                        $getID = Users::where('email', $request->email)->pluck('id')->first();
-                        $chackAmount = DB::table('yamluck')->where('user_id', $getID)->first();
-                        if ($chackAmount == null) {
-                            DB::table('yamluck')->insert([
-                                'user_id' => $getID,
-                                'amount' => 0,
-                            ]);
-                        }
+                        DB::table('yamluck')->insert([
+                            'user_id' => $getID->id,
+                            'amount' => 0,
+                        ]);
                     }
                     return response()->json(['alert' => 'Account Created Successfully'], 202);
                 }
