@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Api;
 
+use App\Http\Controllers\Controller;
 use App\Models\Users;
 use App\Models\Verification;
 use Illuminate\Http\Request;

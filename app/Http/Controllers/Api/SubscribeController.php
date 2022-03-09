@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Api;
 
+use App\Http\Controllers\Controller;
 use App\Models\Offers;
 use App\Models\Subscribe;
 use App\Models\Users;
