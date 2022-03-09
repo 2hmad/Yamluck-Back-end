@@ -23,7 +23,7 @@ class PayWithYamluck extends Controller
                 ]);
                 Subscribe::create([
                     'user_id' => $checkToken->id,
-                    'product_id' => $productID,
+                    'product_id' => $productID->id,
                     'date' => date('Y-m-d')
                 ]);
             } else {
