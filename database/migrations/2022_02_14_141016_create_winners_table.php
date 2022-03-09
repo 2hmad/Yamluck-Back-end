@@ -18,6 +18,7 @@ return new class extends Migration
             $table->text('user_id');
             $table->text('product_id');
             $table->date('date');
+            $table->text('confirmed')->default(0);
         });
     }
 
