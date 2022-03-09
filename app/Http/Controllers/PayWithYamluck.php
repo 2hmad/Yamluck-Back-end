@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Offers;
+use App\Models\Subscribe;
 use App\Models\Users;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
@@ -19,6 +20,11 @@ class PayWithYamluck extends Controller
             if ($getBalance->amount >= $productID->share_price) {
                 DB::table('yamluck')->where('user_id', '=', $checkToken->id)->update([
                     'amount' => $getBalance->amount - $productID->share_price
+                ]);
+                Subscribe::create([
+                    'user_id' => $checkToken->id,
+                    'product_id' => $productID,
+                    'date' => date('Y-m-d')
                 ]);
             } else {
                 return response()->json(['alert' => 'Balance is not enough'], 404);
