@@ -16,4 +16,9 @@ class Winner extends Model
     ];
     protected $hidden = [];
     public $timestamps = false;
+
+    public function user()
+    {
+        return $this->belongsTo(Users::class, 'user_id');
+    }
 }

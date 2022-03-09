@@ -41,4 +41,8 @@ class Users extends Model
     {
         return $this->hasOne(Subscribe::class, 'user_id');
     }
+    public function winner()
+    {
+        return $this->hasOne(Winner::class, 'user_id');
+    }
 }
