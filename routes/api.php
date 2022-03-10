@@ -4,6 +4,7 @@ use App\Http\Controllers\Api\AdsController;
 use App\Http\Controllers\Api\CategoriesController;
 use App\Http\Controllers\Api\CountriesController;
 use App\Http\Controllers\Api\LoginController;
+use App\Http\Controllers\Api\NotificationController;
 use App\Http\Controllers\Api\OffersController;
 use App\Http\Controllers\Api\PaymentController;
 use App\Http\Controllers\Api\PayWithYamluck;
@@ -84,4 +85,6 @@ Route::group(['middleware' => ['cors']], function () {
     Route::post('offer/pay-with-yamluck', [PayWithYamluck::class, 'pay'])->middleware('verifyApiKey');
 
     Route::post('payment/{type}', [PaymentController::class, 'pay'])->middleware('verifyApiKey');
+
+    Route::post('notification', [NotificationController::class, 'switch']);
 });

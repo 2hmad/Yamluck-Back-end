@@ -30,7 +30,7 @@ return new class extends Migration
             $table->text('twitter_id')->nullable();
             $table->text('apple_id')->nullable();
             $table->text('token');
-            $table->text('notifications')->nullable();
+            $table->text('notifications')->nullable()->default('Yes');
             $table->text('pic');
             $table->text('verified');
         });
