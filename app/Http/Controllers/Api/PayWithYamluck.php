@@ -27,6 +27,9 @@ class PayWithYamluck extends Controller
                     'product_id' => $productID->id,
                     'date' => date('Y-m-d')
                 ]);
+                Offers::where('id', $request->product_id)->update([
+                    "curr_subs" => $productID->curr_subs + 1
+                ]);
             } else {
                 return response()->json(['alert' => 'Balance is not enough'], 404);
             }
