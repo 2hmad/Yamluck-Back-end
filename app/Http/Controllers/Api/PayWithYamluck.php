@@ -18,20 +18,25 @@ class PayWithYamluck extends Controller
         if ($checkToken !== null && $headerToken !== null) {
             $getBalance = DB::table('yamluck')->where('user_id', '=', $checkToken->id)->first();
             $productID = Offers::where('id', $request->product_id)->first();
-            if ($getBalance->amount >= $productID->share_price) {
-                DB::table('yamluck')->where('user_id', '=', $checkToken->id)->update([
-                    'amount' => $getBalance->amount - $productID->share_price
-                ]);
-                Subscribe::create([
-                    'user_id' => $checkToken->id,
-                    'product_id' => $productID->id,
-                    'date' => date('Y-m-d')
-                ]);
-                Offers::where('id', $request->product_id)->update([
-                    "curr_subs" => $productID->curr_subs + 1
-                ]);
+            $checkSubscribe = Subscribe::where('user_id', $checkToken->id)->first();
+            if ($checkSubscribe == null) {
+                if ($getBalance->amount >= $productID->share_price) {
+                    DB::table('yamluck')->where('user_id', '=', $checkToken->id)->update([
+                        'amount' => $getBalance->amount - $productID->share_price
+                    ]);
+                    Subscribe::create([
+                        'user_id' => $checkToken->id,
+                        'product_id' => $productID->id,
+                        'date' => date('Y-m-d')
+                    ]);
+                    Offers::where('id', $request->product_id)->update([
+                        "curr_subs" => $productID->curr_subs + 1
+                    ]);
+                } else {
+                    return response()->json(['alert' => 'Balance is not enough'], 404);
+                }
             } else {
-                return response()->json(['alert' => 'Balance is not enough'], 404);
+                return response()->json(['alert' => 'Already Subscribed'], 404);
             }
         }
     }
