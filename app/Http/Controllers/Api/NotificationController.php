@@ -12,8 +12,8 @@ class NotificationController extends Controller
     {
         $headerToken = $request->header('Authorization');
         $checkToken = Users::where('token', $headerToken)->first();
-        if ($checkToken !== null && $headerToken !== null) {
-            if ($checkToken->notifications == "Yes") {
+        if ($checkToken !== null && $headerToken !== null && $request->status !== "") {
+            if ($request->status == 0) {
                 Users::where('id', $checkToken->id)->update([
                     "notifications" => "No"
                 ]);
