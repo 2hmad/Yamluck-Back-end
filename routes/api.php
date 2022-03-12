@@ -7,6 +7,7 @@ use App\Http\Controllers\Api\LoginController;
 use App\Http\Controllers\Api\NotificationController;
 use App\Http\Controllers\Api\OffersController;
 use App\Http\Controllers\Api\PaymentController;
+use App\Http\Controllers\Api\PaypalController;
 use App\Http\Controllers\Api\PayWithYamluck;
 use App\Http\Controllers\Api\ProductController;
 use App\Http\Controllers\Api\ProfileController;
@@ -85,6 +86,13 @@ Route::group(['middleware' => ['cors']], function () {
     Route::post('offer/pay-with-yamluck', [PayWithYamluck::class, 'pay'])->middleware('verifyApiKey');
 
     Route::post('payment/{type}', [PaymentController::class, 'pay'])->middleware('verifyApiKey');
+
+    Route::get('paypal/index', [PayPalController::class, 'view']);
+    // Route::group(['middleware' => 'getUserData'], function () {
+    Route::post('paypal', [PayPalController::class, 'index'])->name('paypalIndex');
+    Route::get('paypal/return', [PaypalController::class, 'paypalReturn'])->name('paypalReturn');
+    Route::get('paypal/cancel', [PaypalController::class, 'paypalCancel'])->name('paypalCancel');
+    // });
 
     Route::post('notification', [NotificationController::class, 'switch']);
 });
