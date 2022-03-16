@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\Admin\UsersController;
 use App\Http\Controllers\Api\AdsController;
 use App\Http\Controllers\Api\CategoriesController;
 use App\Http\Controllers\Api\CountriesController;
@@ -55,6 +56,9 @@ Route::group(['middleware' => ['cors']], function () {
     Route::get('categories-limited/{count}', [CategoriesController::class, 'getCategoriesLimit']);
     Route::get('get-subcategory/{cat_id}', [CategoriesController::class, 'getSubCategories']);
     Route::get('get-subsubcategory/{subcat_id}', [CategoriesController::class, 'getSubSubCategories']);
+    Route::post('add-category', [CategoriesController::class, 'addCategory']);
+    Route::post('add-subcategory', [CategoriesController::class, 'addSubCategory']);
+    Route::post('add-subsubcategory', [CategoriesController::class, 'addSubSubCategory']);
 
     Route::get('get-ad', [AdsController::class, 'get']);
 

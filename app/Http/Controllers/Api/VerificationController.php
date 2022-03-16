@@ -8,13 +8,14 @@ use App\Models\Verification;
 use Illuminate\Http\Request;
 use Carbon\Carbon;
 use Illuminate\Support\Facades\DB;
+use Dot2hmad\LaravelTwilio\Facades\LaravelTwilio;
 
 class VerificationController extends Controller
 {
     public function resend(Request $request)
     {
         $headerToken = $request->header('Authorization');
-        $getID = Users::where('token', $headerToken)->first('id');
+        $getID = Users::where('token', $headerToken)->first();
         $checkCode = Verification::where('user_id', $getID->id)->first();
         if ($checkCode !== null) {
             Verification::where('user_id', $getID->id)->update([
@@ -23,6 +24,11 @@ class VerificationController extends Controller
                 'end_time' => Carbon::now()->addMinutes(15)->toTimeString(),
                 'date' => date('Y-m-d')
             ]);
+            $getCode = Verification::where('user_id', $getID->id)->first();
+            if ($getCode) {
+                return LaravelTwilio::notify($getID->phone, 'Your Verification Code : ' . $getCode->code . '
+It will be expire in 15 minutes');
+            }
         } else {
             Verification::create([
                 'user_id' => $getID->id,
@@ -31,6 +37,11 @@ class VerificationController extends Controller
                 'end_time' => Carbon::now()->addMinutes(15)->toTimeString(),
                 'date' => date('Y-m-d')
             ]);
+            $getCode = Verification::where('user_id', $getID->id)->first();
+            if ($getCode) {
+                LaravelTwilio::notify($getID->phone, 'Your Verification Code : ' . $getCode->code . '
+It will be expire in 15 minutes');
+            }
         }
     }
     public function verify(Request $request)
