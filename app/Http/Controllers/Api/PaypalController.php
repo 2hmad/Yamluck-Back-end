@@ -23,7 +23,7 @@ class PaypalController extends Controller
         $checkToken = Users::where('token', $headerToken)->first();
         if ($checkToken !== null && $headerToken !== null && $request->product_id !== null) {
             $getProduct = Offers::where('id', $request->product_id)->first();
-            $checkSubscribe = Subscribe::where('user_id', $checkToken->id)->first();
+            $checkSubscribe = Subscribe::where('user_id', $checkToken->id)->where('product_id', $request->product_id)->first();
             if ($checkSubscribe == null) {
                 $this->paypalReturn($request);
                 $apiContext = new \PayPal\Rest\ApiContext(
