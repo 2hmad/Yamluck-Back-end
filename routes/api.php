@@ -92,8 +92,8 @@ Route::group(['middleware' => ['cors']], function () {
     Route::post('payment/{type}', [PaymentController::class, 'pay'])->middleware('verifyApiKey');
 
     Route::get('paypal/index', [PayPalController::class, 'view']);
-    Route::post('paypal', [PayPalController::class, 'index'])->middleware('verifyApiKey')->name('paypalIndex');
-    Route::get('paypal/return', [PaypalController::class, 'paypalReturn'])->name('paypalReturn');
+    Route::get('paypal/{product_id}/{auth}', [PayPalController::class, 'index'])->name('paypalIndex');
+    Route::get('paypal/return/{product_id}/{auth}', [PaypalController::class, 'paypalReturn']);
     Route::get('paypal/cancel', [PaypalController::class, 'paypalCancel'])->name('paypalCancel');
 
     Route::post('notification', [NotificationController::class, 'switch']);

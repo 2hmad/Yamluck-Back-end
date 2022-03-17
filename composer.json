@@ -20,7 +20,7 @@
         "laravel/tinker": "^2.5",
         "nesbot/carbon": "^2.57",
         "paypal/rest-api-sdk-php": "*",
-        "srmklive/paypal": "~3.0"
+        "srmklive/paypal": "^3.0"
     },
     "require-dev": {
         "facade/ignition": "^2.5",

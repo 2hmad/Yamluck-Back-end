@@ -168,6 +168,7 @@ return [
         App\Providers\RouteServiceProvider::class,
         Paytabs\PaytabsServiceProvider::class,
         Jenssegers\Agent\AgentServiceProvider::class,
+        Srmklive\PayPal\Providers\PayPalServiceProvider::class
     ],
 
     /*
@@ -224,6 +225,7 @@ return [
         'View' => Illuminate\Support\Facades\View::class,
         'Paytabs' => Paytabs\Facades\PaytabsFacade::class,
         'Agent' => Jenssegers\Agent\Facades\Agent::class,
+        'PayPal' => Srmklive\PayPal\Facades\PayPal::class
     ],
 
 ];

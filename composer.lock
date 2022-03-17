@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "84897da9916cf30e48e657cd3a36ef04",
+    "content-hash": "5d4e1db50af5610b76678f66af92de88",
     "packages": [
         {
             "name": "2hmad/laravel-twilio",
