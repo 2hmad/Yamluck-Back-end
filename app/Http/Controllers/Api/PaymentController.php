@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\Controller;
 use App\Models\Offers;
+use App\Models\Payments;
 use App\Models\Subscribe;
 use App\Models\Users;
 use Illuminate\Http\Request;
@@ -30,6 +31,15 @@ class PaymentController extends Controller
                             ]);
                             Offers::where('id', $id)->update([
                                 "curr_subs" => $getOffer->curr_subs + 1
+                            ]);
+                            Payments::create([
+                                'user_id' => $checkToken->id,
+                                'invoice_id' => uniqid(),
+                                'bill_to' => $checkToken->email,
+                                'payment' => 'Credit / Debit Card',
+                                "order_date" => date('Y-m-d'),
+                                'description' => $getOffer->title_en,
+                                'price' => $getOffer->share_price
                             ]);
                         } else {
                             return response()->json(['alert' => 'Already Subscribed'], 404);

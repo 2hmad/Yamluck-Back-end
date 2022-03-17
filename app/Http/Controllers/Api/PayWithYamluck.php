@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\Controller;
 use App\Models\Offers;
+use App\Models\Payments;
 use App\Models\Subscribe;
 use App\Models\Users;
 use Illuminate\Http\Request;
@@ -31,6 +32,15 @@ class PayWithYamluck extends Controller
                     ]);
                     Offers::where('id', $request->product_id)->update([
                         "curr_subs" => $productID->curr_subs + 1
+                    ]);
+                    Payments::create([
+                        'user_id' => $checkToken->id,
+                        'invoice_id' => uniqid(),
+                        'bill_to' => $checkToken->email,
+                        'payment' => 'Yammluck Balances',
+                        "order_date" => date('Y-m-d'),
+                        'description' => $productID->title_en,
+                        'price' => $productID->share_price
                     ]);
                 } else {
                     return response()->json(['alert' => 'Balance is not enough'], 404);

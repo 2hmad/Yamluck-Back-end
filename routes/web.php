@@ -13,4 +13,6 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', [LoginController::class, 'index']);
+Route::get('/', function () {
+    return uniqid();
+});

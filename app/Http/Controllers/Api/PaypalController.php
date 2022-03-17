@@ -4,14 +4,11 @@ namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\Controller;
 use App\Models\Offers;
+use App\Models\Payments;
 use App\Models\Subscribe;
 use App\Models\Users;
 use Exception;
-use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Session;
 use PayPal\Api\PaymentExecution;
-use Srmklive\PayPal\Services\PayPal as PayPalClient;
-use Srmklive\PayPal\Services\ExpressCheckout;
 
 class PaypalController extends Controller
 {
@@ -29,7 +26,7 @@ class PaypalController extends Controller
                     $checkSubscribe = Subscribe::where('user_id', $checkToken->id)->where('product_id', $product_id)->first();
                     if ($checkSubscribe == null) {
                         $apiContext = new \PayPal\Rest\ApiContext(
-                            new \PayPal\Auth\OAuthTokenCredential(env('PAYPAL_LIVE_CLIENT_ID'), env('PAYPAL_LIVE_CLIENT_SECRET'))
+                            new \PayPal\Auth\OAuthTokenCredential(env('PAYPAL_SANDBOX_CLIENT_ID'), env('PAYPAL_SANDBOX_CLIENT_SECRET'))
                         );
                         $payer = new \PayPal\Api\Payer();
                         $payer->setPaymentMethod('paypal');
@@ -49,6 +46,7 @@ class PaypalController extends Controller
 
                         try {
                             $payment->create($apiContext);
+                            echo $payment;
                             return redirect($payment->getApprovalLink());
                         } catch (\PayPal\Exception\PayPalConnectionException $ex) {
                             echo $ex->getData();
@@ -68,19 +66,47 @@ class PaypalController extends Controller
     }
     public function paypalReturn($product_id, $auth)
     {
+        $apiContext = new \PayPal\Rest\ApiContext(
+            new \PayPal\Auth\OAuthTokenCredential(env('PAYPAL_SANDBOX_CLIENT_ID'), env('PAYPAL_SANDBOX_CLIENT_SECRET'))
+        );
+
         $checkToken = Users::where('token', $auth)->first();
         $checkSubscribe = Subscribe::where('user_id', $checkToken->id)->where('product_id', $product_id)->first();
         if ($checkSubscribe == null) {
-            Subscribe::create([
-                "user_id" => $checkToken->id,
-                "product_id" => $product_id,
-                "date" => date('Y-m-d')
-            ]);
-            $getCurrentSubscribers = Offers::where('id', $product_id)->first('curr_subs');
-            Offers::where('id', $product_id)->update([
-                "curr_subs" => $getCurrentSubscribers->curr_subs + 1
-            ]);
-            return redirect('http://localhost:3000/confirm-payment');
+            $paymentId = $_GET['paymentId'];
+            $payment = \PayPal\Api\Payment::get($paymentId, $apiContext);
+            $payerId = $_GET['PayerID'];
+
+            $execution = new PaymentExecution();
+            $execution->setPayerId($payerId);
+
+            try {
+                $result = $payment->execute($execution, $apiContext);
+                Subscribe::create([
+                    "user_id" => $checkToken->id,
+                    "product_id" => $product_id,
+                    "date" => date('Y-m-d')
+                ]);
+                $getCurrentSubscribers = Offers::where('id', $product_id)->first('curr_subs');
+                Offers::where('id', $product_id)->update([
+                    "curr_subs" => $getCurrentSubscribers->curr_subs + 1
+                ]);
+                $getProduct = Offers::where('id', $product_id)->first();
+                Payments::create([
+                    'user_id' => $checkToken->id,
+                    'invoice_id' => uniqid(),
+                    'bill_to' => $checkToken->email,
+                    'payment' => 'PayPal',
+                    "order_date" => date('Y-m-d'),
+                    'description' => $getProduct->title_en,
+                    'price' => $getProduct->share_price
+                ]);
+                return redirect('http://localhost:3000/confirm-payment');
+            } catch (\PayPal\Exception\PayPalConnectionException $ex) {
+                echo $ex->getCode();
+                echo $ex->getData();
+                die($ex);
+            }
         } else {
             return response()->json(['alert' => 'Already subscribed'], 404);
         }
