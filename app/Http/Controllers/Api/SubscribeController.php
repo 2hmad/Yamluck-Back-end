@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\Controller;
+use App\Http\Controllers\CreateInvoiceController;
 use App\Models\Offers;
 use App\Models\Payments;
 use App\Models\Subscribe;
@@ -36,6 +37,12 @@ class SubscribeController extends Controller
                     'description' => $getCurrentSubscribers->title_en,
                     'price' => $getCurrentSubscribers->share_price
                 ]);
+                $getInvoice = Payments::where([
+                    ['user_id', '=', $checkToken->id],
+                    ['description', '=', $getCurrentSubscribers->title_en],
+                ])->first();
+                $tasks_controller = new CreateInvoiceController;
+                $tasks_controller->index('6233477b1ba0a');
             } else {
                 return response()->json(['alert' => 'Already subscribed'], 404);
             }

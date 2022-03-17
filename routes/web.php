@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\CreateInvoiceController;
 use App\Http\Controllers\Web\LoginController;
 use Illuminate\Support\Facades\Route;
 /*
@@ -13,6 +14,5 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', function () {
-    return uniqid();
-});
+Route::get('/', [LoginController::class, 'index']);
+Route::get('/invoice/{id}', [CreateInvoiceController::class, 'index']);

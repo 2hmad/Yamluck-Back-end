@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\Controller;
+use App\Http\Controllers\CreateInvoiceController;
 use App\Models\Offers;
 use App\Models\Payments;
 use App\Models\Subscribe;
@@ -42,6 +43,12 @@ class PayWithYamluck extends Controller
                         'description' => $productID->title_en,
                         'price' => $productID->share_price
                     ]);
+                    $getInvoice = Payments::where([
+                        ['user_id', '=', $checkToken->id],
+                        ['description', '=', $productID->title_en],
+                    ])->first();
+                    $tasks_controller = new CreateInvoiceController;
+                    $tasks_controller->index('6233477b1ba0a');
                 } else {
                     return response()->json(['alert' => 'Balance is not enough'], 404);
                 }

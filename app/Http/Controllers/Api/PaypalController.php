@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\Controller;
+use App\Http\Controllers\CreateInvoiceController;
 use App\Models\Offers;
 use App\Models\Payments;
 use App\Models\Subscribe;
@@ -101,6 +102,12 @@ class PaypalController extends Controller
                     'description' => $getProduct->title_en,
                     'price' => $getProduct->share_price
                 ]);
+                $getInvoice = Payments::where([
+                    ['user_id', '=', $checkToken->id],
+                    ['description', '=', $getProduct->title_en],
+                ])->first();
+                $tasks_controller = new CreateInvoiceController;
+                $tasks_controller->index('6233477b1ba0a');
                 return redirect('http://localhost:3000/confirm-payment');
             } catch (\PayPal\Exception\PayPalConnectionException $ex) {
                 echo $ex->getCode();
