@@ -169,7 +169,6 @@ return [
         Paytabs\PaytabsServiceProvider::class,
         Jenssegers\Agent\AgentServiceProvider::class,
         Srmklive\PayPal\Providers\PayPalServiceProvider::class,
-        Barryvdh\DomPDF\ServiceProvider::class,
     ],
 
     /*
@@ -227,7 +226,6 @@ return [
         'Paytabs' => Paytabs\Facades\PaytabsFacade::class,
         'Agent' => Jenssegers\Agent\Facades\Agent::class,
         'PayPal' => Srmklive\PayPal\Facades\PayPal::class,
-        'PDF' => Barryvdh\DomPDF\Facade::class,
     ],
 
 ];
