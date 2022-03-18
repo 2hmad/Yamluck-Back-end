@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\Api\SocialAuthController;
 use App\Http\Controllers\CreateInvoiceController;
 use App\Http\Controllers\Web\LoginController;
 use Illuminate\Support\Facades\Route;

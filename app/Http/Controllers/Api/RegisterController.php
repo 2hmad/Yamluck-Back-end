@@ -12,6 +12,7 @@ use Illuminate\Support\Facades\Hash;
 use Laravel\Socialite\Facades\Socialite;
 use Illuminate\Support\Str;
 use Carbon\Carbon;
+use Dot2hmad\LaravelTwilio\Facades\LaravelTwilio;
 use Illuminate\Support\Facades\DB;
 
 class RegisterController extends Controller
@@ -53,6 +54,11 @@ class RegisterController extends Controller
                             'user_id' => $getID->id,
                             'amount' => 0,
                         ]);
+                        $getCode = Verification::where('user_id', $getID->id)->first();
+                        if ($getCode) {
+                            return LaravelTwilio::notify($getID->phone, 'Your Verification Code : ' . $getCode->code . '
+It will be expire in 15 minutes');
+                        }
                     } else {
                         Verification::create([
                             'user_id' => $getID->id,
@@ -65,6 +71,11 @@ class RegisterController extends Controller
                             'user_id' => $getID->id,
                             'amount' => 0,
                         ]);
+                        $getCode = Verification::where('user_id', $getID->id)->first();
+                        if ($getCode) {
+                            return LaravelTwilio::notify($getID->phone, 'Your Verification Code : ' . $getCode->code . '
+It will be expire in 15 minutes');
+                        }
                     }
                     return response()->json(['alert' => 'Account Created Successfully'], 202);
                 }

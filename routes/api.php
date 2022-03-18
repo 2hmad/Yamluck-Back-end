@@ -39,7 +39,7 @@ Route::group(['middleware' => ['cors']], function () {
     Route::post('login', [LoginController::class, 'login']);
 
     Route::post('auth/facebook', [SocialAuthController::class, 'facebook']);
-    Route::post('auth/twitter', [SocialAuthController::class, 'twitter']);
+    Route::post('auth/google', [SocialAuthController::class, 'google']);
 
     Route::post('reset-password', [ResetPasswordController::class, 'reset']);
     Route::post('update-password/{code}', [ResetPasswordController::class, 'update']);

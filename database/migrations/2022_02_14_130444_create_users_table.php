@@ -27,7 +27,7 @@ return new class extends Migration
             $table->text('interest')->nullable();
             $table->text('password');
             $table->text('facebook_id')->nullable();
-            $table->text('twitter_id')->nullable();
+            $table->text('google_id')->nullable();
             $table->text('apple_id')->nullable();
             $table->text('token');
             $table->text('notifications')->default('Yes');
