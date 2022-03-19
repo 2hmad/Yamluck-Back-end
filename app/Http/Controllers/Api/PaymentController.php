@@ -23,7 +23,7 @@ class PaymentController extends Controller
                 if ($request->card_holder !== "" && $request->card_number !== "" && $request->expire_month !== "" && $request->expire_year !== "" && $request->cvv !== "") {
                     $getOffer = Offers::where('id', $id)->first();
                     if ($getOffer->curr_subs < $getOffer->max_subs) {
-                        $checkSubscribe = Subscribe::where('user_id', $checkToken->id)->first();
+                        $checkSubscribe = Subscribe::where('user_id', $checkToken->id)->where('product_id', $request->product_id)->first();
                         if ($checkSubscribe == null) {
                             Subscribe::create([
                                 'user_id' => $checkToken->id,

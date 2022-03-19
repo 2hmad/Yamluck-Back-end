@@ -20,7 +20,7 @@ class PayWithYamluck extends Controller
         if ($checkToken !== null && $headerToken !== null) {
             $getBalance = DB::table('yamluck')->where('user_id', '=', $checkToken->id)->first();
             $productID = Offers::where('id', $request->product_id)->first();
-            $checkSubscribe = Subscribe::where('user_id', $checkToken->id)->first();
+            $checkSubscribe = Subscribe::where('user_id', $checkToken->id)->where('product_id', $request->product_id)->first();
             if ($checkSubscribe == null) {
                 if ($getBalance->amount >= $productID->share_price) {
                     DB::table('yamluck')->where('user_id', '=', $checkToken->id)->update([
