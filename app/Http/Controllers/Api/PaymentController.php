@@ -75,6 +75,13 @@ class PaymentController extends Controller
                     DB::table('yamluck')->where('user_id', '=', $checkToken->id)->update([
                         'amount' => $getAmount->amount + $amount
                     ]);
+                    DB::table('activities')->insert([
+                        "user_id" => $checkToken->id,
+                        "type" => "add-balance",
+                        "amount" => $request->amount,
+                        "date" => date("Y-m-d")
+                    ]);
+                    return response()->json(['alert' => 'OK'], 200);
                 } else {
                     return response()->json(['alert' => 'Data is missing'], 404);
                 }

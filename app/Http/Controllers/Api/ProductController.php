@@ -10,9 +10,9 @@ class ProductController extends Controller
 {
     public function getProduct($id)
     {
-        $get = Offers::where('id', $id)->first()->toJson();
+        $get = Offers::where('id', $id)->first();
         if ($get == "") {
-            return response()->json(['alert' => 'Invalid User ID'], 404);
+            return response()->json(['alert' => 'Invalid Offer ID'], 404);
         } else {
             return $get;
         }
