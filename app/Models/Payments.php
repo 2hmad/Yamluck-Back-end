@@ -10,6 +10,7 @@ class Payments extends Model
     use HasFactory;
     protected $table = "payments_invoices";
     protected $fillable = [
+        "user_id",
         "invoice_id",
         "bill_to",
         "payment",
