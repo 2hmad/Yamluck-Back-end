@@ -31,7 +31,7 @@ class RegisterController extends Controller
                     'country' => $request->country,
                     'city' => $request->city,
                     'nationality' => $request->country,
-                    'age' => $request->age,
+                    'birthdate' => $request->birthdate,
                     'interest' => $request->interest,
                     'password' => Hash::make($request->password),
                     'token' => md5(rand(1, 10) . microtime()),

@@ -22,7 +22,6 @@ return new class extends Migration
             $table->text('country')->nullable();
             $table->text('city')->nullable();
             $table->text('nationality')->nullable();
-            $table->text('age')->nullable();
             $table->date('birthdate')->nullable();
             $table->text('interest')->nullable();
             $table->text('password');

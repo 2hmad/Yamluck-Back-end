@@ -20,7 +20,6 @@ class Users extends Model
         'country',
         'city',
         'nationality',
-        'age',
         'birthdate',
         'interest',
         'password',
