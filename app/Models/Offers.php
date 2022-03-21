@@ -26,6 +26,7 @@ class Offers extends Model
         "pic_one",
         "pic_two",
         "pic_three",
+        "video_link",
         "publish_date"
     ];
     protected $hidden = [];

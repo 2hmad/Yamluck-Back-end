@@ -33,6 +33,7 @@ return new class extends Migration
             $table->text('pic_one');
             $table->text('pic_two');
             $table->text('pic_three');
+            $table->text('video_link')->nullable();
             $table->date('publish_date');
         });
     }
