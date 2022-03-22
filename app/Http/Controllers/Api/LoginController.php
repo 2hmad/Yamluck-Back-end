@@ -17,7 +17,7 @@ class LoginController extends Controller
         $checkUser = Users::where('email', '=', $request->email)->first();
         if ($checkUser) {
             if (Hash::check($request->password, $checkUser->password)) {
-                $getToken = Users::where('email', $request->email)->first(['id', 'token', 'verified']);
+                $getToken = Users::where('email', $request->email)->first(['id', 'phone', 'token', 'verified']);
                 return $getToken;
             } else {
                 return response()->json(['alert' => 'Wrong Password'], 404);

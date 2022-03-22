@@ -20,6 +20,7 @@ use App\Http\Controllers\Api\SubscribeController;
 use App\Http\Controllers\Api\VerificationController;
 use App\Http\Controllers\Api\WalletController;
 use App\Http\Controllers\Api\WinnerController;
+use App\Http\Controllers\CheckPhoneController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -98,4 +99,6 @@ Route::group(['middleware' => ['cors']], function () {
 
     Route::post('notification', [NotificationController::class, 'switch']);
     Route::post('get-notifications', [NotificationController::class, 'fetch']);
+
+    Route::post('update-phone', [CheckPhoneController::class, 'update']);
 });
