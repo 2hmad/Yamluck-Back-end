@@ -33,7 +33,7 @@ class SocialAuthController extends Controller
                 'token' => md5(rand(1, 10) . microtime()),
                 'pic' => 'default.png',
                 'notifications' => 'Yes',
-                'verified' => 1,
+                'verified' => 0,
                 "birthdate" => date("Y-m-d")
             ]);
             $getID = Users::where('email', $request->email)->first();
@@ -65,7 +65,7 @@ class SocialAuthController extends Controller
                 'token' => md5(rand(1, 10) . microtime()),
                 'pic' => 'default.png',
                 'notifications' => 'Yes',
-                'verified' => 1,
+                'verified' => 0,
                 "birthdate" => date("Y-m-d")
             ]);
             $getID = Users::where('email', $request->email)->first();

@@ -29,7 +29,7 @@ class CheckPhoneController extends Controller
                     $getCode = Verification::where('user_id', $checkToken->id)->first();
                     if ($getCode) {
                         $sendMessage = LaravelTwilio::notify($checkToken->phone, 'Your Verification Code : ' . $getCode->code . '
-It will be expire in 15 minutes');
+            It will be expire in 15 minutes');
                         if (!$sendMessage) {
                             return response()->json(['alert' => 'Phone number is incorrect'], 404);
                         }
@@ -45,7 +45,7 @@ It will be expire in 15 minutes');
                     $getCode = Verification::where('user_id', $checkToken->id)->first();
                     if ($getCode) {
                         $sendMessage = LaravelTwilio::notify($checkToken->phone, 'Your Verification Code : ' . $getCode->code . '
-It will be expire in 15 minutes');
+            It will be expire in 15 minutes');
                         if (!$sendMessage) {
                             return response()->json(['alert' => 'Phone number is incorrect'], 404);
                         }
