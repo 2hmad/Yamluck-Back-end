@@ -27,13 +27,13 @@ class CheckPhoneController extends Controller
                         'date' => date('Y-m-d')
                     ]);
                     $getCode = Verification::where('user_id', $checkToken->id)->first();
-                    //         if ($getCode) {
-                    //             $sendMessage = LaravelTwilio::notify($checkToken->phone, 'Your Verification Code : ' . $getCode->code . '
-                    // It will be expire in 15 minutes');
-                    //             if (!$sendMessage) {
-                    //                 return response()->json(['alert' => 'Phone number is incorrect'], 404);
-                    //             }
-                    //         }
+                    if ($getCode) {
+                        $sendMessage = LaravelTwilio::notify($checkToken->phone, 'Your Verification Code : ' . $getCode->code . '
+It will be expire in 15 minutes');
+                        if (!$sendMessage) {
+                            return response()->json(['alert' => 'Phone number is incorrect'], 404);
+                        }
+                    }
                 } else {
                     Verification::create([
                         'user_id' => $checkToken->id,
@@ -43,13 +43,13 @@ class CheckPhoneController extends Controller
                         'date' => date('Y-m-d')
                     ]);
                     $getCode = Verification::where('user_id', $checkToken->id)->first();
-                    //         if ($getCode) {
-                    //             $sendMessage = LaravelTwilio::notify($checkToken->phone, 'Your Verification Code : ' . $getCode->code . '
-                    // It will be expire in 15 minutes');
-                    //             if (!$sendMessage) {
-                    //                 return response()->json(['alert' => 'Phone number is incorrect'], 404);
-                    //             }
-                    //         }
+                    if ($getCode) {
+                        $sendMessage = LaravelTwilio::notify($checkToken->phone, 'Your Verification Code : ' . $getCode->code . '
+It will be expire in 15 minutes');
+                        if (!$sendMessage) {
+                            return response()->json(['alert' => 'Phone number is incorrect'], 404);
+                        }
+                    }
                 }
             } else {
                 return response()->json(['alert' => 'Cant update phone number'], 404);

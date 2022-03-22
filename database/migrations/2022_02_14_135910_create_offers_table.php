@@ -21,8 +21,8 @@ return new class extends Migration
             $table->longText('details_en');
             $table->text('price');
             $table->text('share_price');
-            $table->time('start_time')->nullable();
-            $table->time('end_time')->nullable();
+            $table->text('start_date')->nullable();
+            $table->text('end_date')->nullable();
             $table->text('max_subs');
             $table->text('curr_subs');
             $table->longText('conditions_ar');

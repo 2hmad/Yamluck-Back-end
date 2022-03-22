@@ -4,6 +4,7 @@ use App\Http\Controllers\Api\SocialAuthController;
 use App\Http\Controllers\CreateInvoiceController;
 use App\Http\Controllers\Web\LoginController;
 use Illuminate\Support\Facades\Route;
+use Illuminate\Support\Facades\File;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -15,5 +16,6 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', [LoginController::class, 'index']);
+Route::get('/', function () {
+});
 Route::get('/invoice/{id}', [CreateInvoiceController::class, 'index']);
