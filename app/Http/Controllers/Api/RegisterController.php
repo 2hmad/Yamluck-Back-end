@@ -41,7 +41,7 @@ class RegisterController extends Controller
                     "birthdate" => date("Y-m-d")
                 ]);
                 if ($createUser) {
-                    $getID = Users::where('email', $request->email)->first('id');
+                    $getID = Users::where('email', $request->email)->first();
                     $checkCode = Verification::where('user_id', $getID->id)->first();
                     if ($checkCode !== null) {
                         Verification::where('user_id', $getID->id)->update([
