@@ -17,7 +17,10 @@ return new class extends Migration
             $table->bigIncrements('id');
             $table->text('user_id');
             $table->text('sender');
-            $table->text('content');
+            $table->text('subject_en');
+            $table->text('subject_ar');
+            $table->text('content_en');
+            $table->text('content_ar');
             $table->date('date');
         });
     }

@@ -97,4 +97,5 @@ Route::group(['middleware' => ['cors']], function () {
     Route::get('paypal/cancel', [PaypalController::class, 'paypalCancel'])->name('paypalCancel');
 
     Route::post('notification', [NotificationController::class, 'switch']);
+    Route::post('get-notifications', [NotificationController::class, 'fetch']);
 });
