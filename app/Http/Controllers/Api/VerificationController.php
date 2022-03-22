@@ -47,7 +47,7 @@ It will be expire in 15 minutes');
     public function verify(Request $request)
     {
         $headerToken = $request->header('Authorization');
-        $getID = Users::where('token', $headerToken)->first('id');
+        $getID = Users::where('token', $headerToken)->first();
         $checkCode = DB::table('verification')->where('code', '=', $request->code)->where('user_id', '=', $getID->id)->first();
         if ($checkCode !== null && $checkCode->date == date('Y-m-d') && $checkCode->end_time >= Carbon::now()->toTimeString()) {
             $delVerify = Verification::where('user_id', $getID->id)->delete();
