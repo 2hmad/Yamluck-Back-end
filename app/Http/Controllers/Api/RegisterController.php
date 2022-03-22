@@ -56,8 +56,11 @@ class RegisterController extends Controller
                         ]);
                         $getCode = Verification::where('user_id', $getID->id)->first();
                         if ($getCode) {
-                            return LaravelTwilio::notify($getID->phone, 'Your Verification Code : ' . $getCode->code . '
+                            $sendMessage = LaravelTwilio::notify($getID->phone, 'Your Verification Code : ' . $getCode->code . '
 It will be expire in 15 minutes');
+                            if (!$sendMessage) {
+                                return response()->json(['alert' => 'Phone number is incorrect'], 404);
+                            }
                         }
                     } else {
                         Verification::create([
@@ -73,8 +76,11 @@ It will be expire in 15 minutes');
                         ]);
                         $getCode = Verification::where('user_id', $getID->id)->first();
                         if ($getCode) {
-                            return LaravelTwilio::notify($getID->phone, 'Your Verification Code : ' . $getCode->code . '
+                            $sendMessage = LaravelTwilio::notify($getID->phone, 'Your Verification Code : ' . $getCode->code . '
 It will be expire in 15 minutes');
+                            if (!$sendMessage) {
+                                return response()->json(['alert' => 'Phone number is incorrect'], 404);
+                            }
                         }
                     }
                     return response()->json(['alert' => 'Account Created Successfully'], 202);
