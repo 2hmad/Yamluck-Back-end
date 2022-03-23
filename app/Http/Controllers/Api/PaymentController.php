@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\Controller;
 use App\Http\Controllers\CreateInvoiceController;
+use App\Models\Notifications;
 use App\Models\Offers;
 use App\Models\Payments;
 use App\Models\Subscribe;
@@ -42,6 +43,22 @@ class PaymentController extends Controller
                                 'description' => $getOffer->title_en,
                                 'price' => $getOffer->share_price
                             ]);
+                            $getNotification = Notifications::where([
+                                ['user_id', '=', $checkToken->id],
+                                ['subject_en', '=', 'Payment completed successfully'],
+                                ['date', '=', date('Y-m-d')]
+                            ])->first();
+                            if ($getNotification == null) {
+                                Notifications::create([
+                                    'user_id' => $checkToken->id,
+                                    'sender' => "Yammluck",
+                                    'subject_en' => "Payment completed successfully",
+                                    'subject_ar' => "تم الدفع بنجاح",
+                                    "content_en" => "You have successfully completed the payment for the subscription to the product: " . $getOffer->title_en,
+                                    "content_ar" => "لقد تمت عملية الدفع بنجاح في الاشتراك بمنتج: " . $getOffer->title_ar,
+                                    "date" => date('Y-m-d'),
+                                ]);
+                            }
                             $getInvoice = Payments::where([
                                 ['user_id', '=', $checkToken->id],
                                 ['description', '=', $getOffer->title_en],
@@ -81,6 +98,22 @@ class PaymentController extends Controller
                         "amount" => $request->amount,
                         "date" => date("Y-m-d")
                     ]);
+                    $getNotification = Notifications::where([
+                        ['user_id', '=', $checkToken->id],
+                        ['subject_en', '=', 'Your wallet has been recharged'],
+                        ['date', '=', date('Y-m-d')]
+                    ])->first();
+                    if ($getNotification == null) {
+                        Notifications::create([
+                            'user_id' => $checkToken->id,
+                            'sender' => "Yammluck",
+                            'subject_en' => "Your wallet has been recharged",
+                            'subject_ar' => "تم شحن المحفظة بنجاح",
+                            "content_en" => "Your wallet has been successfully recharged with " . $request->amount . ' S.R',
+                            "content_ar" => "تمت إعادة شحن محفظتك بنجاح بمبلغ " . $request->amount . ' ر.س',
+                            "date" => date('Y-m-d'),
+                        ]);
+                    }
                     return response()->json(['alert' => 'OK'], 200);
                 } else {
                     return response()->json(['alert' => 'Data is missing'], 404);

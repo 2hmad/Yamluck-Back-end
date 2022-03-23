@@ -3,7 +3,9 @@
 namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\Controller;
+use App\Models\Notifications;
 use App\Models\Offers;
+use App\Models\Users;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\File;
 
@@ -68,6 +70,20 @@ class OffersController extends Controller
                     ['price', '=', $reqDecode['price']],
                 ])->first('id');
                 if ($getProduct && $getProduct !== null) {
+                    $getInterestUsers = Users::where('interest', $reqDecode['category'])->get();
+                    if ($getInterestUsers == null) {
+                        foreach ($getInterestUsers as $interestUser) {
+                            Notifications::create([
+                                'user_id' => $interestUser->id,
+                                'sender' => "Yammluck",
+                                'subject_en' => "Offers you may be interested in",
+                                'subject_ar' => "عروض قد تهمك",
+                                "content_en" => $reqDecode['title_en'] . " has been posted to your interests, you may be interested",
+                                "content_ar" => "لقد تم نشر " . $reqDecode['title_ar'] . ' في نفس اهتماماتك ، قد يهمك',
+                                "date" => date('Y-m-d'),
+                            ]);
+                        }
+                    }
                     File::makeDirectory(public_path() . '/storage/products/product_id_' . $getProduct->id);
                     $file_name_one = '1' . '.' . $request->pic_one->getClientOriginalExtension();
                     $file_path_one = $request->file('pic_one')->storeAs('products/product_id_' . $getProduct->id, $file_name_one, 'public');

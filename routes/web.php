@@ -3,6 +3,7 @@
 use App\Http\Controllers\Api\SocialAuthController;
 use App\Http\Controllers\CreateInvoiceController;
 use App\Http\Controllers\Web\LoginController;
+use App\Models\Users;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\File;
 /*
