@@ -64,6 +64,7 @@ Route::group(['middleware' => ['cors']], function () {
     Route::post('add-subsubcategory', [CategoriesController::class, 'addSubSubCategory']);
 
     Route::get('get-ad', [AdsController::class, 'get']);
+    Route::post('add-ad', [AdsController::class, 'addAd']);
 
     Route::get('countries', [CountriesController::class, 'getCountries']);
     Route::get('cities/{country_id}', [CountriesController::class, 'getCities']);
