@@ -17,7 +17,7 @@ return new class extends Migration
             $table->bigIncrements('id');
             $table->text('full_name');
             $table->text('nick_name')->nullable();
-            $table->string('email', 700)->unique();
+            $table->text('email')->unique();
             $table->text('phone')->nullable();
             $table->text('country')->nullable();
             $table->text('city')->nullable();
