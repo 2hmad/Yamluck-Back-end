@@ -59,8 +59,6 @@ Route::get('offers/{limit}', [OffersController::class, 'randomOffers']);
 Route::get('get-offers/{category_id}', [OffersController::class, 'getOffers']);
 Route::get('get-sub-offers/{sub_category_id}', [OffersController::class, 'getSubOffers']);
 Route::get('get-sub-sub-offers/{sub_sub_category_id}', [OffersController::class, 'getSubSubOffers']);
-Route::post('add-offer', [OffersController::class, 'addOffer']);
-Route::post('offer/closeOffer', [OffersController::class, 'closeOffer']);
 
 Route::get('product/{id}', [ProductController::class, 'getProduct']);
 Route::get('similar-product/{id}', [ProductController::class, 'getSimilarProduct']);
@@ -69,12 +67,6 @@ Route::get('get-categories', [CategoriesController::class, 'getCategories']);
 Route::get('categories-limited/{count}', [CategoriesController::class, 'getCategoriesLimit']);
 Route::get('get-subcategory/{cat_id}', [CategoriesController::class, 'getSubCategories']);
 Route::get('get-subsubcategory/{subcat_id}', [CategoriesController::class, 'getSubSubCategories']);
-Route::post('add-category', [CategoriesController::class, 'addCategory']);
-Route::post('add-subcategory', [CategoriesController::class, 'addSubCategory']);
-Route::post('add-subsubcategory', [CategoriesController::class, 'addSubSubCategory']);
-
-Route::get('get-ad', [AdsController::class, 'get']);
-Route::post('add-ad', [AdsController::class, 'addAd']);
 
 Route::get('countries', [CountriesController::class, 'getCountries']);
 Route::get('cities/{country_id}', [CountriesController::class, 'getCities']);
@@ -126,6 +118,10 @@ Route::group(['prefix' => "admin"], function () {
     Route::post('subSubCat', [CategoriesAdminController::class, 'getSubSubCat']);
     Route::post('subSubCat/delete', [CategoriesAdminController::class, 'deleteSubSubCat']);
 
+    Route::post('add-category', [CategoriesController::class, 'addCategory']);
+    Route::post('add-subcategory', [CategoriesController::class, 'addSubCategory']);
+    Route::post('add-subsubcategory', [CategoriesController::class, 'addSubSubCategory']);
+
     Route::group(['prefix' => 'activities'], function () {
         Route::get('getTotalBalances', [ActivitiesController::class, 'getTotalBalances']);
         Route::get('getSpentBalances', [ActivitiesController::class, 'getSpentBalances']);
@@ -138,8 +134,14 @@ Route::group(['prefix' => "admin"], function () {
         Route::get('getPendingUsers', [UsersController::class, 'getPendingUsers']);
     });
 
+    Route::get('get-ad', [AdsController::class, 'get']);
+    Route::post('add-ad', [AdsController::class, 'addAd']);
+
     Route::get('offers', [OffersAdminController::class, 'index']);
     Route::post('getSubs', [OffersAdminController::class, 'getSubs']);
+
+    Route::post('add-offer', [OffersController::class, 'addOffer']);
+    Route::post('offer/closeOffer', [OffersController::class, 'closeOffer']);
     Route::post('offer/updateOffer', [OffersAdminController::class, 'updateOffer']);
     Route::post('offer/finishOffer', [OffersAdminController::class, 'finishOffer']);
 
