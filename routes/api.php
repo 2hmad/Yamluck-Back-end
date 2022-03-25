@@ -1,11 +1,21 @@
 <?php
 
+// Admin Controllers
+use App\Http\Controllers\Admin\ActivitiesController;
+use App\Http\Controllers\Admin\AdminController;
+use App\Http\Controllers\Admin\AdsAdminController;
+use App\Http\Controllers\Admin\CategoriesAdminController;
+use App\Http\Controllers\Admin\InvoicesController;
+use App\Http\Controllers\Admin\NotificationsController;
+use App\Http\Controllers\Admin\OffersAdminController;
 use App\Http\Controllers\Admin\UsersController;
+// End Admin Controllers
+
+// Api Controllers
 use App\Http\Controllers\Api\AdsController;
 use App\Http\Controllers\Api\CategoriesController;
 use App\Http\Controllers\Api\CountriesController;
 use App\Http\Controllers\Api\LoginController;
-use App\Http\Controllers\Api\NotificationController;
 use App\Http\Controllers\Api\OffersController;
 use App\Http\Controllers\Api\PaymentController;
 use App\Http\Controllers\Api\PaypalController;
@@ -22,6 +32,7 @@ use App\Http\Controllers\Api\WalletController;
 use App\Http\Controllers\Api\WinnerController;
 use App\Http\Controllers\CheckPhoneController;
 use Illuminate\Support\Facades\Route;
+// End Api Controllers 
 
 /*
 |--------------------------------------------------------------------------
@@ -104,4 +115,42 @@ Route::group(['middleware' => ['cors']], function () {
     Route::post('get-notifications', [NotificationController::class, 'fetch']);
 
     Route::post('update-phone', [CheckPhoneController::class, 'update']);
+
+    // Admin Panel Routes
+    Route::group(['prefix' => "admin"], function () {
+        Route::get('users', [UsersController::class, 'index']);
+        Route::get('activities', [ActivitiesController::class, 'index']);
+        Route::get('categories', [CategoriesAdminController::class, 'index']);
+        Route::post('categories/delete', [CategoriesAdminController::class, 'delete']);
+        Route::post('subCat', [CategoriesAdminController::class, 'getSubCat']);
+        Route::post('subCat/delete', [CategoriesAdminController::class, 'deleteSubCat']);
+        Route::post('subSubCat', [CategoriesAdminController::class, 'getSubSubCat']);
+        Route::post('subSubCat/delete', [CategoriesAdminController::class, 'deleteSubSubCat']);
+
+        Route::group(['prefix' => 'activities'], function () {
+            Route::get('getTotalBalances', [ActivitiesController::class, 'getTotalBalances']);
+            Route::get('getSpentBalances', [ActivitiesController::class, 'getSpentBalances']);
+            Route::get('getTodayTransactions', [ActivitiesController::class, 'getTodayTransactions']);
+        });
+
+        Route::group(['prefix' => 'users'], function () {
+            Route::get('getTotalUsers', [UsersController::class, 'getTotalUsers']);
+            Route::get('getActiveUsers', [UsersController::class, 'getActiveUsers']);
+            Route::get('getPendingUsers', [UsersController::class, 'getPendingUsers']);
+        });
+
+        Route::get('offers', [OffersAdminController::class, 'index']);
+        Route::post('getSubs', [OffersAdminController::class, 'getSubs']);
+        Route::post('offer/updateOffer', [OffersAdminController::class, 'updateOffer']);
+        Route::post('offer/finishOffer', [OffersAdminController::class, 'finishOffer']);
+
+        Route::get('invoices', [InvoicesController::class, 'index']);
+
+        Route::get('getAd', [AdsAdminController::class, 'getAd']);
+
+        Route::post('send-notify', [NotificationsController::class, 'sendNotify']);
+
+        Route::post('admin/login', [AdminController::class, 'login']);
+        Route::post('admin/add', [AdminController::class, 'addAdmin']);
+    });
 });
