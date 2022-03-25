@@ -21,7 +21,7 @@ class CreatePaymentsInvoicesTable extends Migration
             $table->text('payment');
             $table->date('order_date');
             $table->text('description');
-            $table->text('publisher')->default('Yammluck');
+            $table->string('publisher')->default('Yammluck');
             $table->text('price');
         });
     }

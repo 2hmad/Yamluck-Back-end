@@ -29,7 +29,7 @@ return new class extends Migration
             $table->text('google_id')->nullable();
             $table->text('apple_id')->nullable();
             $table->text('token');
-            $table->text('notifications')->default('Yes');
+            $table->string('notifications')->default('Yes')->nullable();
             $table->text('pic');
             $table->text('verified');
         });
