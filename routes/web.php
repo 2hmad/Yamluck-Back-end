@@ -20,5 +20,6 @@ use Illuminate\Support\Facades\Hash;
 */
 
 Route::get('/', function () {
+    return md5(rand(1, 10) . microtime());
 });
 Route::get('/invoice/{id}', [CreateInvoiceController::class, 'index']);
