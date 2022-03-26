@@ -16,6 +16,7 @@ use App\Http\Controllers\Api\AdsController;
 use App\Http\Controllers\Api\CategoriesController;
 use App\Http\Controllers\Api\CountriesController;
 use App\Http\Controllers\Api\LoginController;
+use App\Http\Controllers\Api\NotificationController;
 use App\Http\Controllers\Api\OffersController;
 use App\Http\Controllers\Api\PaymentController;
 use App\Http\Controllers\Api\PaypalController;
@@ -141,7 +142,7 @@ Route::group(['prefix' => "admin"], function () {
     Route::post('getSubs', [OffersAdminController::class, 'getSubs']);
 
     Route::post('add-offer', [OffersController::class, 'addOffer']);
-    Route::post('offer/closeOffer', [OffersController::class, 'closeOffer']);
+    Route::post('offer/closeOffer', [OffersAdminController::class, 'closeOffer']);
     Route::post('offer/updateOffer', [OffersAdminController::class, 'updateOffer']);
     Route::post('offer/finishOffer', [OffersAdminController::class, 'finishOffer']);
 
