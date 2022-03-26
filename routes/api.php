@@ -107,6 +107,7 @@ Route::post('notification', [NotificationController::class, 'switch']);
 Route::post('get-notifications', [NotificationController::class, 'fetch']);
 
 Route::post('update-phone', [CheckPhoneController::class, 'update']);
+Route::get('get-ad', [AdsController::class, 'get']);
 
 // Admin Panel Routes
 Route::group(['prefix' => "admin"], function () {
@@ -135,7 +136,6 @@ Route::group(['prefix' => "admin"], function () {
         Route::get('getPendingUsers', [UsersController::class, 'getPendingUsers']);
     });
 
-    Route::get('get-ad', [AdsController::class, 'get']);
     Route::post('add-ad', [AdsController::class, 'addAd']);
 
     Route::get('offers', [OffersAdminController::class, 'index']);
