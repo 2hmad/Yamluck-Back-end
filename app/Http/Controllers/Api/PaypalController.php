@@ -68,7 +68,7 @@ class PaypalController extends Controller
     public function paypalReturn($product_id, $auth)
     {
         $apiContext = new \PayPal\Rest\ApiContext(
-            new \PayPal\Auth\OAuthTokenCredential(env('PAYPAL_SANDBOX_CLIENT_ID'), env('PAYPAL_SANDBOX_CLIENT_SECRET'))
+            new \PayPal\Auth\OAuthTokenCredential(env('PAYPAL_LIVE_CLIENT_ID'), env('PAYPAL_LIVE_CLIENT_SECRET'))
         );
 
         $checkToken = Users::where('token', $auth)->first();
