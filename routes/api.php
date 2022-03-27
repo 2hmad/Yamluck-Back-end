@@ -143,7 +143,7 @@ Route::group(['prefix' => "admin"], function () {
     Route::post('offer/closeOffer', [OffersAdminController::class, 'closeOffer']);
     Route::post('offer/updateOffer', [OffersAdminController::class, 'updateOffer']);
     Route::post('offer/finishOffer', [OffersAdminController::class, 'finishOffer']);
-    Route::get('offer/getWinner', [OffersAdminController::class, 'getWinner']);
+    Route::post('offer/getWinner', [OffersAdminController::class, 'getWinner']);
 
     Route::get('invoices', [InvoicesController::class, 'index']);
 
