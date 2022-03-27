@@ -19,6 +19,7 @@ class CheckPhoneController extends Controller
             $updatePhone = Users::where('id', $checkToken->id)->update(['phone' => $request->phone]);
             if ($updatePhone) {
                 $checkCode = Verification::where('user_id', $checkToken->id)->first();
+                $getUserAfterUpdate = Users::where('token', $headerToken)->first();
                 if ($checkCode !== null) {
                     Verification::where('user_id', $checkToken->id)->update([
                         'code' => random_int(1000, 9999),
@@ -28,13 +29,14 @@ class CheckPhoneController extends Controller
                     ]);
                     $getCode = Verification::where('user_id', $checkToken->id)->first();
                     if ($getCode) {
-                        $sendMessage = LaravelTwilio::notify($checkToken->phone, 'Your Verification Code : ' . $getCode->code . '
+                        $sendMessage = LaravelTwilio::notify($getUserAfterUpdate->phone, 'Your Verification Code : ' . $getCode->code . '
 It will be expire in 15 minutes');
                         if (!$sendMessage) {
                             return response()->json(['alert' => 'Phone number is incorrect'], 404);
                         }
                     }
                 } else {
+                    $getUserAfterUpdate = Users::where('token', $headerToken)->first();
                     Verification::create([
                         'user_id' => $checkToken->id,
                         'code' => random_int(1000, 9999),
@@ -44,7 +46,7 @@ It will be expire in 15 minutes');
                     ]);
                     $getCode = Verification::where('user_id', $checkToken->id)->first();
                     if ($getCode) {
-                        $sendMessage = LaravelTwilio::notify($checkToken->phone, 'Your Verification Code : ' . $getCode->code . '
+                        $sendMessage = LaravelTwilio::notify($getUserAfterUpdate->phone, 'Your Verification Code : ' . $getCode->code . '
 It will be expire in 15 minutes');
                         if (!$sendMessage) {
                             return response()->json(['alert' => 'Phone number is incorrect'], 404);

@@ -136,8 +136,6 @@ Route::group(['prefix' => "admin"], function () {
         Route::get('getPendingUsers', [UsersController::class, 'getPendingUsers']);
     });
 
-    Route::post('add-ad', [AdsController::class, 'addAd']);
-
     Route::get('offers', [OffersAdminController::class, 'index']);
     Route::post('getSubs', [OffersAdminController::class, 'getSubs']);
 
@@ -149,6 +147,7 @@ Route::group(['prefix' => "admin"], function () {
     Route::get('invoices', [InvoicesController::class, 'index']);
 
     Route::get('getAd', [AdsAdminController::class, 'getAd']);
+    Route::post('add-ad', [AdsController::class, 'addAd']);
 
     Route::post('send-notify', [NotificationsController::class, 'sendNotify']);
 
