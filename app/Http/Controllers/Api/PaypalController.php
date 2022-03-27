@@ -27,7 +27,7 @@ class PaypalController extends Controller
                     $checkSubscribe = Subscribe::where('user_id', $checkToken->id)->where('product_id', $product_id)->first();
                     if ($checkSubscribe == null) {
                         $apiContext = new \PayPal\Rest\ApiContext(
-                            new \PayPal\Auth\OAuthTokenCredential(env('PAYPAL_SANDBOX_CLIENT_ID'), env('PAYPAL_SANDBOX_CLIENT_SECRET'))
+                            new \PayPal\Auth\OAuthTokenCredential(env('PAYPAL_LIVE_CLIENT_ID'), env('PAYPAL_LIVE_CLIENT_ID'))
                         );
                         $payer = new \PayPal\Api\Payer();
                         $payer->setPaymentMethod('paypal');
