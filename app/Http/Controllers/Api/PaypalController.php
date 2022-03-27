@@ -29,6 +29,16 @@ class PaypalController extends Controller
                         $apiContext = new \PayPal\Rest\ApiContext(
                             new \PayPal\Auth\OAuthTokenCredential(env('PAYPAL_LIVE_CLIENT_ID'), env('PAYPAL_LIVE_CLIENT_ID'))
                         );
+
+                        $apiContext->setConfig(
+                            array(
+                                'mode' => 'live',
+                                'log.LogEnabled' => true,
+                                'log.FileName' => 'PayPal.log',
+                                'log.LogLevel' => 'DEBUG'
+                            )
+                        );
+
                         $payer = new \PayPal\Api\Payer();
                         $payer->setPaymentMethod('paypal');
 
