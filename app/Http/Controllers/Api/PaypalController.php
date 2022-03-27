@@ -30,7 +30,7 @@ class PaypalController extends Controller
                         \PayPal\Core\PayPalConfigManager::getInstance()->addConfigs(['mode' => 'live']);
 
                         $apiContext = new \PayPal\Rest\ApiContext(
-                            new \PayPal\Auth\OAuthTokenCredential(env('PAYPAL_LIVE_CLIENT_ID'), env('PAYPAL_LIVE_CLIENT_ID'))
+                            new \PayPal\Auth\OAuthTokenCredential(env('PAYPAL_LIVE_CLIENT_ID'), env('PAYPAL_LIVE_CLIENT_SECRET'))
                         );
 
                         $apiContext->setConfig(
