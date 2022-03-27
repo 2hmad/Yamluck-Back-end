@@ -87,4 +87,11 @@ class OffersAdminController extends Controller
             return response()->json(['alert' => 'Offer not found'], 404);
         }
     }
+    public function getWinner(Request $request)
+    {
+        $checkWinner = Winner::where('product_id', $request->product_id)->first();
+        if ($checkWinner == null) {
+            return response()->json(['alert' => 'Winner not found'], 404);
+        }
+    }
 }
