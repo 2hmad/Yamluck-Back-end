@@ -43,35 +43,4 @@ class LoginController extends Controller
             return response()->json(['alert' => 'User not found'], 404);
         }
     }
-    public function facebookRedirect()
-    {
-        return Socialite::driver("facebook")->redirect();
-    }
-    public function facebookCallback()
-    {
-        $user = Socialite::driver("facebook")->user();
-        $isUser = Users::where('facebook_id', $user->id)->first();
-        $checkEmail = Users::where('email', $user->email)->first();
-        if ($isUser !== null) {
-            return response()->json(['alert' => 'User is found'], 200);
-        } elseif ($checkEmail !== null) {
-            $createUser = Users::where('email', $user->email)->update([
-                'facebook_id' => $user->id
-            ]);
-        } else {
-            $createUser = Users::create([
-                'full_name' => $user->name,
-                'nick_name' => $user->nickname,
-                'email' => $user->email,
-                'facebook_id' => $user->id,
-                'password' => Hash::make(Str::random(8)),
-                'token' => md5(rand(1, 10) . microtime()),
-                'pic' => 'default.jpg',
-                'notifications' => 'Yes'
-            ]);
-            if ($createUser) {
-                return response()->json(['alert' => 'User created'], 200);
-            }
-        }
-    }
 }
