@@ -26,6 +26,9 @@ class PaypalController extends Controller
                 if ($getProduct->curr_subs < $getProduct->max_subs) {
                     $checkSubscribe = Subscribe::where('user_id', $checkToken->id)->where('product_id', $product_id)->first();
                     if ($checkSubscribe == null) {
+
+                        \PayPal\Core\PayPalConfigManager::getInstance()->addConfigs(['mode' => 'live']);
+
                         $apiContext = new \PayPal\Rest\ApiContext(
                             new \PayPal\Auth\OAuthTokenCredential(env('PAYPAL_LIVE_CLIENT_ID'), env('PAYPAL_LIVE_CLIENT_ID'))
                         );
