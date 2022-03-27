@@ -10,7 +10,7 @@ class CategoriesController extends Controller
 {
     public function getCategories()
     {
-        return DB::table('categories')->get()->toJson();
+        return DB::table('categories')->get();
     }
     public function getCategoriesLimit($count)
     {
@@ -19,9 +19,9 @@ class CategoriesController extends Controller
     public function getSubCategories($cat_id)
     {
         if ($cat_id == null) {
-            return response()->json(['alert' => 'Invalid User ID'], 404);
+            return response()->json(['alert' => 'Invalid Cat ID'], 404);
         } else {
-            return DB::table('sub_categories')->where('category_id', '=', $cat_id)->get()->toJson();
+            return DB::table('sub_categories')->where('category_id', '=', $cat_id)->get();
         }
     }
     public function getSubSubCategories($subcat_id)
@@ -29,7 +29,7 @@ class CategoriesController extends Controller
         if ($subcat_id == null) {
             return response()->json(['alert' => 'Invalid User ID'], 404);
         } else {
-            return DB::table('sub_sub_category')->where('sub_category_id', '=', $subcat_id)->get()->toJson();
+            return DB::table('sub_sub_category')->where('sub_category_id', '=', $subcat_id)->get();
         }
     }
     public function addCategory(Request $request)
