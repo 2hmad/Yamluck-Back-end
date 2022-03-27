@@ -92,6 +92,8 @@ class OffersAdminController extends Controller
         $checkWinner = Winner::where('product_id', $request->product_id)->first();
         if ($checkWinner == null) {
             return response()->json(['alert' => 'Winner not found'], 404);
+        } else {
+            return Winner::where('product_id', $request->product_id)->with('user')->first();
         }
     }
 }
