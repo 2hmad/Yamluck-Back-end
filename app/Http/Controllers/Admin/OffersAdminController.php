@@ -28,6 +28,8 @@ class OffersAdminController extends Controller
             'title_ar' => $request->title_ar,
             'details_en' => $request->details_en,
             'details_ar' => $request->details_ar,
+            'conditions_en' => $request->conditions_en,
+            'conditions_ar' => $request->conditions_ar,
             'video_link' => $request->video_link
         ]);
     }
