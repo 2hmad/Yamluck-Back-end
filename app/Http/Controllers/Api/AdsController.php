@@ -22,9 +22,9 @@ class AdsController extends Controller
             $banner_name = 'ad' . '.' . $request->banner->getClientOriginalExtension();
             $banner_path = $request->file('banner')->storeAs('ads', $banner_name, 'public');
 
-            DB::table('ads')->update([
+            DB::table('ads')->updateOrInsert([
+                'banner' => $banner_name,
                 'redirect' => $reqDecode['product_id'],
-                'banner' => $banner_name
             ]);
             return response()->json(['success' => 'Ad Added successfully.']);
         } else {
