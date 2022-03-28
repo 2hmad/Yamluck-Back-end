@@ -28,6 +28,7 @@ class OffersAdminController extends Controller
             'title_ar' => $request->title_ar,
             'details_en' => $request->details_en,
             'details_ar' => $request->details_ar,
+            'video_link' => $request->video_link
         ]);
     }
     public function finishOffer(Request $request)
