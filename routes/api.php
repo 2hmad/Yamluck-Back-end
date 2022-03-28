@@ -110,10 +110,10 @@ Route::post('update-phone', [CheckPhoneController::class, 'update']);
 Route::get('get-ad', [AdsController::class, 'get']);
 
 // Admin Panel Routes
-Route::group(['prefix' => "admin", 'middleware' => 'verifyApiKey'], function () {
-    Route::post('users', [UsersController::class, 'index']);
-    Route::post('activities', [ActivitiesController::class, 'index']);
-    Route::post('categories', [CategoriesAdminController::class, 'index']);
+Route::group(['prefix' => "admin"], function () {
+    Route::get('users', [UsersController::class, 'index']);
+    Route::get('activities', [ActivitiesController::class, 'index']);
+    Route::get('categories', [CategoriesAdminController::class, 'index']);
     Route::post('categories/delete', [CategoriesAdminController::class, 'delete']);
     Route::post('subCat', [CategoriesAdminController::class, 'getSubCat']);
     Route::post('subCat/delete', [CategoriesAdminController::class, 'deleteSubCat']);
@@ -125,18 +125,18 @@ Route::group(['prefix' => "admin", 'middleware' => 'verifyApiKey'], function () 
     Route::post('add-subsubcategory', [CategoriesController::class, 'addSubSubCategory']);
 
     Route::group(['prefix' => 'activities'], function () {
-        Route::post('getTotalBalances', [ActivitiesController::class, 'getTotalBalances']);
-        Route::post('getSpentBalances', [ActivitiesController::class, 'getSpentBalances']);
-        Route::post('getTodayTransactions', [ActivitiesController::class, 'getTodayTransactions']);
+        Route::get('getTotalBalances', [ActivitiesController::class, 'getTotalBalances']);
+        Route::get('getSpentBalances', [ActivitiesController::class, 'getSpentBalances']);
+        Route::get('getTodayTransactions', [ActivitiesController::class, 'getTodayTransactions']);
     });
 
     Route::group(['prefix' => 'users'], function () {
-        Route::post('getTotalUsers', [UsersController::class, 'getTotalUsers']);
-        Route::post('getActiveUsers', [UsersController::class, 'getActiveUsers']);
-        Route::post('getPendingUsers', [UsersController::class, 'getPendingUsers']);
+        Route::get('getTotalUsers', [UsersController::class, 'getTotalUsers']);
+        Route::get('getActiveUsers', [UsersController::class, 'getActiveUsers']);
+        Route::get('getPendingUsers', [UsersController::class, 'getPendingUsers']);
     });
 
-    Route::post('offers', [OffersAdminController::class, 'index']);
+    Route::get('offers', [OffersAdminController::class, 'index']);
     Route::post('getSubs', [OffersAdminController::class, 'getSubs']);
 
     Route::post('add-offer', [OffersController::class, 'addOffer']);
@@ -145,9 +145,9 @@ Route::group(['prefix' => "admin", 'middleware' => 'verifyApiKey'], function () 
     Route::post('offer/finishOffer', [OffersAdminController::class, 'finishOffer']);
     Route::post('offer/getWinner', [OffersAdminController::class, 'getWinner']);
 
-    Route::post('invoices', [InvoicesController::class, 'index']);
+    Route::get('invoices', [InvoicesController::class, 'index']);
 
-    Route::post('getAd', [AdsAdminController::class, 'getAd']);
+    Route::get('getAd', [AdsAdminController::class, 'getAd']);
     Route::post('add-ad', [AdsController::class, 'addAd']);
 
     Route::post('send-notify', [NotificationsController::class, 'sendNotify']);
