@@ -46,6 +46,14 @@ class AdminController extends Controller
             return response()->json(['alert' => 'Information not complete'], 404);
         }
     }
+    public function deleteAdmin(Request $request)
+    {
+        if ($request->email !== '') {
+            DB::table('admins')->where('email', '=', $request->email)->delete();
+        } else {
+            return response()->json(['alert' => 'Email not found'], 404);
+        }
+    }
     public function admins()
     {
         return DB::table('admins')->get();

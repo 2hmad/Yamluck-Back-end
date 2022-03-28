@@ -67,6 +67,7 @@ class Kernel extends HttpKernel
         'verified' => \Illuminate\Auth\Middleware\EnsureEmailIsVerified::class,
         'preventbot' => \App\Http\Middleware\PreventBots::class,
         'verifyApiKey' => \App\Http\Middleware\VerifyApiKey::class,
+        'verifyAdminToken' => \App\Http\Middleware\VerifyAdminToken::class,
         "getUserData" => \App\Http\Middleware\GetUserData::class
     ];
 }
