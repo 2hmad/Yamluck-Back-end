@@ -46,4 +46,8 @@ class AdminController extends Controller
             return response()->json(['alert' => 'Information not complete'], 404);
         }
     }
+    public function admins()
+    {
+        return DB::table('admins')->get();
+    }
 }
