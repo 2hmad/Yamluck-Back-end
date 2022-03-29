@@ -110,50 +110,51 @@ Route::post('update-phone', [CheckPhoneController::class, 'update']);
 Route::get('get-ad', [AdsController::class, 'get']);
 
 // Admin Panel Routes
-Route::group(['prefix' => "admin", 'middleware' => 'verifyAdminToken'], function () {
-    Route::post('users', [UsersController::class, 'index']);
-    Route::post('activities', [ActivitiesController::class, 'index']);
-    Route::post('categories', [CategoriesAdminController::class, 'index']);
-    Route::post('categories/delete', [CategoriesAdminController::class, 'delete']);
-    Route::post('subCat', [CategoriesAdminController::class, 'getSubCat']);
-    Route::post('subCat/delete', [CategoriesAdminController::class, 'deleteSubCat']);
-    Route::post('subSubCat', [CategoriesAdminController::class, 'getSubSubCat']);
-    Route::post('subSubCat/delete', [CategoriesAdminController::class, 'deleteSubSubCat']);
+Route::group(['prefix' => "admin"], function () {
+    Route::post('users', [UsersController::class, 'index'])->middleware('verifyAdminToken');
+    Route::post('deleteUser', [UsersController::class, 'deleteUser'])->middleware('verifyAdminToken');
+    Route::post('activities', [ActivitiesController::class, 'index'])->middleware('verifyAdminToken');
+    Route::post('categories', [CategoriesAdminController::class, 'index'])->middleware('verifyAdminToken');
+    Route::post('categories/delete', [CategoriesAdminController::class, 'delete'])->middleware('verifyAdminToken');
+    Route::post('subCat', [CategoriesAdminController::class, 'getSubCat'])->middleware('verifyAdminToken');
+    Route::post('subCat/delete', [CategoriesAdminController::class, 'deleteSubCat'])->middleware('verifyAdminToken');
+    Route::post('subSubCat', [CategoriesAdminController::class, 'getSubSubCat'])->middleware('verifyAdminToken');
+    Route::post('subSubCat/delete', [CategoriesAdminController::class, 'deleteSubSubCat'])->middleware('verifyAdminToken');
 
-    Route::post('add-category', [CategoriesController::class, 'addCategory']);
-    Route::post('add-subcategory', [CategoriesController::class, 'addSubCategory']);
-    Route::post('add-subsubcategory', [CategoriesController::class, 'addSubSubCategory']);
+    Route::post('add-category', [CategoriesController::class, 'addCategory'])->middleware('verifyAdminToken');
+    Route::post('add-subcategory', [CategoriesController::class, 'addSubCategory'])->middleware('verifyAdminToken');
+    Route::post('add-subsubcategory', [CategoriesController::class, 'addSubSubCategory'])->middleware('verifyAdminToken');
 
     Route::group(['prefix' => 'activities'], function () {
-        Route::post('getTotalBalances', [ActivitiesController::class, 'getTotalBalances']);
-        Route::post('getSpentBalances', [ActivitiesController::class, 'getSpentBalances']);
-        Route::post('getTodayTransactions', [ActivitiesController::class, 'getTodayTransactions']);
+        Route::post('getTotalBalances', [ActivitiesController::class, 'getTotalBalances'])->middleware('verifyAdminToken');
+        Route::post('getSpentBalances', [ActivitiesController::class, 'getSpentBalances'])->middleware('verifyAdminToken');
+        Route::post('getTodayTransactions', [ActivitiesController::class, 'getTodayTransactions'])->middleware('verifyAdminToken');
     });
 
     Route::group(['prefix' => 'users'], function () {
-        Route::post('getTotalUsers', [UsersController::class, 'getTotalUsers']);
-        Route::post('getActiveUsers', [UsersController::class, 'getActiveUsers']);
-        Route::post('getPendingUsers', [UsersController::class, 'getPendingUsers']);
+        Route::post('getTotalUsers', [UsersController::class, 'getTotalUsers'])->middleware('verifyAdminToken');
+        Route::post('getActiveUsers', [UsersController::class, 'getActiveUsers'])->middleware('verifyAdminToken');
+        Route::post('getPendingUsers', [UsersController::class, 'getPendingUsers'])->middleware('verifyAdminToken');
     });
 
-    Route::post('offers', [OffersAdminController::class, 'index']);
-    Route::post('getSubs', [OffersAdminController::class, 'getSubs']);
+    Route::post('offers', [OffersAdminController::class, 'index'])->middleware('verifyAdminToken');
+    Route::post('getSubs', [OffersAdminController::class, 'getSubs'])->middleware('verifyAdminToken');
 
-    Route::post('add-offer', [OffersController::class, 'addOffer']);
-    Route::post('offer/closeOffer', [OffersAdminController::class, 'closeOffer']);
-    Route::post('offer/updateOffer', [OffersAdminController::class, 'updateOffer']);
-    Route::post('offer/finishOffer', [OffersAdminController::class, 'finishOffer']);
-    Route::post('offer/getWinner', [OffersAdminController::class, 'getWinner']);
+    Route::post('add-offer', [OffersController::class, 'addOffer'])->middleware('verifyAdminToken');
+    Route::post('offer/closeOffer', [OffersAdminController::class, 'closeOffer'])->middleware('verifyAdminToken');
+    Route::post('offer/updateOffer', [OffersAdminController::class, 'updateOffer'])->middleware('verifyAdminToken');
+    Route::post('offer/finishOffer', [OffersAdminController::class, 'finishOffer'])->middleware('verifyAdminToken');
+    Route::post('offer/getWinner', [OffersAdminController::class, 'getWinner'])->middleware('verifyAdminToken');
 
-    Route::post('invoices', [InvoicesController::class, 'index']);
+    Route::post('invoices', [InvoicesController::class, 'index'])->middleware('verifyAdminToken');
 
-    Route::post('getAd', [AdsAdminController::class, 'getAd']);
-    Route::post('add-ad', [AdsController::class, 'addAd']);
+    Route::post('getAd', [AdsAdminController::class, 'getAd'])->middleware('verifyAdminToken');
+    Route::post('add-ad', [AdsController::class, 'addAd'])->middleware('verifyAdminToken');
 
-    Route::post('send-notify', [NotificationsController::class, 'sendNotify']);
+    Route::post('send-notify', [NotificationsController::class, 'sendNotify'])->middleware('verifyAdminToken');
 
     Route::post('admin/login', [AdminController::class, 'login']);
-    Route::post('admin/add', [AdminController::class, 'addAdmin']);
-    Route::post('admin/delete', [AdminController::class, 'deleteAdmin']);
-    Route::post('admin/admins', [AdminController::class, 'admins']);
+    Route::post('admin/add', [AdminController::class, 'addAdmin'])->middleware('verifyAdminToken');
+    Route::post('admin/delete', [AdminController::class, 'deleteAdmin'])->middleware('verifyAdminToken');
+    Route::post('admin/admins', [AdminController::class, 'admins'])->middleware('verifyAdminToken');
 });

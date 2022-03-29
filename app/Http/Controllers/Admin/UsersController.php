@@ -12,6 +12,10 @@ class UsersController extends Controller
     {
         return Users::orderBy('id', 'DESC')->get();
     }
+    public function deleteUser(Request $request)
+    {
+        return Users::where('id', '=', $request->id)->delete();
+    }
     public function getTotalUsers()
     {
         return Users::count();
