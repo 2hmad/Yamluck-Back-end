@@ -8,10 +8,14 @@ use Illuminate\Support\Facades\DB;
 
 class HomeSettingsController extends Controller
 {
+    public function carousels(Request $request)
+    {
+        return DB::table('home_settings')->get();
+    }
     public function addCarousel(Request $request)
     {
         $validate = $request->validate([
-            'image' => 'required|mimes:jpg,png,jpeg|max:2000'
+            'image' => 'required|mimes:jpg,png,jpeg,svg|max:2000'
         ]);
         if ($validate) {
             $reqDecode = json_decode($request->data, true);
