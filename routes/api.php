@@ -110,6 +110,7 @@ Route::post('get-notifications', [NotificationController::class, 'fetch']);
 
 Route::post('update-phone', [CheckPhoneController::class, 'update']);
 Route::get('get-ad', [AdsController::class, 'get']);
+Route::get('carousels', [HomeSettingsController::class, 'carousels']);
 
 // Admin Panel Routes
 Route::group(['prefix' => "admin"], function () {
@@ -160,7 +161,6 @@ Route::group(['prefix' => "admin"], function () {
     Route::post('admin/delete', [AdminController::class, 'deleteAdmin'])->middleware('verifyAdminToken');
     Route::post('admin/admins', [AdminController::class, 'admins'])->middleware('verifyAdminToken');
 
-    Route::post('carousels', [HomeSettingsController::class, 'carousels'])->middleware('verifyAdminToken');
     Route::post('addCarousel', [HomeSettingsController::class, 'addCarousel'])->middleware('verifyAdminToken');
     Route::post('deleteCarousel', [HomeSettingsController::class, 'deleteCarousel'])->middleware('verifyAdminToken');
 });

@@ -8,7 +8,7 @@ use Illuminate\Support\Facades\DB;
 
 class HomeSettingsController extends Controller
 {
-    public function carousels(Request $request)
+    public function carousels()
     {
         return DB::table('home_settings')->get();
     }
