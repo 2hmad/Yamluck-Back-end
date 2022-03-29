@@ -5,6 +5,7 @@ use App\Http\Controllers\Admin\ActivitiesController;
 use App\Http\Controllers\Admin\AdminController;
 use App\Http\Controllers\Admin\AdsAdminController;
 use App\Http\Controllers\Admin\CategoriesAdminController;
+use App\Http\Controllers\Admin\HomeSettingsController;
 use App\Http\Controllers\Admin\InvoicesController;
 use App\Http\Controllers\Admin\NotificationsController;
 use App\Http\Controllers\Admin\OffersAdminController;
@@ -158,4 +159,7 @@ Route::group(['prefix' => "admin"], function () {
     Route::post('admin/add', [AdminController::class, 'addAdmin'])->middleware('verifyAdminToken');
     Route::post('admin/delete', [AdminController::class, 'deleteAdmin'])->middleware('verifyAdminToken');
     Route::post('admin/admins', [AdminController::class, 'admins'])->middleware('verifyAdminToken');
+
+    Route::post('addCarousel', [HomeSettingsController::class, 'addCarousel'])->middleware('verifyAdminToken');
+    Route::post('deleteCarousel', [HomeSettingsController::class, 'deleteCarousel'])->middleware('verifyAdminToken');
 });
