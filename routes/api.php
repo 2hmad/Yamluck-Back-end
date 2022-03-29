@@ -104,6 +104,7 @@ Route::get('paypal/return/{product_id}/{auth}', [PaypalController::class, 'paypa
 Route::get('paypal/cancel', [PaypalController::class, 'paypalCancel'])->name('paypalCancel');
 
 Route::post('notification', [NotificationController::class, 'switch']);
+Route::post('count-notifications', [NotificationController::class, 'count']);
 Route::post('get-notifications', [NotificationController::class, 'fetch']);
 
 Route::post('update-phone', [CheckPhoneController::class, 'update']);

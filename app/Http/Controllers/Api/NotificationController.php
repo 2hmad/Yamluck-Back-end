@@ -27,6 +27,21 @@ class NotificationController extends Controller
             return response()->json(['alert' => 'Invalid token'], 404);
         }
     }
+    public function count(Request $request)
+    {
+        $headerToken = $request->header('Authorization');
+        $checkToken = Users::where('token', $headerToken)->first();
+        if ($checkToken !== null && $headerToken !== null) {
+            $get = Notifications::where('user_id', $checkToken->id)->orderBy('id', 'DESC')->count();
+            if ($get) {
+                return $get;
+            } else {
+                return response()->json(['alert' => 'Cant get notifications'], 404);
+            }
+        } else {
+            return response()->json(['alert' => 'Invalid token'], 404);
+        }
+    }
     public function fetch(Request $request)
     {
         $headerToken = $request->header('Authorization');
