@@ -10,94 +10,13 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600&display=swap" rel="stylesheet" />
 </head>
-<style>
-    body {
-        background-color: #f1f1f1;
-        font-family: "Poppins", sans-serif;
-    }
 
-    .container {
-        max-width: 600px;
-        margin: 5% auto;
-    }
-
-    .logo {
-        max-width: 70px;
-        margin: 0 auto;
-    }
-
-    .logo img {
-        width: 100%;
-        display: block;
-    }
-
-    .card {
-        background-color: white;
-        padding: 10px;
-        border-radius: 3px;
-    }
-
-    .order-information .heading {
-        border-bottom: 1px solid #d1d1d1;
-        color: #b2b2b2;
-        font-weight: 500;
-        line-height: 2.2em;
-        font-size: 15px;
-    }
-
-    .order-information .row {
-        display: flex;
-        justify-content: space-between;
-        margin-top: 2%;
-        padding: 0px 5px 0 5px;
-    }
-
-    .order-information .col {
-        line-height: 2em;
-        width: 290px;
-        max-width: 100%;
-        overflow: hidden;
-    }
-
-    .what-you-ordered {
-        margin-top: 3%;
-    }
-
-    .what-you-ordered .heading {
-        border-bottom: 1px solid #d1d1d1;
-        color: #b2b2b2;
-        font-weight: 500;
-        line-height: 2.2em;
-        font-size: 15px;
-    }
-
-    table {
-        width: 100%;
-        text-align: left;
-        margin: 0px auto 15px;
-        padding: 5px 0px;
-        border-bottom: 1px solid #d1d1d1;
-    }
-
-    table th {
-        background-color: #f1f1f1;
-        padding-left: 10px;
-        font-size: 14px;
-        line-height: 40px;
-    }
-
-    table td {
-        font-size: 14px;
-        padding: 10px;
-    }
-
-</style>
-
-<body>
-    <div class="container">
-        <div class="logo">
+<body style="background-color: #f1f1f1;font-family:'Poppins', sans-serif">
+    <div class="container" style="max-width: 600px;margin: 5% auto;">
+        <div class="logo" style="max-width: 70px;margin: 0 auto;">
             <a href="https://yammluck.com">
-                <img src="https://i.ibb.co/ZhczmzW/YAM-LUCK-2-png.png" alt="Yammluck Logo" />
+                <img src="https://i.ibb.co/ZhczmzW/YAM-LUCK-2-png.png" alt="Yammluck Logo"
+                    style="width: 100%;display: block;" />
             </a>
         </div>
         <div style="
@@ -109,7 +28,7 @@
         ">
             Thank You.
         </div>
-        <div class="card">
+        <div class="card" style="background-color: white;padding: 10px;border-radius: 3px;">
             <div style="text-align: center; line-height: 2em">
                 <div style="font-weight: bold; font-size: 18px">Hi
                     {{ DB::table('users')->where('id', $user_id)->pluck('full_name')->first() }}!
@@ -131,46 +50,56 @@
                 </strong>
             </div>
             <div class="order-information">
-                <div class="heading">YOUR ORDER INFORMATION:</div>
-                <div class="row">
-                    <div class="col">
+                <div class="heading"
+                    style="border-bottom: 1px solid #d1d1d1;color: #b2b2b2;font-weight: 500;line-height: 2.2em;font-size: 15px;">
+                    YOUR ORDER INFORMATION:</div>
+                <div class="row"
+                    style="display: flex;justify-content: space-between;margin-top: 2%;padding: 0px 5px 0 5px;">
+                    <div class="col" style="line-height: 2em;width: 290px;max-width: 100%;overflow: hidden;">
                         <strong>Order ID</strong>
                         <div>{{ $id }}</div>
                     </div>
-                    <div class="col">
+                    <div class="col" style="line-height: 2em;width: 290px;max-width: 100%;overflow: hidden;">
                         <strong>Bill To:</strong>
                         <div>{{ DB::table('users')->where('id', $user_id)->pluck('email')->first() }}
                         </div>
                     </div>
                 </div>
-                <div class="row">
-                    <div class="col">
+                <div class="row"
+                    style="display: flex;justify-content: space-between;margin-top: 2%;padding: 0px 5px 0 5px;">
+                    <div class="col" style="line-height: 2em;width: 290px;max-width: 100%;overflow: hidden;">
                         <strong>Order Date:</strong>
                         <div>{{ $order_date }}</div>
                     </div>
-                    <div class="col">
+                    <div class="col" style="line-height: 2em;width: 290px;max-width: 100%;overflow: hidden;">
                         <strong>Payment Method:</strong>
                         <div>{{ $payment }}</div>
                     </div>
                 </div>
             </div>
-            <div class="what-you-ordered">
-                <div class="heading">HERE'S WHAT YOU ORDERED:</div>
-                <table>
+            <div class="what-you-ordered" style="margin-top: 3%;">
+                <div class="heading"
+                    style="border-bottom: 1px solid #d1d1d1;color: #b2b2b2;font-weight: 500;line-height: 2.2em;font-size: 15px;">
+                    HERE'S WHAT YOU ORDERED:</div>
+                <table
+                    style="width: 100%;text-align: left;margin: 0px auto 15px;padding: 5px 0px;border-bottom: 1px solid #d1d1d1;">
                     <tr>
-                        <th>Description</th>
-                        <th>Publisher</th>
-                        <th>Price</th>
+                        <th style="background-color: #f1f1f1;padding-left: 10px;font-size: 14px;line-height: 40px;">
+                            Description</th>
+                        <th style="background-color: #f1f1f1;padding-left: 10px;font-size: 14px;line-height: 40px;">
+                            Publisher</th>
+                        <th style="background-color: #f1f1f1;padding-left: 10px;font-size: 14px;line-height: 40px;">
+                            Price</th>
                     </tr>
                     <tr>
-                        <td>{{ $description }}</td>
-                        <td>{{ $publisher }}</td>
-                        <td>SAR ${{ $price }}</td>
+                        <td style="font-size: 14px;padding: 10px;">{{ $description }}</td>
+                        <td style="font-size: 14px;padding: 10px;">{{ $publisher }}</td>
+                        <td style="font-size: 14px;padding: 10px;">SAR {{ $price }}</td>
                     </tr>
                     <tr>
-                        <td></td>
-                        <td></td>
-                        <td>
+                        <td style="font-size: 14px;padding: 10px;"></td>
+                        <td style="font-size: 14px;padding: 10px;"></td>
+                        <td style="font-size: 14px;padding: 10px;">
                             <span style="font-weight: bold; color: #b2b2b2">
                                 TOTAL [ SAR ]:
                             </span>
@@ -193,7 +122,7 @@
         <p style="text-align: center; font-size: 12px; color: #858585">
             &copy; 2022 Yammluck, Ltd. All rights reserved
         </p>
-        <div style="display: flex; justify-content: center; gap: 10px">
+        <div style="display: flex; justify-content: center;gap:5px">
             <a href="https://yammluck.com/terms" style="font-size: 13px; color: #4545ef">
                 Terms of Service
             </a>
