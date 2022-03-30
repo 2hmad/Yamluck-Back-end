@@ -42,7 +42,7 @@ class SubscribeController extends Controller
                     ['description', '=', $getCurrentSubscribers->title_en],
                 ])->first();
                 $tasks_controller = new CreateInvoiceController;
-                $tasks_controller->index('6233477b1ba0a');
+                $tasks_controller->index($getInvoice->invoice_id);
             } else {
                 return response()->json(['alert' => 'Already subscribed'], 404);
             }

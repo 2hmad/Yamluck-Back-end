@@ -10,6 +10,7 @@ use App\Models\Subscribe;
 use App\Models\Users;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Mail;
 
 class PayWithYamluck extends Controller
 {
@@ -47,8 +48,11 @@ class PayWithYamluck extends Controller
                         ['user_id', '=', $checkToken->id],
                         ['description', '=', $productID->title_en],
                     ])->first();
-                    $tasks_controller = new CreateInvoiceController;
-                    $tasks_controller->index('6233477b1ba0a');
+                    // $tasks_controller = new CreateInvoiceController;
+                    // $tasks_controller->index($getInvoice->invoice_id);
+                    Mail::send('invoice', $getInvoice, function ($message) {
+                        $message->to('eng.ahmedmohamed.2002@gmail.com')->subject('Subject of the message!');
+                    });
                 } else {
                     return response()->json(['alert' => 'Balance is not enough'], 404);
                 }
