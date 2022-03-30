@@ -49,7 +49,7 @@ class PayWithYamluck extends Controller
                         ['description', '=', $productID->title_en],
                     ])->first();
                     $getBillTo = $getInvoice->bill_to;
-                    Mail::send('invoice', ['id' => $getInvoice->id, 'user_id' => $getInvoice->user_id, 'invoice_id' => $getInvoice->invoice_id, 'bill_to' => $getInvoice->bill_to, 'payment' => $getInvoice->payment, 'order_date' => $getInvoice->order_date, 'description' => $getInvoice->description, 'publisher' => $getInvoice->publisher, 'price' => $getInvoice->price], function ($message, $getBillTo) {
+                    Mail::send('invoice', ['id' => $getInvoice->id, 'user_id' => $getInvoice->user_id, 'invoice_id' => $getInvoice->invoice_id, 'bill_to' => $getInvoice->bill_to, 'payment' => $getInvoice->payment, 'order_date' => $getInvoice->order_date, 'description' => $getInvoice->description, 'publisher' => $getInvoice->publisher, 'price' => $getInvoice->price], function ($message) use ($getBillTo) {
                         $message->to($getBillTo)->subject('Yammluck Invoice');
                     });
                 } else {
