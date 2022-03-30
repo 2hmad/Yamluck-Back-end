@@ -9,6 +9,7 @@ use App\Models\Payments;
 use App\Models\Subscribe;
 use App\Models\Users;
 use Exception;
+use Illuminate\Support\Facades\Mail;
 use PayPal\Api\PaymentExecution;
 
 class PaypalController extends Controller
@@ -116,8 +117,10 @@ class PaypalController extends Controller
                     ['user_id', '=', $checkToken->id],
                     ['description', '=', $getProduct->title_en],
                 ])->first();
-                $tasks_controller = new CreateInvoiceController;
-                $tasks_controller->index($getInvoice->invoice_id);
+                $getBillTo = $getInvoice->bill_to;
+                Mail::send('invoice', ['id' => $getInvoice->id, 'user_id' => $getInvoice->user_id, 'invoice_id' => $getInvoice->invoice_id, 'bill_to' => $getInvoice->bill_to, 'payment' => $getInvoice->payment, 'order_date' => $getInvoice->order_date, 'description' => $getInvoice->description, 'publisher' => $getInvoice->publisher, 'price' => $getInvoice->price], function ($message) use ($getBillTo) {
+                    $message->to($getBillTo)->subject('Yammluck Invoice');
+                });
                 return redirect('https://yammluck.com/confirm-payment');
             } catch (\PayPal\Exception\PayPalConnectionException $ex) {
                 echo $ex->getCode();
