@@ -48,8 +48,9 @@ class PayWithYamluck extends Controller
                         ['user_id', '=', $checkToken->id],
                         ['description', '=', $productID->title_en],
                     ])->first();
-                    Mail::send('invoice', ['id' => $getInvoice->id, 'user_id' => $getInvoice->user_id, 'invoice_id' => $getInvoice->invoice_id, 'bill_to' => $getInvoice->bill_to, 'payment' => $getInvoice->payment, 'order_date' => $getInvoice->order_date, 'description' => $getInvoice->description, 'publisher' => $getInvoice->publisher, 'price' => $getInvoice->price], function ($message, $getInvoice) {
-                        $message->to($getInvoice->email)->subject('Subject of the message!');
+                    $getBillTo = $getInvoice->bill_to;
+                    Mail::send('invoice', ['id' => $getInvoice->id, 'user_id' => $getInvoice->user_id, 'invoice_id' => $getInvoice->invoice_id, 'bill_to' => $getInvoice->bill_to, 'payment' => $getInvoice->payment, 'order_date' => $getInvoice->order_date, 'description' => $getInvoice->description, 'publisher' => $getInvoice->publisher, 'price' => $getInvoice->price], function ($message, $getBillTo) {
+                        $message->to($getBillTo)->subject('Yammluck Invoice');
                     });
                 } else {
                     return response()->json(['alert' => 'Balance is not enough'], 404);
