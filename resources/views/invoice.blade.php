@@ -30,10 +30,10 @@
         </div>
         <div class="card" style="background-color: white;padding: 10px;border-radius: 3px;">
             <div style="text-align: center; line-height: 2em">
-                <div style="font-weight: bold; font-size: 18px">Hi
+                <div style="font-weight: bold; font-size: 18px;color: black;">Hi
                     {{ DB::table('users')->where('id', $user_id)->pluck('full_name')->first() }}!
                 </div>
-                <div style="font-size: 13px">
+                <div style="font-size: 13px;color: black;">
                     Thanks for your purchase from Yammluck, Ltd.
                 </div>
                 <strong style="
@@ -67,11 +67,13 @@
                 </div>
                 <div class="row"
                     style="display: flex;justify-content: space-between;margin-top: 2%;padding: 0px 5px 0 5px;">
-                    <div class="col" style="line-height: 2em;width: 290px;max-width: 100%;overflow: hidden;">
+                    <div class="col"
+                        style="line-height: 2em;width: 290px;max-width: 100%;overflow: hidden;color: black;">
                         <strong>Order Date:</strong>
                         <div>{{ $order_date }}</div>
                     </div>
-                    <div class="col" style="line-height: 2em;width: 290px;max-width: 100%;overflow: hidden;">
+                    <div class="col"
+                        style="line-height: 2em;width: 290px;max-width: 100%;overflow: hidden;color: black;">
                         <strong>Payment Method:</strong>
                         <div>{{ $payment }}</div>
                     </div>
@@ -116,7 +118,7 @@
           display: block;
           margin: 11px auto;
         ">
-            Need Help?
+            <span style="color: black;">Need Help?</span>
             <a href="https://yammluck.com/help" style="color: #4545ef; text-decoration: none">Yammluck.com/help</a>
         </strong>
         <p style="text-align: center; font-size: 12px; color: #858585">
