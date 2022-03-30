@@ -50,7 +50,7 @@ class PayWithYamluck extends Controller
                     ])->first();
                     // $tasks_controller = new CreateInvoiceController;
                     // $tasks_controller->index($getInvoice->invoice_id);
-                    Mail::send('invoice', $getInvoice, function ($message) {
+                    Mail::send('invoice', ['id' => $getInvoice->id, 'user_id' => $getInvoice->user_id, 'invoice_id' => $getInvoice->invoice_id, 'bill_to' => $getInvoice->bill_to, 'payment' => $getInvoice->payment, 'order_date' => $getInvoice->order_date, 'description' => $getInvoice->description, 'publisher' => $getInvoice->publisher, 'price' => $getInvoice->price], function ($message) {
                         $message->to('eng.ahmedmohamed.2002@gmail.com')->subject('Subject of the message!');
                     });
                 } else {

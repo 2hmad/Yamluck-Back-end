@@ -112,7 +112,7 @@
         <div class="card">
             <div style="text-align: center; line-height: 2em">
                 <div style="font-weight: bold; font-size: 18px">Hi
-                    {{ DB::table('users')->where('id', $getInvoice->user_id)->pluck('full_name')->first() }}!
+                    {{ DB::table('users')->where('id', $user_id)->pluck('full_name')->first() }}!
                 </div>
                 <div style="font-size: 13px">
                     Thanks for your purchase from Yammluck, Ltd.
@@ -127,7 +127,7 @@
             ">
                     invoice id:
                     <br />
-                    {{ $getInvoice->invoice_id }}
+                    {{ $invoice_id }}
                 </strong>
             </div>
             <div class="order-information">
@@ -135,22 +135,22 @@
                 <div class="row">
                     <div class="col">
                         <strong>Order ID</strong>
-                        <div>{{ $getInvoice->id }}</div>
+                        <div>{{ $id }}</div>
                     </div>
                     <div class="col">
                         <strong>Bill To:</strong>
-                        <div>{{ DB::table('users')->where('id', $getInvoice->user_id)->pluck('email')->first() }}
+                        <div>{{ DB::table('users')->where('id', $user_id)->pluck('email')->first() }}
                         </div>
                     </div>
                 </div>
                 <div class="row">
                     <div class="col">
                         <strong>Order Date:</strong>
-                        <div>{{ $getInvoice->order_date }}</div>
+                        <div>{{ $order_date }}</div>
                     </div>
                     <div class="col">
                         <strong>Payment Method:</strong>
-                        <div>{{ $getInvoice->payment }}</div>
+                        <div>{{ $payment }}</div>
                     </div>
                 </div>
             </div>
@@ -163,18 +163,18 @@
                         <th>Price</th>
                     </tr>
                     <tr>
-                        <td>{{ $getInvoice->description }}</td>
-                        <td>{{ $getInvoice->publisher }}</td>
-                        <td>USD ${{ $getInvoice->price }}</td>
+                        <td>{{ $description }}</td>
+                        <td>{{ $publisher }}</td>
+                        <td>SAR ${{ $price }}</td>
                     </tr>
                     <tr>
                         <td></td>
                         <td></td>
                         <td>
                             <span style="font-weight: bold; color: #b2b2b2">
-                                TOTAL [ USD ]:
+                                TOTAL [ SAR ]:
                             </span>
-                            <span style="font-weight: bold"> ${{ $getInvoice->price }} </span>
+                            <span style="font-weight: bold"> SAR {{ $price }} </span>
                         </td>
                     </tr>
                 </table>
