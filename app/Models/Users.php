@@ -44,4 +44,8 @@ class Users extends Model
     {
         return $this->hasOne(Winner::class, 'user_id');
     }
+    public function country()
+    {
+        return $this->hasOne(Countries::class, 'id');
+    }
 }

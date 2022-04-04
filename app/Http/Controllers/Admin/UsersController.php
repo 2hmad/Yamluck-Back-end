@@ -10,7 +10,7 @@ class UsersController extends Controller
 {
     public function index()
     {
-        return Users::orderBy('id', 'DESC')->get();
+        return Users::orderBy('id', 'DESC')->with('country')->get();
     }
     public function deleteUser(Request $request)
     {

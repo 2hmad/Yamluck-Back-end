@@ -36,6 +36,9 @@ class OffersController extends Controller
             'pic_one' => 'required|mimes:jpg,png,jpeg|max:2000',
             'pic_two' => 'mimes:jpg,png,jpeg|max:2000',
             'pic_three' => 'mimes:jpg,png,jpeg|max:2000',
+            'pic_four' => 'mimes:jpg,png,jpeg|max:2000',
+            'pic_five' => 'mimes:jpg,png,jpeg|max:2000',
+            'pic_six' => 'mimes:jpg,png,jpeg|max:2000',
         ]);
         if ($validate) {
             $reqDecode = json_decode($request->data, true);
@@ -97,6 +100,15 @@ class OffersController extends Controller
                     $file_name_three = '3' . '.' . $request->pic_three->getClientOriginalExtension();
                     $file_path_three = $request->file('pic_three')->storeAs('products/product_id_' . $getProduct->id, $file_name_three, 'public');
 
+                    $file_name_four = '4' . '.' . $request->pic_four->getClientOriginalExtension();
+                    $file_path_four = $request->file('pic_four')->storeAs('products/product_id_' . $getProduct->id, $file_name_four, 'public');
+
+                    $file_name_five = '5' . '.' . $request->pic_five->getClientOriginalExtension();
+                    $file_path_five = $request->file('pic_five')->storeAs('products/product_id_' . $getProduct->id, $file_name_five, 'public');
+
+                    $file_name_six = '6' . '.' . $request->pic_six->getClientOriginalExtension();
+                    $file_path_six = $request->file('pic_six')->storeAs('products/product_id_' . $getProduct->id, $file_name_six, 'public');
+
                     Offers::where([
                         ['title_en', '=', $reqDecode['title_en']],
                         ['title_ar', '=', $reqDecode['title_ar']],
@@ -107,6 +119,9 @@ class OffersController extends Controller
                         'pic_one' => $file_name_one,
                         'pic_two' => $file_name_two,
                         'pic_three' => $file_name_three,
+                        'pic_four' => $file_name_four,
+                        'pic_five' => $file_name_five,
+                        'pic_six' => $file_name_six,
                     ]);
                     return response()->json(['success' => 'Added successfully.']);
                 }
