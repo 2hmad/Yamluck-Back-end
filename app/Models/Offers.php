@@ -41,4 +41,13 @@ class Offers extends Model
     ];
     protected $hidden = [];
     public $timestamps = false;
+
+    public function country()
+    {
+        return $this->hasOne(Countries::class, 'country');
+    }
+    public function city()
+    {
+        return $this->hasOne(Cities::class, 'city');
+    }
 }

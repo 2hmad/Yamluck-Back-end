@@ -10,7 +10,7 @@ class ProductController extends Controller
 {
     public function getProduct($id)
     {
-        $get = Offers::where('id', $id)->first();
+        $get = Offers::where('id', $id)->with('country')->first();
         if ($get == "") {
             return response()->json(['alert' => 'Invalid Offer ID'], 404);
         } else {
