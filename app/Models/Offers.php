@@ -13,6 +13,8 @@ class Offers extends Model
     protected $fillable = [
         "title_ar",
         "title_en",
+        "owner_name",
+        "owner_phone",
         "details_ar",
         "details_en",
         "price",

@@ -36,6 +36,8 @@ return new class extends Migration
             $table->text('pic_four')->nullable();
             $table->text('pic_five')->nullable();
             $table->text('pic_six')->nullable();
+            $table->text('country')->nullable();
+            $table->text('city')->nullable();
             $table->text('video_link')->nullable();
             $table->date('publish_date');
         });

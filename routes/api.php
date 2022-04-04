@@ -33,6 +33,7 @@ use App\Http\Controllers\Api\VerificationController;
 use App\Http\Controllers\Api\WalletController;
 use App\Http\Controllers\Api\WinnerController;
 use App\Http\Controllers\CheckPhoneController;
+use App\Models\Users;
 use Illuminate\Support\Facades\Route;
 // End Api Controllers 
 
@@ -163,4 +164,8 @@ Route::group(['prefix' => "admin"], function () {
 
     Route::post('addCarousel', [HomeSettingsController::class, 'addCarousel'])->middleware('verifyAdminToken');
     Route::post('deleteCarousel', [HomeSettingsController::class, 'deleteCarousel'])->middleware('verifyAdminToken');
+
+    Route::get('mostCountries', function () {
+        return App\Models\Users::join('countries', 'users.country', '=', 'countries.id')->groupBy(['users.country', 'countries.name_en'])->orderByRaw('COUNT(*) DESC')->limit(5)->get(['users.country', 'countries.name_en']);
+    });
 });

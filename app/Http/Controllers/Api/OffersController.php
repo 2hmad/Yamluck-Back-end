@@ -45,6 +45,8 @@ class OffersController extends Controller
             $checkProduct = Offers::where([
                 ['title_en', '=', $reqDecode['title_en']],
                 ['title_ar', '=', $reqDecode['title_ar']],
+                ['owner_name', '=', $reqDecode['owner_name']],
+                ['owner_phone', '=', $reqDecode['owner_phone']],
                 ['details_en', '=', $reqDecode['details_en']],
                 ['details_ar', '=', $reqDecode['details_ar']],
                 ['price', '=', $reqDecode['price']],
@@ -53,6 +55,8 @@ class OffersController extends Controller
                 Offers::create([
                     "title_ar" => $reqDecode['title_ar'],
                     "title_en" => $reqDecode['title_en'],
+                    "owner_name" => $reqDecode['owner_name'],
+                    "owner_phone" => $reqDecode['owner_phone'],
                     'details_ar' => $reqDecode['details_ar'],
                     'details_en' => $reqDecode['details_en'],
                     'price' => $reqDecode['price'],
@@ -71,6 +75,8 @@ class OffersController extends Controller
                 $getProduct = Offers::where([
                     ['title_en', '=', $reqDecode['title_en']],
                     ['title_ar', '=', $reqDecode['title_ar']],
+                    ['owner_name', '=', $reqDecode['owner_name']],
+                    ['owner_phone', '=', $reqDecode['owner_phone']],
                     ['details_en', '=', $reqDecode['details_en']],
                     ['details_ar', '=', $reqDecode['details_ar']],
                     ['price', '=', $reqDecode['price']],
@@ -112,6 +118,8 @@ class OffersController extends Controller
                     Offers::where([
                         ['title_en', '=', $reqDecode['title_en']],
                         ['title_ar', '=', $reqDecode['title_ar']],
+                        ['owner_name', '=', $reqDecode['owner_name']],
+                        ['owner_phone', '=', $reqDecode['owner_phone']],
                         ['details_en', '=', $reqDecode['details_en']],
                         ['details_ar', '=', $reqDecode['details_ar']],
                         ['price', '=', $reqDecode['price']],
