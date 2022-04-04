@@ -162,6 +162,8 @@ Route::group(['prefix' => "admin"], function () {
     Route::post('admin/delete', [AdminController::class, 'deleteAdmin'])->middleware('verifyAdminToken');
     Route::post('admin/admins', [AdminController::class, 'admins'])->middleware('verifyAdminToken');
 
+    Route::post('change-password', [AdminController::class, 'change_password'])->middleware('verifyAdminToken');
+
     Route::post('addCarousel', [HomeSettingsController::class, 'addCarousel'])->middleware('verifyAdminToken');
     Route::post('deleteCarousel', [HomeSettingsController::class, 'deleteCarousel'])->middleware('verifyAdminToken');
 

@@ -58,4 +58,15 @@ class AdminController extends Controller
     {
         return DB::table('admins')->get();
     }
+    public function change_password(Request $request)
+    {
+        $getAdmin = DB::table('admins')->where('token', $request->header('token'))->first();
+        if (Hash::check($request->oldPassword, $getAdmin->password)) {
+            DB::table('admins')->where('token', $request->header('token'))->update([
+                'password' => Hash::make($request->newPassword)
+            ]);
+        } else {
+            return response()->json(['alert' => 'The old password is not correct'], 404);
+        }
+    }
 }
