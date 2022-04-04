@@ -29,6 +29,9 @@ class Offers extends Model
         "pic_one",
         "pic_two",
         "pic_three",
+        "pic_four",
+        "pic_five",
+        "pic_six",
         "video_link",
         "publish_date"
     ];
