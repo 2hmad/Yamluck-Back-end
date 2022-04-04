@@ -34,6 +34,8 @@ class Offers extends Model
         "pic_four",
         "pic_five",
         "pic_six",
+        'country',
+        'city',
         "video_link",
         "publish_date"
     ];

@@ -70,6 +70,9 @@ class OffersController extends Controller
                     'category_id' => $reqDecode['category'],
                     'sub_category_id' => $reqDecode['subCategory'],
                     'sub_sub_category_id' => $reqDecode['subSubCategory'],
+                    'country' => $reqDecode['country'],
+                    'city' => $reqDecode['city'],
+                    'video_link' => $reqDecode['video_link'],
                     'publish_date' => date('Y-m-d')
                 ]);
                 $getProduct = Offers::where([
