@@ -103,20 +103,40 @@ class OffersController extends Controller
                     $file_name_one = '1' . '.' . $request->pic_one->getClientOriginalExtension();
                     $file_path_one = $request->file('pic_one')->storeAs('products/product_id_' . $getProduct->id, $file_name_one, 'public');
 
-                    $file_name_two = '2' . '.' . $request->pic_two->getClientOriginalExtension();
-                    $file_path_two = $request->file('pic_two')->storeAs('products/product_id_' . $getProduct->id, $file_name_two, 'public');
+                    if ($request->pic_two !== null) {
+                        $file_name_two = '2' . '.' . $request->pic_two->getClientOriginalExtension();
+                        $file_path_two = $request->file('pic_two')->storeAs('products/product_id_' . $getProduct->id, $file_name_two, 'public');
+                    } else {
+                        $file_name_two = null;
+                    }
 
-                    $file_name_three = '3' . '.' . $request->pic_three->getClientOriginalExtension();
-                    $file_path_three = $request->file('pic_three')->storeAs('products/product_id_' . $getProduct->id, $file_name_three, 'public');
+                    if ($request->pic_three !== null) {
+                        $file_name_three = '3' . '.' . $request->pic_three->getClientOriginalExtension();
+                        $file_path_three = $request->file('pic_three')->storeAs('products/product_id_' . $getProduct->id, $file_name_three, 'public');
+                    } else {
+                        $file_name_three = null;
+                    }
 
-                    $file_name_four = '4' . '.' . $request->pic_four->getClientOriginalExtension();
-                    $file_path_four = $request->file('pic_four')->storeAs('products/product_id_' . $getProduct->id, $file_name_four, 'public');
+                    if ($request->pic_four !== null) {
+                        $file_name_four = '4' . '.' . $request->pic_four->getClientOriginalExtension();
+                        $file_path_four = $request->file('pic_four')->storeAs('products/product_id_' . $getProduct->id, $file_name_four, 'public');
+                    } else {
+                        $file_name_four = null;
+                    }
 
-                    $file_name_five = '5' . '.' . $request->pic_five->getClientOriginalExtension();
-                    $file_path_five = $request->file('pic_five')->storeAs('products/product_id_' . $getProduct->id, $file_name_five, 'public');
+                    if ($request->pic_five !== null) {
+                        $file_name_five = '5' . '.' . $request->pic_five->getClientOriginalExtension();
+                        $file_path_five = $request->file('pic_five')->storeAs('products/product_id_' . $getProduct->id, $file_name_five, 'public');
+                    } else {
+                        $file_name_five = null;
+                    }
 
-                    $file_name_six = '6' . '.' . $request->pic_six->getClientOriginalExtension();
-                    $file_path_six = $request->file('pic_six')->storeAs('products/product_id_' . $getProduct->id, $file_name_six, 'public');
+                    if ($request->pic_six !== null) {
+                        $file_name_six = '6' . '.' . $request->pic_six->getClientOriginalExtension();
+                        $file_path_six = $request->file('pic_six')->storeAs('products/product_id_' . $getProduct->id, $file_name_six, 'public');
+                    } else {
+                        $file_name_six = null;
+                    }
 
                     Offers::where([
                         ['title_en', '=', $reqDecode['title_en']],
