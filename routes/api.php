@@ -168,6 +168,6 @@ Route::group(['prefix' => "admin"], function () {
     Route::post('deleteCarousel', [HomeSettingsController::class, 'deleteCarousel'])->middleware('verifyAdminToken');
 
     Route::get('mostCountries', function () {
-        return App\Models\Users::join('countries', 'users.country', '=', 'countries.id')->groupBy(['users.country', 'countries.name_en'])->orderByRaw('COUNT(*) DESC')->limit(5)->get(['users.country', 'countries.name_en']);
+        return App\Models\Users::join('countries', 'users.country', '=', 'countries.id')->groupBy(['users.country', 'countries.name_en'])->orderByRaw('COUNT(*) DESC')->limit(5)->get('countries.name_en');
     });
 });
