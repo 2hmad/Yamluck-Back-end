@@ -44,10 +44,10 @@ class Offers extends Model
 
     public function country()
     {
-        return $this->hasOne(Countries::class, 'country');
+        return $this->hasOne(Countries::class, 'id', 'country');
     }
     public function city()
     {
-        return $this->hasOne(Cities::class, 'city');
+        return $this->hasOne(Cities::class, 'id', 'city');
     }
 }
