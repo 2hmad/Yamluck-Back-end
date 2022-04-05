@@ -17,5 +17,6 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::get('/', function () {
+    return Carbon::parse('12/15/2007')->format('Y-m-d');
 });
 Route::get('/invoice/{id}', [CreateInvoiceController::class, 'index']);

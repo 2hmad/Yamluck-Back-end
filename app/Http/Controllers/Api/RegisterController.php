@@ -33,7 +33,7 @@ class RegisterController extends Controller
                     'country' => $request->country,
                     'city' => $request->city,
                     'nationality' => $request->country,
-                    'birthdate' => $request->birthdate,
+                    'birthdate' => Carbon::parse($request->birthdate)->format('Y-m-d'),
                     'interest' => $request->interest,
                     'password' => Hash::make($request->password),
                     'token' => md5(rand(1, 10) . microtime()),
