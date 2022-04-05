@@ -40,7 +40,6 @@ class RegisterController extends Controller
                     'pic' => 'default.png',
                     'notifications' => 'Yes',
                     'verified' => 0,
-                    "birthdate" => date("Y-m-d")
                 ]);
                 if ($createUser) {
                     $getID = Users::where('email', $request->email)->first();
