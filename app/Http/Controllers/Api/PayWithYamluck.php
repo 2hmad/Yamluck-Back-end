@@ -18,7 +18,7 @@ class PayWithYamluck extends Controller
     {
         $headerToken = $request->header('Authorization');
         $checkToken = Users::where('token', $headerToken)->first();
-        if ($checkToken !== null && $headerToken !== null) {
+        if ($checkToken !== null && $headerToken !== null && $checkToken->block !== '1') {
             $getBalance = DB::table('yamluck')->where('user_id', '=', $checkToken->id)->first();
             $productID = Offers::where('id', $request->product_id)->first();
             $checkSubscribe = Subscribe::where('user_id', $checkToken->id)->where('product_id', $request->product_id)->first();

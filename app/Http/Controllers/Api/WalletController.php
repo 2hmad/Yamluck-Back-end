@@ -41,7 +41,7 @@ class WalletController extends Controller
     {
         $headerToken = $request->header('Authorization');
         $checkToken = Users::where('token', $headerToken)->first();
-        if ($checkToken !== null && $headerToken !== null) {
+        if ($checkToken !== null && $headerToken !== null && $checkToken->block !== '1') {
             $checkBalance = DB::table('yamluck')->where('user_id', '=', $checkToken->id)->first();
             if ($checkBalance->amount == 0) {
                 DB::table('yamluck')->where('user_id', '=', $checkToken->id)->update([

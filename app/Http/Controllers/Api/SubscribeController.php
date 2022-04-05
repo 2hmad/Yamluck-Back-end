@@ -17,7 +17,7 @@ class SubscribeController extends Controller
     {
         $headerToken = $request->header('Authorization');
         $checkToken = Users::where('token', $headerToken)->first();
-        if ($checkToken !== null && $headerToken !== null && $request->product_id !== null) {
+        if ($checkToken !== null && $headerToken !== null && $request->product_id !== null && $checkToken->block !== '1') {
             $checkSubscribe = Subscribe::where('user_id', $checkToken->id)->where('product_id', $request->product_id)->first();
             if ($checkSubscribe == null) {
                 Subscribe::create([

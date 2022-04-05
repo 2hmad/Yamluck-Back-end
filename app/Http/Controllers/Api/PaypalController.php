@@ -21,7 +21,7 @@ class PaypalController extends Controller
     public function index($product_id, $auth)
     {
         $checkToken = Users::where('token', $auth)->first();
-        if ($checkToken !== null && $auth !== null && $product_id !== null) {
+        if ($checkToken !== null && $auth !== null && $product_id !== null && $checkToken->block !== '1') {
             $getProduct = Offers::where('id', $product_id)->first();
             if ($getProduct !== null) {
                 if ($getProduct->curr_subs < $getProduct->max_subs) {

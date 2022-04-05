@@ -20,7 +20,7 @@ class PaymentController extends Controller
         if ($type == 'offer') {
             $headerToken = $request->header('Authorization');
             $checkToken = Users::where('token', $headerToken)->first();
-            if ($checkToken !== null && $headerToken !== null && $request->product_id !== null) {
+            if ($checkToken !== null && $headerToken !== null && $request->product_id !== null && $checkToken->block !== '1') {
                 $id = $request->product_id;
                 if ($request->card_holder !== "" && $request->card_number !== "" && $request->expire_month !== "" && $request->expire_year !== "" && $request->cvv !== "") {
                     $getOffer = Offers::where('id', $id)->first();
@@ -83,7 +83,7 @@ class PaymentController extends Controller
         } elseif ($type == 'wallet') {
             $headerToken = $request->header('Authorization');
             $checkToken = Users::where('token', $headerToken)->first();
-            if ($checkToken !== null && $headerToken !== null && $request->amount !== null) {
+            if ($checkToken !== null && $headerToken !== null && $request->amount !== null && $checkToken->block !== '1') {
                 $amount = $request->amount;
                 $cardHolder = $request->card_holder;
                 $cardNumber = $request->card_number;
