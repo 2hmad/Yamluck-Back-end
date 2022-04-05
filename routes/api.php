@@ -169,6 +169,9 @@ Route::group(['prefix' => "admin"], function () {
     Route::post('deleteCarousel', [HomeSettingsController::class, 'deleteCarousel'])->middleware('verifyAdminToken');
 
     Route::get('mostCountries', function () {
-        return App\Models\Users::join('countries', 'users.country', '=', 'countries.id')->groupBy(['users.country', 'countries.name_en'])->orderByRaw('COUNT(*) DESC')->limit(5)->get('countries.name_en');
+        return App\Models\CountryRepeat::join('countries', 'countries_reports.country', '=', 'countries.id')->groupBy(['countries_reports.country', 'countries.name_en', 'countries_reports.repeat'])->orderByRaw('COUNT(*) DESC')->limit(5)->get(['countries.name_en', 'countries_reports.repeat']);
+    });
+    Route::get('mostAges', function () {
+        return App\Models\AgesRepeat::groupBy(['ages_reports.year', 'ages_reports.repeat'])->orderByRaw('COUNT(*) DESC')->limit(5)->get(['ages_reports.year', 'ages_reports.repeat']);
     });
 });
