@@ -16,10 +16,10 @@ class UsersController extends Controller
     {
         $getUser = Users::where('id', $request->id)->first();
         if ($getUser->block == '0') {
-            Users::where('id', $request->id)->update('block', '1');
+            Users::where('id', $request->id)->update(['block' => '1']);
             return response()->json(['alert' => 'The user is blocked']);
         } else {
-            Users::where('id', $request->id)->update('block', '0');
+            Users::where('id', $request->id)->update(['block' => '0']);
             return response()->json(['alert' => 'User ban removed']);
         }
     }
