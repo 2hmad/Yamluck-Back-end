@@ -31,6 +31,7 @@ return new class extends Migration
             $table->text('token');
             $table->string('notifications')->default('Yes')->nullable();
             $table->text('pic');
+            $table->text('block')->default('0');
             $table->text('verified');
         });
     }
