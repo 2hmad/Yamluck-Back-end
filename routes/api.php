@@ -169,9 +169,9 @@ Route::group(['prefix' => "admin"], function () {
     Route::post('deleteCarousel', [HomeSettingsController::class, 'deleteCarousel'])->middleware('verifyAdminToken');
 
     Route::get('mostCountries', function () {
-        return App\Models\CountryRepeat::join('countries', 'countries_reports.country', '=', 'countries.id')->groupBy(['countries_reports.country', 'countries.name_en', 'countries_reports.repeat'])->orderByRaw('COUNT(*) DESC')->limit(5)->get(['countries.name_en', 'countries_reports.repeat']);
+        return App\Models\CountryRepeat::join('countries', 'countries_reports.country', '=', 'countries.id')->groupBy(['countries_reports.country', 'countries.name_en', 'countries_reports.repeat'])->orderByRaw('COUNT(*) DESC')->get(['countries.name_en', 'countries_reports.repeat']);
     });
     Route::get('mostAges', function () {
-        return App\Models\AgesRepeat::groupBy(['ages_reports.year', 'ages_reports.repeat'])->orderByRaw('COUNT(*) DESC')->limit(5)->get(['ages_reports.year', 'ages_reports.repeat']);
+        return App\Models\AgesRepeat::groupBy(['ages_reports.year', 'ages_reports.repeat'])->orderByRaw('COUNT(*) DESC')->get(['ages_reports.year', 'ages_reports.repeat']);
     });
 });
