@@ -3,6 +3,8 @@
 namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\Controller;
+use App\Models\AgesRepeat;
+use App\Models\CountryRepeat;
 use App\Models\PhoneVerified;
 use App\Models\Users;
 use App\Models\Verification;
@@ -42,6 +44,32 @@ class RegisterController extends Controller
                 ]);
                 if ($createUser) {
                     $getID = Users::where('email', $request->email)->first();
+                    $checkCountry = CountryRepeat::where('country', $getID->country)->first();
+                    if ($checkCountry !== null) {
+                        CountryRepeat::where('country', $getID->country)->update([
+                            'country' => $getID->country,
+                            'repeat' => $checkCountry->repeat + 1
+                        ]);
+                    } else {
+                        CountryRepeat::insert([
+                            'country' => $getID->country,
+                            'repeat' => 1
+                        ]);
+                    }
+
+                    $yearFromBirthdate = Carbon::createFromFormat('Y-m-d', $getID->birthdate)->year;
+                    $checkYear = AgesRepeat::where('year', $yearFromBirthdate)->first();
+                    if ($checkYear !== null) {
+                        AgesRepeat::where('year', $yearFromBirthdate)->update([
+                            'year' => $yearFromBirthdate,
+                            'repeat' => $checkYear->repeat + 1
+                        ]);
+                    } else {
+                        AgesRepeat::insert([
+                            'year' => $yearFromBirthdate,
+                            'repeat' => 1
+                        ]);
+                    }
                     $checkCode = Verification::where('user_id', $getID->id)->first();
                     if ($checkCode !== null) {
                         Verification::where('user_id', $getID->id)->update([

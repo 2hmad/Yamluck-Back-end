@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\Admin\ReportsController;
 use App\Http\Controllers\CreateInvoiceController;
+use Carbon\Carbon;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -15,5 +16,6 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', [ReportsController::class, 'getAges']);
+Route::get('/', function () {
+});
 Route::get('/invoice/{id}', [CreateInvoiceController::class, 'index']);
