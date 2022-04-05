@@ -116,6 +116,7 @@ Route::get('carousels', [HomeSettingsController::class, 'carousels']);
 // Admin Panel Routes
 Route::group(['prefix' => "admin"], function () {
     Route::post('users', [UsersController::class, 'index'])->middleware('verifyAdminToken');
+    Route::post('block-user', [UsersController::class, 'switchBlock'])->middleware('verifyAdminToken');
     Route::post('deleteUser', [UsersController::class, 'deleteUser'])->middleware('verifyAdminToken');
     Route::post('activities', [ActivitiesController::class, 'index'])->middleware('verifyAdminToken');
     Route::post('categories', [CategoriesAdminController::class, 'index'])->middleware('verifyAdminToken');
