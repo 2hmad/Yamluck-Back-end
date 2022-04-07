@@ -53,9 +53,10 @@ class NotificationsController extends Controller
         } else if ($request->method == 'Email') {
             $getEmail = Users::get('email');
             $body = $request->content_en;
+            $subject = $request->subject_en;
             foreach ($getEmail as $email) {
-                Mail::send([], [], function ($message) use ($email, $body) {
-                    $message->to($email)->subject('Yammluck Mail')->setBody($body);
+                Mail::send([], [], function ($message) use ($email, $body, $subject) {
+                    $message->to($email)->subject($subject)->setBody($body);
                 });
             }
         }
