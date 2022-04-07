@@ -15,7 +15,7 @@ class CategoriesController extends Controller
     }
     public function getCategoriesLimit($count)
     {
-        return DB::table('categories')->limit($count)->get();
+        return Categories::with('subCategory')->limit($count)->get();
     }
     public function getSubCategories($cat_id)
     {
