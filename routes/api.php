@@ -157,6 +157,7 @@ Route::group(['prefix' => "admin"], function () {
     Route::post('add-ad', [AdsController::class, 'addAd'])->middleware('verifyAdminToken');
 
     Route::post('send-notify', [NotificationsController::class, 'sendNotify'])->middleware('verifyAdminToken');
+    Route::post('bulk-message', [NotificationsController::class, 'bulkMessage'])->middleware('verifyAdminToken');
 
     Route::post('admin/login', [AdminController::class, 'login']);
     Route::post('admin/add', [AdminController::class, 'addAdmin'])->middleware('verifyAdminToken');
