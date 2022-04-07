@@ -30,7 +30,7 @@ class NotificationsController extends Controller
             return response()->json(['alert' => 'Sent before'], 404);
         }
     }
-    public function bulk_message(Request $request)
+    public function bulkMessage(Request $request)
     {
         if ($request->method == 'Notification') {
             $checkNotify = Notifications::where('user_id', $request->uid)
