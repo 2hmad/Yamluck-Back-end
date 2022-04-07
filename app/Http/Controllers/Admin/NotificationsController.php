@@ -51,10 +51,11 @@ class NotificationsController extends Controller
                 return response()->json(['alert' => 'Sent before'], 404);
             }
         } else if ($request->method == 'Email') {
-            $getEmail = Users::get('email');
+            $users = Users::get();
             $body = $request->content_en;
             $subject = $request->subject_en;
-            foreach ($getEmail as $email) {
+            foreach ($users as $user) {
+                $email = $user->email;
                 Mail::send([], [], function ($message) use ($email, $body, $subject) {
                     $message->to($email)->subject($subject)->setBody($body);
                 });
