@@ -47,7 +47,7 @@ class NotificationController extends Controller
         $headerToken = $request->header('Authorization');
         $checkToken = Users::where('token', $headerToken)->first();
         if ($checkToken !== null && $headerToken !== null) {
-            $get = Notifications::where('user_id', $checkToken->id)->where('user_id', 'All')->orderBy('id', 'DESC')->get();
+            $get = Notifications::where('user_id', $checkToken->id)->orWhere('user_id', 'All')->orderBy('id', 'DESC')->get();
             if ($get) {
                 return $get;
             } else {

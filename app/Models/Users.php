@@ -28,11 +28,11 @@ class Users extends Model
         'apple_id',
         'token',
         'pic',
+        'block',
         'verified'
     ];
     protected $hidden = [
         'password',
-        'block'
     ];
     public $timestamps = false;
 
