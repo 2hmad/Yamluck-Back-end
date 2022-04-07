@@ -20,6 +20,6 @@ class Categories extends Model
 
     public function subCategory()
     {
-        return $this->hasOne(SubCategories::class, 'category_id');
+        return $this->hasMany(SubCategories::class, 'category_id');
     }
 }
