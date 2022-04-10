@@ -16,48 +16,48 @@ class CheckPhoneController extends Controller
         $headerToken = $request->header('Authorization');
         $checkToken = Users::where('token', $headerToken)->first();
         if ($checkToken !== null && $headerToken !== null && $request->phone !== null) {
-            $updatePhone = Users::where('id', $checkToken->id)->update([
+            Users::where('id', $checkToken->id)->update([
                 'phone' => str_replace(' ', '', $request->phone)
             ]);
-            if ($updatePhone) {
-                $checkCode = Verification::where('user_id', $checkToken->id)->first();
-                $getUserAfterUpdate = Users::where('token', $headerToken)->first();
-                if ($checkCode !== null) {
-                    Verification::where('user_id', $checkToken->id)->update([
-                        'code' => random_int(1000, 9999),
-                        'start_time' => Carbon::now()->toTimeString(),
-                        'end_time' => Carbon::now()->addMinutes(15)->toTimeString(),
-                        'date' => date('Y-m-d')
-                    ]);
-                    $getCode = Verification::where('user_id', $checkToken->id)->first();
-                    if ($getCode) {
-                        $sendMessage = LaravelTwilio::notify($getUserAfterUpdate->phone, 'Your Verification Code : ' . $getCode->code . '
+            // if ($updatePhone) {
+            $checkCode = Verification::where('user_id', $checkToken->id)->first();
+            $getUserAfterUpdate = Users::where('token', $headerToken)->first();
+            if ($checkCode !== null) {
+                Verification::where('user_id', $checkToken->id)->update([
+                    'code' => random_int(1000, 9999),
+                    'start_time' => Carbon::now()->toTimeString(),
+                    'end_time' => Carbon::now()->addMinutes(15)->toTimeString(),
+                    'date' => date('Y-m-d')
+                ]);
+                $getCode = Verification::where('user_id', $checkToken->id)->first();
+                if ($getCode) {
+                    $sendMessage = LaravelTwilio::notify($getUserAfterUpdate->phone, 'Your Verification Code : ' . $getCode->code . '
 It will be expire in 15 minutes');
-                        if (!$sendMessage) {
-                            return response()->json(['alert' => 'Phone number is incorrect'], 404);
-                        }
-                    }
-                } else {
-                    $getUserAfterUpdate = Users::where('token', $headerToken)->first();
-                    Verification::create([
-                        'user_id' => $checkToken->id,
-                        'code' => random_int(1000, 9999),
-                        'start_time' => Carbon::now()->toTimeString(),
-                        'end_time' => Carbon::now()->addMinutes(15)->toTimeString(),
-                        'date' => date('Y-m-d')
-                    ]);
-                    $getCode = Verification::where('user_id', $checkToken->id)->first();
-                    if ($getCode) {
-                        $sendMessage = LaravelTwilio::notify($getUserAfterUpdate->phone, 'Your Verification Code : ' . $getCode->code . '
-It will be expire in 15 minutes');
-                        if (!$sendMessage) {
-                            return response()->json(['alert' => 'Phone number is incorrect'], 404);
-                        }
+                    if (!$sendMessage) {
+                        return response()->json(['alert' => 'Phone number is incorrect'], 404);
                     }
                 }
             } else {
-                return response()->json(['alert' => 'Cant update phone number'], 404);
+                $getUserAfterUpdate = Users::where('token', $headerToken)->first();
+                Verification::create([
+                    'user_id' => $checkToken->id,
+                    'code' => random_int(1000, 9999),
+                    'start_time' => Carbon::now()->toTimeString(),
+                    'end_time' => Carbon::now()->addMinutes(15)->toTimeString(),
+                    'date' => date('Y-m-d')
+                ]);
+                $getCode = Verification::where('user_id', $checkToken->id)->first();
+                if ($getCode) {
+                    $sendMessage = LaravelTwilio::notify($getUserAfterUpdate->phone, 'Your Verification Code : ' . $getCode->code . '
+It will be expire in 15 minutes');
+                    if (!$sendMessage) {
+                        return response()->json(['alert' => 'Phone number is incorrect'], 404);
+                    }
+                }
             }
+            // } else {
+            //     return response()->json(['alert' => 'Cant update phone number'], 404);
+            // }
         } else {
             return response()->json(['alert' => 'Invalid token'], 404);
         }
