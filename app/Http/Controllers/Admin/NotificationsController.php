@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Controller;
 use App\Models\Notifications;
 use App\Models\Users;
+use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Mail;
 
@@ -24,7 +25,7 @@ class NotificationsController extends Controller
                 'subject_ar' => $request->subject_ar,
                 'content_en' => $request->content_en,
                 'content_ar' => $request->content_ar,
-                'date' => date('Y-m-d')
+                "date" => Carbon::now()->toDateTimeString(),
             ]);
         } else {
             return response()->json(['alert' => 'Sent before'], 404);
@@ -45,7 +46,7 @@ class NotificationsController extends Controller
                     'subject_ar' => $request->subject_ar,
                     'content_en' => $request->content_en,
                     'content_ar' => $request->content_ar,
-                    'date' => date('Y-m-d')
+                    "date" => Carbon::now()->toDateTimeString(),
                 ]);
             } else {
                 return response()->json(['alert' => 'Sent before'], 404);

@@ -9,6 +9,7 @@ use App\Models\Offers;
 use App\Models\Payments;
 use App\Models\Subscribe;
 use App\Models\Users;
+use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Mail;
@@ -46,8 +47,7 @@ class PaymentController extends Controller
                             ]);
                             $getNotification = Notifications::where([
                                 ['user_id', '=', $checkToken->id],
-                                ['subject_en', '=', 'Payment completed successfully'],
-                                ['date', '=', date('Y-m-d')]
+                                ['subject_en', '=', 'Payment completed successfully']
                             ])->first();
                             if ($getNotification == null) {
                                 Notifications::create([
@@ -57,7 +57,7 @@ class PaymentController extends Controller
                                     'subject_ar' => "تم الدفع بنجاح",
                                     "content_en" => "You have successfully completed the payment for the subscription to the product: " . $getOffer->title_en,
                                     "content_ar" => "لقد تمت عملية الدفع بنجاح في الاشتراك بمنتج: " . $getOffer->title_ar,
-                                    "date" => date('Y-m-d'),
+                                    "date" => Carbon::now()->toDateTimeString(),
                                 ]);
                             }
                             $getInvoice = Payments::where([
@@ -103,8 +103,7 @@ class PaymentController extends Controller
                     ]);
                     $getNotification = Notifications::where([
                         ['user_id', '=', $checkToken->id],
-                        ['subject_en', '=', 'Your wallet has been recharged'],
-                        ['date', '=', date('Y-m-d')]
+                        ['subject_en', '=', 'Your wallet has been recharged']
                     ])->first();
                     if ($getNotification == null) {
                         Notifications::create([
@@ -114,7 +113,7 @@ class PaymentController extends Controller
                             'subject_ar' => "تم شحن المحفظة بنجاح",
                             "content_en" => "Your wallet has been successfully recharged with " . $request->amount . ' S.R',
                             "content_ar" => "تمت إعادة شحن محفظتك بنجاح بمبلغ " . $request->amount . ' ر.س',
-                            "date" => date('Y-m-d'),
+                            "date" => Carbon::now()->toDateTimeString(),
                         ]);
                     }
                     return response()->json(['alert' => 'OK'], 200);

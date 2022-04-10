@@ -8,6 +8,7 @@ use App\Models\Offers;
 use App\Models\Subscribe;
 use App\Models\Users;
 use App\Models\Winner;
+use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\File;
@@ -95,7 +96,7 @@ class OffersController extends Controller
                                 'subject_ar' => "عروض قد تهمك",
                                 "content_en" => $reqDecode['title_en'] . " has been posted to your interests, you may be interested",
                                 "content_ar" => "لقد تم نشر " . $reqDecode['title_ar'] . ' في نفس اهتماماتك ، قد يهمك',
-                                "date" => date('Y-m-d'),
+                                "date" => Carbon::now()->toDateTimeString(),
                             ]);
                         }
                     }

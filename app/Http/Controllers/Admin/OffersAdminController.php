@@ -7,6 +7,7 @@ use App\Models\Notifications;
 use App\Models\Offers;
 use App\Models\Subscribe;
 use App\Models\Winner;
+use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\File;
@@ -52,7 +53,7 @@ class OffersAdminController extends Controller
                     'subject_ar' => "تهانينا!",
                     "content_en" => "You have been chosen to win an (" . $getOffer->title_en . "), please confirm receipt by entering the product and emailing the administration",
                     "content_ar" => "لقد تم اختيارك للفوز بـ (" . $getOffer->title_ar . ") ، برجاء تأكيد الاستلام عن طريق الدخول الي المنتج ومراسلة الادارة",
-                    "date" => date('Y-m-d'),
+                    "date" => Carbon::now()->toDateTimeString(),
                 ]);
             }
         } else {
@@ -72,7 +73,7 @@ class OffersAdminController extends Controller
                     'subject_ar' => "تم الغاء المسابقة",
                     "content_en" => "The administration has canceled (" . $getOffer->title_en . ") competition, and we would like to inform you that the amount paid will be returned to your wallet again.",
                     "content_ar" => "لقد قامت الادارة بألغاء مسابقة (" . $getOffer->title_ar . ") ونود اخباركم ان تم استرجاع المبلغ المدفوع الي محفظتكم مرة اخري",
-                    "date" => date('Y-m-d'),
+                    "date" => Carbon::now()->toDateTimeString(),
                 ]);
                 $getUserBalance = DB::table('yamluck')->where('user_id', '=', $getSub->user_id)->first();
                 if ($getUserBalance !== null) {

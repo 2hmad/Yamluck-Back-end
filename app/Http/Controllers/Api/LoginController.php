@@ -22,8 +22,7 @@ class LoginController extends Controller
                 $getToken = Users::where('email', $request->email)->first(['id', 'phone', 'token', 'verified']);
                 $getNotification = Notifications::where([
                     ['user_id', '=', $getToken->id],
-                    ['subject_en', '=', 'Login Successfully'],
-                    ['date', '=', date('Y-m-d')]
+                    ['subject_en', '=', 'Login Successfully']
                 ])->first();
                 if ($getNotification == null) {
                     Notifications::create([
