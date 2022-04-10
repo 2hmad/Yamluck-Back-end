@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Api;
 use App\Http\Controllers\Controller;
 use App\Models\Notifications;
 use App\Models\Users;
+use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Hash;
@@ -32,7 +33,7 @@ class LoginController extends Controller
                         'subject_ar' => "تم تسجيل الدخول بنجاح",
                         "content_en" => "Your account has been successfully logged in",
                         "content_ar" => "لقد تمت عملية تسجيل دخول لحسابك بنجاح",
-                        "date" => date('Y-m-d H:i:s'),
+                        "date" => Carbon::now()->toDateTimeString(),
                     ]);
                 }
                 return $getToken;
