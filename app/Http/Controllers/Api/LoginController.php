@@ -32,7 +32,7 @@ class LoginController extends Controller
                         'subject_ar' => "تم تسجيل الدخول بنجاح",
                         "content_en" => "Your account has been successfully logged in",
                         "content_ar" => "لقد تمت عملية تسجيل دخول لحسابك بنجاح",
-                        "date" => date('Y-m-d'),
+                        "date" => date('Y-m-d H:i:s'),
                     ]);
                 }
                 return $getToken;

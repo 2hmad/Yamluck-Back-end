@@ -21,7 +21,7 @@ return new class extends Migration
             $table->text('subject_ar');
             $table->text('content_en');
             $table->text('content_ar');
-            $table->date('date');
+            $table->timestamp('date');
         });
     }
 
