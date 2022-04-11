@@ -59,7 +59,7 @@ Route::post('auth/google', [SocialAuthController::class, 'google']);
 Route::post('reset-password', [ResetPasswordController::class, 'reset']);
 Route::post('update-password/{code}', [ResetPasswordController::class, 'update']);
 
-Route::get('offers/{limit}', [OffersController::class, 'randomOffers']);
+Route::post('offers/{limit}', [OffersController::class, 'randomOffers']);
 Route::get('get-offers/{category_id}', [OffersController::class, 'getOffers']);
 Route::get('get-sub-offers/{sub_category_id}', [OffersController::class, 'getSubOffers']);
 Route::get('get-sub-sub-offers/{sub_sub_category_id}', [OffersController::class, 'getSubSubOffers']);

@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Api;
 use App\Http\Controllers\Controller;
 use App\Models\Users;
 use Illuminate\Http\Request;
+use stdClass;
 
 class InterestsController extends Controller
 {
@@ -13,7 +14,11 @@ class InterestsController extends Controller
         $headerToken = $request->header('Authorization');
         $checkToken = Users::where('token', $headerToken)->first();
         if ($checkToken !== null && $headerToken !== null) {
-            return $checkToken->interest;
+            if ($checkToken->interest == null) {
+                return new stdClass();
+            } else {
+                return $checkToken->interest;
+            }
         } else {
             return response()->json(['alert' => 'Invalid Token'], 404);
         }

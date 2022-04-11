@@ -17,7 +17,13 @@ class OffersController extends Controller
 {
     public function randomOffers(Request $request, $limit)
     {
-        return Offers::inRandomOrder()->with('country')->with('city')->limit($limit)->get();
+        $headerToken = $request->header('Authorization');
+        $checkToken = Users::where('token', $headerToken)->first();
+        if ($checkToken !== null && $headerToken !== null) {
+            return Offers::inRandomOrder()->with('country')->with('city')->limit($limit)->get();
+        } else {
+            return response()->json(['alert' => 'Invalid Token'], 404);
+        }
     }
     public function getOffers($category_id)
     {
