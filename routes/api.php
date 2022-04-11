@@ -114,8 +114,8 @@ Route::post('update-phone', [CheckPhoneController::class, 'update']);
 Route::get('get-ad', [AdsController::class, 'get']);
 Route::get('carousels', [HomeSettingsController::class, 'carousels']);
 
-Route::get('getInterest', [InterestsController::class, 'get']);
-Route::get('updateInterest', [InterestsController::class, 'update']);
+Route::post('getInterest', [InterestsController::class, 'get']);
+Route::post('updateInterest', [InterestsController::class, 'update']);
 
 // Admin Panel Routes
 Route::group(['prefix' => "admin"], function () {
