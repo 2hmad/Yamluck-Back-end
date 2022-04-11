@@ -23,9 +23,15 @@ class InterestsController extends Controller
         $headerToken = $request->header('Authorization');
         $checkToken = Users::where('token', $headerToken)->first();
         if ($checkToken !== null && $headerToken !== null) {
-            Users::where('token', $headerToken)->update([
-                'interest' => $request->interest
-            ]);
+            if ($request->interest == '') {
+                Users::where('token', $headerToken)->update([
+                    'interest' => '[]'
+                ]);
+            } else {
+                Users::where('token', $headerToken)->update([
+                    'interest' => $request->interest
+                ]);
+            }
         } else {
             return response()->json(['alert' => 'Invalid Token'], 404);
         }
