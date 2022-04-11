@@ -20,9 +20,19 @@ class OffersController extends Controller
         $headerToken = $request->header('Authorization');
         $checkToken = Users::where('token', $headerToken)->first();
         if ($checkToken !== null && $headerToken !== null) {
-            return Offers::inRandomOrder()->with('country')->with('city')->limit($limit)->get();
+            if ($checkToken->interest == '[]') {
+                return Offers::inRandomOrder()->with('country')->with('city')->limit($limit)->get();
+            } else {
+                $dec = json_decode($checkToken->interest);
+                $get = Offers::inRandomOrder()->with('country')->with('city')->where('category_id', $dec[0])->limit($limit)->get();
+                if ($get->isEmpty()) {
+                    return Offers::inRandomOrder()->with('country')->with('city')->limit($limit)->get();
+                } else {
+                    return $get;
+                }
+            }
         } else {
-            return response()->json(['alert' => 'Invalid Token'], 404);
+            return Offers::inRandomOrder()->with('country')->with('city')->limit($limit)->get();
         }
     }
     public function getOffers($category_id)
