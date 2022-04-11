@@ -32,8 +32,8 @@ use App\Http\Controllers\Api\SubscribeController;
 use App\Http\Controllers\Api\VerificationController;
 use App\Http\Controllers\Api\WalletController;
 use App\Http\Controllers\Api\WinnerController;
+use App\Http\Controllers\Api\InterestsController;
 use App\Http\Controllers\CheckPhoneController;
-use App\Http\Controllers\InterestsController;
 use App\Models\Users;
 use Illuminate\Support\Facades\Route;
 // End Api Controllers 
