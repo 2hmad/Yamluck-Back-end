@@ -77,7 +77,7 @@ class OffersController extends Controller
                     'details_ar' => $reqDecode['details_ar'],
                     'details_en' => $reqDecode['details_en'],
                     'price' => $reqDecode['price'],
-                    'share_price' => number_format($reqDecode['price'] / $reqDecode['participants']),
+                    'share_price' => number_format($reqDecode['price'] / $reqDecode['participants'], 0, '.', ''),
                     'start_date' => $reqDecode['start_date'],
                     'end_date' => $reqDecode['end_date'],
                     'max_subs' => $reqDecode['participants'],
