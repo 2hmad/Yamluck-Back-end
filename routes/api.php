@@ -33,6 +33,7 @@ use App\Http\Controllers\Api\VerificationController;
 use App\Http\Controllers\Api\WalletController;
 use App\Http\Controllers\Api\WinnerController;
 use App\Http\Controllers\CheckPhoneController;
+use App\Http\Controllers\InterestsController;
 use App\Models\Users;
 use Illuminate\Support\Facades\Route;
 // End Api Controllers 
@@ -112,6 +113,9 @@ Route::post('get-notifications', [NotificationController::class, 'fetch']);
 Route::post('update-phone', [CheckPhoneController::class, 'update']);
 Route::get('get-ad', [AdsController::class, 'get']);
 Route::get('carousels', [HomeSettingsController::class, 'carousels']);
+
+Route::get('getInterest', [InterestsController::class, 'get']);
+Route::get('updateInterest', [InterestsController::class, 'update']);
 
 // Admin Panel Routes
 Route::group(['prefix' => "admin"], function () {
