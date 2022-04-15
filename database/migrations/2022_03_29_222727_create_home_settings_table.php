@@ -24,6 +24,7 @@ class CreateHomeSettingsTable extends Migration
             $table->text('btn_text_en')->nullable();
             $table->text('btn_text_ar')->nullable();
             $table->text('btn_redirect')->nullable();
+            $table->text('position')->nullable();
             $table->text('image');
         });
     }

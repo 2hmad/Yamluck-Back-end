@@ -112,7 +112,7 @@ Route::post('get-notifications', [NotificationController::class, 'fetch']);
 
 Route::post('update-phone', [CheckPhoneController::class, 'update']);
 Route::get('get-ad', [AdsController::class, 'get']);
-Route::get('carousels', [HomeSettingsController::class, 'carousels']);
+Route::get('carousels/{id}', [HomeSettingsController::class, 'carousels']);
 
 Route::post('getInterest', [InterestsController::class, 'get']);
 Route::post('updateInterest', [InterestsController::class, 'update']);
