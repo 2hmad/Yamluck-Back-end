@@ -10,7 +10,7 @@ class HomeSettingsController extends Controller
 {
     public function carousels($id)
     {
-        return DB::table('home_settings')->get();
+        return DB::table('home_settings')->where('position', '=', $id)->get();
     }
     public function addCarousel(Request $request)
     {
