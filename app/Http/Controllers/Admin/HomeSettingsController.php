@@ -8,7 +8,7 @@ use Illuminate\Support\Facades\DB;
 
 class HomeSettingsController extends Controller
 {
-    public function carousels()
+    public function carousels($id)
     {
         return DB::table('home_settings')->get();
     }
@@ -31,6 +31,7 @@ class HomeSettingsController extends Controller
                 'btn_text_en' => $reqDecode['btn_text_en'],
                 'btn_text_ar' => $reqDecode['btn_text_ar'],
                 'btn_redirect' => $reqDecode['btn_redirect'],
+                'position' => $reqDecode['position'],
                 'image' => $file_name,
             ]);
             return response()->json(['alert' => 'Success'], 200);
