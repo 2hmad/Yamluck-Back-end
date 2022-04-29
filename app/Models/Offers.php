@@ -50,4 +50,8 @@ class Offers extends Model
     {
         return $this->hasOne(Cities::class, 'id', 'city');
     }
+    public function category()
+    {
+        return $this->hasOne(Categories::class, 'id', 'category_id');
+    }
 }

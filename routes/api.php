@@ -63,6 +63,7 @@ Route::post('offers/{limit}', [OffersController::class, 'randomOffers']);
 Route::get('get-offers/{category_id}', [OffersController::class, 'getOffers']);
 Route::get('get-sub-offers/{sub_category_id}', [OffersController::class, 'getSubOffers']);
 Route::get('get-sub-sub-offers/{sub_sub_category_id}', [OffersController::class, 'getSubSubOffers']);
+Route::get('/latest-offers', [OffersController::class, 'latestOffers']);
 
 Route::get('product/{id}', [ProductController::class, 'getProduct']);
 Route::get('similar-product/{id}', [ProductController::class, 'getSimilarProduct']);

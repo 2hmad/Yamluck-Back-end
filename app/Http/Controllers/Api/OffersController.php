@@ -178,4 +178,8 @@ class OffersController extends Controller
             return response()->json(['success' => 'MIMES Invalid.'], 404);
         }
     }
+    public function latestOffers()
+    {
+        return Offers::with('category')->orderBy('id', 'DESC')->limit(40)->get()->groupBy('category_id');
+    }
 }
