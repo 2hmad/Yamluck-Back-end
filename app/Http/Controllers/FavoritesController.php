@@ -7,6 +7,10 @@ use Illuminate\Http\Request;
 
 class FavoritesController extends Controller
 {
+    public function get(Request $request)
+    {
+        Favorites::where('user', $request->user)->get();
+    }
     public function add(Request $request)
     {
         $check = Favorites::where('user', $request->user)->where('product', $request->product_id)->first();

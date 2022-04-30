@@ -119,6 +119,7 @@ Route::get('carousels/{id}', [HomeSettingsController::class, 'carousels']);
 Route::post('getInterest', [InterestsController::class, 'get']);
 Route::post('updateInterest', [InterestsController::class, 'update']);
 
+Route::post('favs', [FavoritesController::class, 'get']);
 Route::post('addFav', [FavoritesController::class, 'add']);
 Route::post('deleteFav', [FavoritesController::class, 'delete']);
 
