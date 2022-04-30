@@ -9,10 +9,15 @@ class FavoritesController extends Controller
 {
     public function add(Request $request)
     {
-        return Favorites::updateOrCreate([
-            'user' => $request->user,
-            'product' => $request->product_id
-        ]);
+        $check = Favorites::where('user', $request->user)->where('product', $request->product_id)->first();
+        if ($check == null) {
+            return Favorites::create([
+                'user' => $request->user,
+                'product' => $request->product_id
+            ]);
+        } else {
+            return response()->json(['alert' => 'Added Before'], 404);
+        }
     }
     public function delete(Request $request)
     {
