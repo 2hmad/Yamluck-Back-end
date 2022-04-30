@@ -9,7 +9,7 @@ class FavoritesController extends Controller
 {
     public function get(Request $request)
     {
-        Favorites::where('user', $request->user)->with('offer')->get();
+        Favorites::where('user', $request->user)->with('product')->get();
     }
     public function add(Request $request)
     {
