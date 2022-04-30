@@ -34,6 +34,7 @@ use App\Http\Controllers\Api\WalletController;
 use App\Http\Controllers\Api\WinnerController;
 use App\Http\Controllers\Api\InterestsController;
 use App\Http\Controllers\CheckPhoneController;
+use App\Http\Controllers\FavoritesController;
 use App\Models\Users;
 use Illuminate\Support\Facades\Route;
 // End Api Controllers 
@@ -117,6 +118,9 @@ Route::get('carousels/{id}', [HomeSettingsController::class, 'carousels']);
 
 Route::post('getInterest', [InterestsController::class, 'get']);
 Route::post('updateInterest', [InterestsController::class, 'update']);
+
+Route::post('addFav', [FavoritesController::class, 'add']);
+Route::post('deleteFav', [FavoritesController::class, 'delete']);
 
 // Admin Panel Routes
 Route::group(['prefix' => "admin"], function () {
