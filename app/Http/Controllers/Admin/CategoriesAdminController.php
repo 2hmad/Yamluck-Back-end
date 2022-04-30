@@ -16,6 +16,13 @@ class CategoriesAdminController extends Controller
     {
         return DB::table('categories')->where('id', '=', $request->id)->delete();
     }
+    public function update(Request $request)
+    {
+        return DB::table('categories')->where('id', '=', $request->id)->update([
+            'title_en' => $request->title_en,
+            'title_ar' => $request->title_ar
+        ]);
+    }
     public function getSubCat(Request $request)
     {
         return DB::table('sub_categories')->where('category_id', '=', $request->catId)->get();

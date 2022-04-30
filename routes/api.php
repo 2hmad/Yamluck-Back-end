@@ -131,10 +131,13 @@ Route::group(['prefix' => "admin"], function () {
     Route::post('activities', [ActivitiesController::class, 'index'])->middleware('verifyAdminToken');
     Route::post('categories', [CategoriesAdminController::class, 'index'])->middleware('verifyAdminToken');
     Route::post('categories/delete', [CategoriesAdminController::class, 'delete'])->middleware('verifyAdminToken');
+    Route::post('categories/update', [CategoriesAdminController::class, 'update'])->middleware('verifyAdminToken');
     Route::post('subCat', [CategoriesAdminController::class, 'getSubCat'])->middleware('verifyAdminToken');
     Route::post('subCat/delete', [CategoriesAdminController::class, 'deleteSubCat'])->middleware('verifyAdminToken');
+    Route::post('subCat/update', [CategoriesAdminController::class, 'updateSubCat'])->middleware('verifyAdminToken');
     Route::post('subSubCat', [CategoriesAdminController::class, 'getSubSubCat'])->middleware('verifyAdminToken');
     Route::post('subSubCat/delete', [CategoriesAdminController::class, 'deleteSubSubCat'])->middleware('verifyAdminToken');
+    Route::post('subSubCat/update', [CategoriesAdminController::class, 'updateSubSubCat'])->middleware('verifyAdminToken');
 
     Route::post('add-category', [CategoriesController::class, 'addCategory'])->middleware('verifyAdminToken');
     Route::post('add-subcategory', [CategoriesController::class, 'addSubCategory'])->middleware('verifyAdminToken');
