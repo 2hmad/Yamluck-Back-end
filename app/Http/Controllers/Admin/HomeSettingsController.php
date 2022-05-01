@@ -49,7 +49,7 @@ class HomeSettingsController extends Controller
                 $reqDecode = json_decode($request->data, true);
                 $file_name = $reqDecode['heading_en'] . '.' . $request->image->getClientOriginalExtension();
                 $file_path = $request->file('image')->storeAs('carousels', $file_name, 'public');
-                DB::table('home_settings')->insert([
+                DB::table('home_settings')->where('id', $reqDecode['id'])->update([
                     'heading_en' => $reqDecode['heading_en'],
                     'image' => $file_name,
                 ]);
@@ -58,7 +58,7 @@ class HomeSettingsController extends Controller
                 return response()->json(['alert' => 'Invalid MIME Type'], 404);
             }
         } else {
-            return DB::table('home_settings')->update([
+            return DB::table('home_settings')->where('id', $request->id)->update([
                 'heading_en' => $request->heading_en,
             ]);
         }
