@@ -181,6 +181,7 @@ Route::group(['prefix' => "admin"], function () {
 
     Route::post('addCarousel', [HomeSettingsController::class, 'addCarousel'])->middleware('verifyAdminToken');
     Route::post('deleteCarousel', [HomeSettingsController::class, 'deleteCarousel'])->middleware('verifyAdminToken');
+    Route::post('updateCarousel', [HomeSettingsController::class, 'updateCarousel'])->middleware('verifyAdminToken');
 
     Route::get('mostCountries', function () {
         return App\Models\CountryRepeat::join('countries', 'countries_reports.country', '=', 'countries.id')->groupBy(['countries_reports.country', 'countries.name_en', 'countries_reports.repeat'])->orderByRaw('COUNT(*) DESC')->get(['countries.name_en', 'countries_reports.repeat']);
