@@ -31,6 +31,13 @@ class CategoriesAdminController extends Controller
     {
         return DB::table('sub_categories')->where('id', '=', $request->id)->delete();
     }
+    public function updateSubCat(Request $request)
+    {
+        return DB::table('sub_categories')->where('id', '=', $request->id)->update([
+            'title_en' => $request->title_en,
+            'title_ar' => $request->title_ar
+        ]);
+    }
     public function getSubSubCat(Request $request)
     {
         return DB::table('sub_sub_category')->where('sub_category_id', '=', $request->subCatId)->get();
@@ -38,5 +45,12 @@ class CategoriesAdminController extends Controller
     public function deleteSubSubCat(Request $request)
     {
         return DB::table('sub_sub_category')->where('id', '=', $request->id)->delete();
+    }
+    public function updateSubSubCat(Request $request)
+    {
+        return DB::table('sub_sub_category')->where('id', '=', $request->id)->update([
+            'title_en' => $request->title_en,
+            'title_ar' => $request->title_ar
+        ]);
     }
 }
