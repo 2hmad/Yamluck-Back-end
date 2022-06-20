@@ -56,4 +56,8 @@ class Offers extends Model
     {
         return $this->hasOne(Categories::class, 'id', 'category_id');
     }
+    public function user()
+    {
+        return $this->hasOne(Users::class, 'id', 'owner_id');
+    }
 }
