@@ -194,6 +194,6 @@ class OffersController extends Controller
     }
     public function latestOffers()
     {
-        return Offers::with('category')->orderBy('id', 'DESC')->limit(40)->get()->groupBy('category_id');
+        return Offers::with('category')->with('country')->with('city')->with('user')->orderBy('id', 'DESC')->limit(40)->get()->groupBy('category_id');
     }
 }

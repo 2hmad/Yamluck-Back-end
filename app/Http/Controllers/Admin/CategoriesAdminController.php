@@ -3,6 +3,8 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
+use App\Models\Categories;
+use App\Models\Offers;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 
@@ -14,7 +16,8 @@ class CategoriesAdminController extends Controller
     }
     public function delete(Request $request)
     {
-        return DB::table('categories')->where('id', '=', $request->id)->delete();
+        Categories::where('id', '=', $request->id)->delete();
+        Offers::where('category_id', '=', $request->id)->delete();
     }
     public function update(Request $request)
     {
@@ -29,7 +32,8 @@ class CategoriesAdminController extends Controller
     }
     public function deleteSubCat(Request $request)
     {
-        return DB::table('sub_categories')->where('id', '=', $request->id)->delete();
+        DB::table('sub_categories')->where('id', '=', $request->id)->delete();
+        Offers::where('sub_category_id', '=', $request->id)->delete();
     }
     public function updateSubCat(Request $request)
     {
@@ -44,7 +48,8 @@ class CategoriesAdminController extends Controller
     }
     public function deleteSubSubCat(Request $request)
     {
-        return DB::table('sub_sub_category')->where('id', '=', $request->id)->delete();
+        DB::table('sub_sub_category')->where('id', '=', $request->id)->delete();
+        Offers::where('sub_sub_category_id', '=', $request->id)->delete();
     }
     public function updateSubSubCat(Request $request)
     {
