@@ -15,8 +15,10 @@ return new class extends Migration
     {
         Schema::create('offers', function (Blueprint $table) {
             $table->bigIncrements('id');
+            $table->unsignedInteger('gift_id');
             $table->text('title_ar');
             $table->text('title_en');
+            $table->unsignedInteger('owner_id')->nullable();
             $table->longText('details_ar');
             $table->longText('details_en');
             $table->text('price');
@@ -38,7 +40,10 @@ return new class extends Migration
             $table->text('pic_six')->nullable();
             $table->text('country')->nullable();
             $table->text('city')->nullable();
-            $table->text('video_link')->nullable();
+            $table->text('preview')->nullable();
+            $table->text('gift_en')->nullable();
+            $table->text('gift_ar')->nullable();
+            $table->text('gift_pic')->nullable();
             $table->date('publish_date');
         });
     }

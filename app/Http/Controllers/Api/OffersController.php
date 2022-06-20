@@ -56,14 +56,15 @@ class OffersController extends Controller
             'pic_four' => 'mimes:jpg,png,jpeg|max:2000',
             'pic_five' => 'mimes:jpg,png,jpeg|max:2000',
             'pic_six' => 'mimes:jpg,png,jpeg|max:2000',
+            'preview' => 'mimes:jpg,png,jpeg,mp4,mov,wmv,avi|max:5000',
+            'gift_pic' => 'mimes:jpg,png,jpeg|max:2000'
         ]);
         if ($validate) {
             $reqDecode = json_decode($request->data, true);
             $checkProduct = Offers::where([
                 ['title_en', '=', $reqDecode['title_en']],
                 ['title_ar', '=', $reqDecode['title_ar']],
-                ['owner_name', '=', $reqDecode['owner_name']],
-                ['owner_phone', '=', $reqDecode['owner_phone']],
+                ['owner_id', '=', $reqDecode['owner_id']],
                 ['details_en', '=', $reqDecode['details_en']],
                 ['details_ar', '=', $reqDecode['details_ar']],
                 ['price', '=', $reqDecode['price']],
@@ -72,8 +73,7 @@ class OffersController extends Controller
                 Offers::create([
                     "title_ar" => $reqDecode['title_ar'],
                     "title_en" => $reqDecode['title_en'],
-                    "owner_name" => $reqDecode['owner_name'],
-                    "owner_phone" => $reqDecode['owner_phone'],
+                    "owner_id" => $reqDecode['owner_id'],
                     'details_ar' => $reqDecode['details_ar'],
                     'details_en' => $reqDecode['details_en'],
                     'price' => $reqDecode['price'],
@@ -89,14 +89,14 @@ class OffersController extends Controller
                     'sub_sub_category_id' => $reqDecode['subSubCategory'],
                     'country' => $reqDecode['country'],
                     'city' => $reqDecode['city'],
-                    'video_link' => $reqDecode['video_link'],
-                    'publish_date' => date('Y-m-d')
+                    'gift_en' => $reqDecode['gift_name_en'],
+                    'gift_ar' => $reqDecode['gift_name_ar'],
+                    'publish_date' => date('Y-m-d'),
                 ]);
                 $getProduct = Offers::where([
                     ['title_en', '=', $reqDecode['title_en']],
                     ['title_ar', '=', $reqDecode['title_ar']],
-                    ['owner_name', '=', $reqDecode['owner_name']],
-                    ['owner_phone', '=', $reqDecode['owner_phone']],
+                    ['owner_id', '=', $reqDecode['owner_id']],
                     ['details_en', '=', $reqDecode['details_en']],
                     ['details_ar', '=', $reqDecode['details_ar']],
                     ['price', '=', $reqDecode['price']],
@@ -114,7 +114,6 @@ class OffersController extends Controller
                             "date" => Carbon::now()->toDateTimeString(),
                         ]);
                     }
-                    File::makeDirectory(public_path() . '/storage/products/product_id_' . $getProduct->id);
                     $file_name_one = '1' . '.' . $request->pic_one->getClientOriginalExtension();
                     $file_path_one = $request->file('pic_one')->storeAs('products/product_id_' . $getProduct->id, $file_name_one, 'public');
 
@@ -153,11 +152,24 @@ class OffersController extends Controller
                         $file_name_six = null;
                     }
 
+                    if ($request->preview !== null) {
+                        $file_name_preview = 'preview' . '.' . $request->preview->getClientOriginalExtension();
+                        $file_path_preview = $request->file('preview')->storeAs('products/product_id_' . $getProduct->id, $file_name_preview, 'public');
+                    } else {
+                        $file_name_preview = null;
+                    }
+
+                    if ($request->gift_pic !== null) {
+                        $file_name_gift = 'gift' . '.' . $request->preview->getClientOriginalExtension();
+                        $file_path_gift = $request->file('gift_pic')->storeAs('products/product_id_' . $getProduct->id, $file_name_gift, 'public');
+                    } else {
+                        $file_name_gift = null;
+                    }
+
                     Offers::where([
                         ['title_en', '=', $reqDecode['title_en']],
                         ['title_ar', '=', $reqDecode['title_ar']],
-                        ['owner_name', '=', $reqDecode['owner_name']],
-                        ['owner_phone', '=', $reqDecode['owner_phone']],
+                        ['owner_id', '=', $reqDecode['owner_id']],
                         ['details_en', '=', $reqDecode['details_en']],
                         ['details_ar', '=', $reqDecode['details_ar']],
                         ['price', '=', $reqDecode['price']],
@@ -168,6 +180,8 @@ class OffersController extends Controller
                         'pic_four' => $file_name_four,
                         'pic_five' => $file_name_five,
                         'pic_six' => $file_name_six,
+                        'preview' => $file_name_preview,
+                        'gift_pic' => $file_name_gift,
                     ]);
                     return response()->json(['success' => 'Added successfully.']);
                 }

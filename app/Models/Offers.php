@@ -13,8 +13,7 @@ class Offers extends Model
     protected $fillable = [
         "title_ar",
         "title_en",
-        "owner_name",
-        "owner_phone",
+        "owner_id",
         "details_ar",
         "details_en",
         "price",
@@ -36,7 +35,10 @@ class Offers extends Model
         "pic_six",
         'country',
         'city',
-        "video_link",
+        "preview",
+        "gift_en",
+        "gift_ar",
+        "gift_pic",
         "publish_date"
     ];
     protected $hidden = [];
