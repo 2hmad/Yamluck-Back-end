@@ -37,7 +37,7 @@ class OffersController extends Controller
     }
     public function getOffers($category_id)
     {
-        return Offers::where('category_id', $category_id)->with(['country', 'city', 'user', 'similar'])->get();
+        return Offers::where('category_id', $category_id)->with(['country', 'city', 'user', 'similar'])->paginate(15);
     }
     public function getSubOffers($sub_category_id)
     {
