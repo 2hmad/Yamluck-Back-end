@@ -68,7 +68,7 @@ class HomeSettingsController extends Controller
     {
         $getSlide = DB::table('home_settings')->where('id', '=', $request->id)->first();
         if ($getSlide !== null) {
-            File::deleteDirectory(public_path('storage/carousels/' . $getSlide->image));
+            File::delete(public_path('storage/carousels/' . $getSlide->image));
             DB::table('home_settings')->where('id', '=', $request->id)->delete();
         }
     }
