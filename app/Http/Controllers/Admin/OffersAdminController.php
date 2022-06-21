@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
+use App\Models\Favorites;
 use App\Models\Notifications;
 use App\Models\Offers;
 use App\Models\Subscribe;
@@ -85,6 +86,7 @@ class OffersAdminController extends Controller
             Offers::where('id', $request->product_id)->delete();
             Subscribe::where('product_id', $request->product_id)->delete();
             Winner::where('product_id', $request->product_id)->delete();
+            Favorites::where('product', $request->product_id)->delete();
             File::deleteDirectory(public_path('storage/products/product_id_' . $request->product_id));
             return response()->json(['alert' => 'Offer Closed Successfully'], 200);
         } else {
