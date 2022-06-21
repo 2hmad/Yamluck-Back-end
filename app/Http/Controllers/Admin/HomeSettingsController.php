@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\File;
 
 class HomeSettingsController extends Controller
 {
@@ -65,6 +66,10 @@ class HomeSettingsController extends Controller
     }
     public function deleteCarousel(Request $request)
     {
-        DB::table('home_settings')->where('id', '=', $request->id)->delete();
+        $getSlide = DB::table('home_settings')->where('id', '=', $request->id)->first();
+        if ($getSlide !== null) {
+            File::deleteDirectory(public_path('storage/carousels/' . $getSlide->image));
+            DB::table('home_settings')->where('id', '=', $request->id)->delete();
+        }
     }
 }
