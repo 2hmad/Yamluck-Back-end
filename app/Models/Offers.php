@@ -60,4 +60,8 @@ class Offers extends Model
     {
         return $this->hasOne(Users::class, 'id', 'owner_id');
     }
+    public function similar()
+    {
+        return $this->hasMany(Offers::class, 'category_id', 'category_id');
+    }
 }

@@ -21,31 +21,31 @@ class OffersController extends Controller
         $checkToken = Users::where('token', $headerToken)->first();
         if ($checkToken !== null && $headerToken !== null) {
             if ($checkToken->interest == '[]') {
-                return Offers::inRandomOrder()->with('country')->with('city')->with('user')->limit($limit)->get();
+                return Offers::inRandomOrder()->with(['country', 'city', 'user', 'similar'])->limit($limit)->get();
             } else {
                 $dec = json_decode($checkToken->interest);
-                $get = Offers::inRandomOrder()->with('country')->with('city')->with('user')->where('category_id', $dec[0])->limit($limit)->get();
+                $get = Offers::inRandomOrder()->with(['country', 'city', 'user', 'similar'])->where('category_id', $dec[0])->limit($limit)->get();
                 if ($get->isEmpty()) {
-                    return Offers::inRandomOrder()->with('country')->with('city')->with('user')->limit($limit)->get();
+                    return Offers::inRandomOrder()->with(['country', 'city', 'user', 'similar'])->limit($limit)->get();
                 } else {
                     return $get;
                 }
             }
         } else {
-            return Offers::inRandomOrder()->with('country')->with('city')->with('user')->limit($limit)->get();
+            return Offers::inRandomOrder()->with(['country', 'city', 'user', 'similar'])->limit($limit)->get();
         }
     }
     public function getOffers($category_id)
     {
-        return Offers::where('category_id', $category_id)->with('country')->with('city')->with('user')->get();
+        return Offers::where('category_id', $category_id)->with(['country', 'city', 'user', 'similar'])->get();
     }
     public function getSubOffers($sub_category_id)
     {
-        return Offers::where('sub_category_id', $sub_category_id)->with('country')->with('city')->with('user')->get();
+        return Offers::where('sub_category_id', $sub_category_id)->with(['country', 'city', 'user', 'similar'])->get();
     }
     public function getSubSubOffers($sub_sub_category_id)
     {
-        return Offers::where('sub_sub_category_id', $sub_sub_category_id)->with('country')->with('city')->with('user')->get();
+        return Offers::where('sub_sub_category_id', $sub_sub_category_id)->with(['country', 'city', 'user', 'similar'])->get();
     }
     public function addOffer(Request $request)
     {
@@ -194,6 +194,6 @@ class OffersController extends Controller
     }
     public function latestOffers()
     {
-        return Offers::with('category')->with('country')->with('city')->with('user')->orderBy('id', 'DESC')->limit(40)->get()->groupBy('category_id');
+        return Offers::with('category')->with(['country', 'city', 'user', 'similar'])->orderBy('id', 'DESC')->limit(40)->get()->groupBy('category_id');
     }
 }
