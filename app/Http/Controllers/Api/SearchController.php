@@ -15,6 +15,9 @@ class SearchController extends Controller
             ->orWhere('title_en', 'LIKE', '%' . $keyword . '%')
             ->orWhere('details_ar', 'LIKE', '%' . $keyword . '%')
             ->orWhere('details_en', 'LIKE', '%' . $keyword . '%')
+            ->orWhere('details_en', 'LIKE', '%' . $keyword . '%')
+            ->orWhere('gift_en', 'LIKE', '%' . $keyword . '%')
+            ->orWhere('gift_ar', 'LIKE', '%' . $keyword . '%')
             ->with(['country', 'city', 'user', 'similar'])->get();
     }
 }
