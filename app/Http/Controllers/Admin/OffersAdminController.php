@@ -31,8 +31,8 @@ class OffersAdminController extends Controller
             'details_en' => $request->details_en,
             'details_ar' => $request->details_ar,
             'conditions_en' => $request->conditions_en,
-            'conditions_ar' => $request->conditions_ar,
-            'video_link' => $request->video_link
+            'conditions_ar' => $request->conditions_ar
+            // 'video_link' => $request->video_link
         ]);
     }
     public function finishOffer(Request $request)
